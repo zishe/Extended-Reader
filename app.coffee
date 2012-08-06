@@ -33,11 +33,11 @@ app.configure "development", ->
     dumpExceptions: true
     showStack: true
   )
-  db = mongoose.connect 'mongodb://<user>:<password>@server-url:port/app-name'
+  db = mongoose.connect 'mongodb://user:user@ds037007.mongolab.com:37007/speed-read'
 
 app.configure "production", ->
   app.use express.errorHandler()
-  db = mongoose.connect 'mongodb://<user>:<password>@server-url:port/app-name'
+  db = mongoose.connect 'mongodb://user:user@ds037007.mongolab.com:37007/speed-read'
 
 
 

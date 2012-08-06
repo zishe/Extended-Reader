@@ -1,4 +1,4 @@
-## Seed app based on Express Coffee Template
+## Apps for speed reading
 
 ## Technologies
 
