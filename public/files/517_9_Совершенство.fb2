@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FictionBook xmlns="http://www.gribuser.ru/xml/fictionbook/2.0" xmlns:l="http://www.w3.org/1999/xlink">
+ <description>
+  <title-info>
+   <genre>prose_classic</genre>
+   <author>
+    <first-name>Владимир</first-name>
+    <last-name>Набоков</last-name>
+   </author>
+   <book-title>Совершенство</book-title>
+   <annotation>
+    <p>«Соглядатай» — роман, занимающий особое место в многообразном, многоуровневом творчестве В. Набокова. Практически впервые здесь набоковская проза, обычно — холодно-изящная, становится нервной, захлебывающейся, угловатой. Экспрессионистская ли эстетика довлеет здесь над «вечной» для писателя темой эмигрантской трагедии — или, напротив, тоска выломившейся из прошлого и утратившей надежду на будущее «России в изгнании» задает неровный, «дерганный» ритм повествования? Мнений может быть много, но — какое из них верное? Решите сами…</p>
+   </annotation>
+   <date>1938</date>
+   <coverpage>
+    <image l:href="#cover.jpg"/></coverpage>
+   <lang>ru</lang>
+   <sequence name="Соглядатай" number="9"/>
+  </title-info>
+  <document-info>
+   <author>
+    <nickname>bokonon</nickname>
+   </author>
+   <program-used>doc2fb+FBE, FB Editor v2.0, FictionBook Editor 2.4</program-used>
+   <date value="2009-07-27">2009-07-15</date>
+   <id>E345E711-22D0-4222-AC35-67D8726D173D</id>
+   <version>2.0</version>
+  </document-info>
+  <publish-info>
+   <book-name>Владимир Набоков. Соглядатай.</book-name>
+   <publisher>Издательство "ФОЛИО" </publisher>
+   <city>Харьков</city>
+   <year>2001</year>
+   <isbn>5-17-006663-5</isbn>
+  </publish-info>
+ </description>
+ <body>
+  <title>
+   <p>Владимир Набоков</p>
+   <p>СОВЕРШЕНСТВО</p>
+  </title>
+  <section>
+   <p>«Итак, мы имеем две линии», — говорил он Давиду бодрым, почти восторженным голосом, точно иметь две линии — редкое счастье, которым можно гордиться. Давид был нежен и туповат. Глядя, как разгораются его уши, Иванов предвидел, что не раз будет сниться ему — через тридцать, через сорок лет: человеческий сон злопамятен.</p>
+   <p>Белокурый, худой, в желтой вязаной безрукавке, стянутой ремешком, со шрамами на голых коленях и с тюремным оконцем часиков на левой кисти, Давид в неудобнейшем положении сидел за столом и стучал себя по зубам концом самопишущей ручки. Он в школе плохо учился, пришлось взять репетитора.</p>
+   <p>«Теперь обратимся ко второй линии», — говорил Иванов все с той же нарочитой бодростью. По образованию он географ, но знания его неприменимы: мертвое богатство, великолепное поместье родовитого бедняка. Как прекрасны, например, старинные карты. Дорожные карты римлян, подобные змеиной коже, длинные и узорные, в продольных полосках каналообразных морей; александрийские, где Англия и Ирландия, как две колбаски; карты христианского средневековья, в пунцовых и травяных красках, с райским востоком наверху и с Иерусалимом — золотым пупом мира — посредине. Чудесные странствия: путешествующий игумен сравнивает Иордан с родной черниговской речкой, царский посланник заходит в страну, где люди гуляют под желтыми солнышниками, тверской купец пробирается через густой женгел, полный обезьян, в знойный край, управляемый голым князем. Островок Вселенной растет: новые робкие очертания показываются из легендарных туманов, медленно раздевается земля, — и далеко за морем уже проступает плечо Южной Америки, и дуют с углов толстощекие ветры, из которых один в очках.</p>
+   <p>Карты картами, — у Иванова было еще много других радостей и причуд. Он долговяз, смугл, не очень молод; черная борода, когда-то надолго отрощенная и затем (в сербской парикмахерской) сбритая, оставила на его лице вечную тень: малейшая поблажка, и уже тень оживала, щетинилась. Он верным пребыл крахмальным воротничкам и манжетам; у его рваных сорочек был спереди хвостик, пристегивавшийся к кальсонам. Последнее время он принужден был бессменно носить старый, выходной черный костюм, обшитый тесьмой по отворотам (все остальное истлело) и иногда, в пасмурный день, при нетребовательном освещении, ему казалось, что он одет хорошо, строго. В галстуке была какая-то фланелевая внутренность, которая прорывалась наружу, приходилось подрезывать, совсем вынуть было жалко.</p>
+   <p>Он отправлялся около трех пополудни на урок к Давиду, развинченной, подпрыгивающей походкой, подняв голову, глотая молодой воздух раннего лета, и перекатывался его большой, уже за утро оперившийся кадык. Однажды юноша в крагах, шедший по другой стороне, тихим свистом подозвал его рассеянный взгляд, и подняв вверх подбородок прошел так несколько шагов: исправляю своеобразность ближнего. Но Иванов не понял этой назидательной мимики, и, думая, что ему указывают явление в небе, доверчиво посмотрел еще выше, чем обычно, — и действительно: дружно держась за руки, там плыли наискось три прелестных облака; третье понемногу отстало, — и его очертание и очертание руки, еще к нему протянутой, медленно утратили свое изящное значение.</p>
+   <p>Все казалось прекрасным и трогательным в эти первые жаркие дни, — голенастые девочки, игравшие в классы, старики на скамейках, зеленое конфетти семян, которое сыпалось с пышных лип, всякий раз, как потягивался воздух. Одиноко и душно было в черном; он снимал шляпу, останавливался, озирался. Порою, глядя на трубочиста, равнодушного носителя чужого счастья, которого трогали суеверной рукой мимо проходившие женщины, или на аэроплан, обгонявший облако, он принимался думать о вещах, которых никогда не узнает ближе, о профессиях, которыми никогда не будет заниматься, — о парашюте, распускающемся как исполинский цветок, о беглом и рябом мире автомобильных гонщиков, о различных образах счастья, об удовольствиях очень богатых людей среди очень живописной природы. Его мысль трепетала и ползла вверх и вниз по стеклу, отделяющему ее от невозможного при жизни совершенного соприкосновения с миром. Страстно хотелось все испытать, до всего добраться, пропустить сквозь себя пятнистую музыку, пестрые голоса, крики птиц, и на минуту войти в душу прохожего, как входишь в свежую тень дерева. Неразрешимые вопросы занимали его ум: как и где моются трубочисты после работы; изменилась ли за эти годы русская лесная дорога, которая сейчас вспомнилась так живо.</p>
+   <p>Когда наконец — с привычным опозданием — он поднимался на лифте, ему казалось, что он медленно растет, вытягивается, а дойдя головой до шестого этажа, вбирает, как пловец, поджатые ноги. Вернувшись к нормальному росту, он входил в светлую комнату Давида.</p>
+   <p>Давид во время урока любил колупать что-нибудь; впрочем, был довольно внимателен. По-русски он изъяснялся с трудом и скукой, и если надобно было выразить важное, или когда с ним говорила мать, переходил сразу на немецкий. Иванов, знавший местный язык дурно, объяснял математику по-русски, а учебник был, конечно, немецкий, так что получалась некоторая путаница. Глядя на отороченные светлым пушком уши мальчика, он пытался представить себе степень тоски и ненависти, возбуждаемых им в Давиде, ему делалось неловко, он видел себя со стороны, нечистую, раздраженную бритвой кожу, лоск черного пиджака, пятна на обшлагах, слышал свой фальшиво оживленный голос, откашливание и даже то, что Давид слышать не мог, — неуклюжий, но старательный стук давно больного сердца. Урок кончался, Давид спешил показать что-нибудь — автомобильный прейскурант, кодак, винтик, найденный на улице, — и тогда Иванов старался изо всех сил проявить смышленое участие, — но, увы, он был не вхож в тайное содружество вещей, зовущееся техникой, и при ином неметком его замечании Давид направлял на него бледно-серые свои глаза с недоумением и затем быстро отбирал расплакавшийся в ивановских руках предмет.</p>
+   <p>И все же Давид был нежен. Его равнодушие к необычному объяснялось так: я сам, должно быть, казался трезвым и суховатым отроком, ибо ни с кем не делился своими мечтами, любовью, страхами. Мое детство произнесло свой маленький, взволнованный монолог про себя. Можно построить такой силлогизм: ребенок — самый совершенный вид человека; Давид — ребенок; Давид — совершенен. С такими глазами нельзя только думать о стоимости различных машин или о том, как набрать побольше купончиков в лавке, чтобы даром получить товару на полтинник. Он копит и другое, — яркие детские впечатления, оставляющие свою краску на перстах души. Молчит об этом, как и я молчал. Когда же, в каком-нибудь 1970 году (они похожи на телефонные номера, эти цифры еще далеких годов), ему попадется картина, — Бонзо, пожирающий теннисный мяч, — которая висит сейчас в его спальне, он почувствует толчок, свет, изумление пред жизнью. Иванов не ошибался, — глаза Давида и впрямь не лишены были некоторой дымки. Но это была дымка затаенного озорства.</p>
+   <p>Входит мать Давида. Она желтоволосая, нервная, вчера изучала испанский язык, нынче питается апельсиновым соком: «Я хотела бы с вами поговорить. Сидите, пожалуйста. Давид, уходи. Вы кончили заниматься? Давид, уходи. Я хочу с вами поговорить вот о чем. Скоро у него каникулы. Было бы желательно его отправить на морской штранд. К сожалению, я сама не сумею поехать. Вы бы взялись. Я вам доверяю, и он вас слушается. Главное, я хочу, чтоб он побольше разговаривал по-русски, а так — он маленький спортсмен, как все современные дети. Ну что, как вы на это смотрите?»</p>
+   <p>С сомнением. Но сомнения своего Иванов не выразил. Последний раз он видел море восемнадцать лет тому назад, студентом. Мерикюль и Гунгербург. Сосны, пески, далекая, бледно-серебристая вода, — пока дойдешь до нее, пока она сама дойдет до колен… Это будет все то же море, Балтийское, но с другого бока. А плавал я последний раз не там, а в реке Луге. Мужики выбегали из воды, — раскорякой, прикрываясь ладонями с грубым целомудрием. Стуча зубами надевали рубахи прямо на мокрое тело. Хорошо купаться под вечер, да еще когда расширяются тихие круги теплого дождя. Но я люблю чувствовать присутствие дна. Как трудно потом обуться, не испачкав ступней. Вода в ухе: прыгай на одной ноге, пока не прольется горячей слезой.</p>
+   <p>Поехали. «А вам будет жарко», — заметила на прощание давидова мать, глядя на черный костюм Иванова (траур по другим умершим вещам). В поезде было тесно, и новый мягкий воротничок (легкая вольность, летнее баловство) обратился в тугой компресс. Давид, аккуратно подстриженный, с играющим на ветру хохолком, довольный, в трепещущей, открытой на шее, рубашке, стоял у окна, высовывался, — и на поворотах появлялся полукруг передних вагонов и головы людей, облокотившихся на спущенные рамы. Потом поезд выпрямлялся опять и шел, позванивая, быстро-быстро работая локтями, сквозь буковый лес.</p>
+   <p>Дом был расположен в тылу городка, простой, двухэтажный, с кустами смородины в саду, отделенном забором от пыльной дороги. Желтобородый рыбак сидел на колоде и, щурясь от вечернего солнца, смолил сеть. Его жена провела их наверх. Оранжевый пол. Карликовая мебель. На стене — внушительных размеров обломок пропеллера («мой муж служил прежде на аэродроме»). Иванов распаковал скудное свое белье, бритву, потрепанного Пушкина в издании книгопродавца Панафидиной. Давид высвободил из сетки пестрый мяч, который, ошалев от радости, чуть не сбил с этажерки рогатую раковину. Хозяйка принесла чаю и блюдо камбалы. Давид торопился, ему не терпелось увидеть море. Солнце уже садилось.</p>
+   <p>Когда, через четверть часа ходьбы, они спустились к морю, Иванов мгновенно почувствовал сильнейшее сердечное недомогание. В груди было то тесно, то пусто, и среди плоского, сизого моря в ужасном одиночестве чернела маленькая лодка. Ее отпечаток стал появляться на всяком предмете, а потом растворился в воздухе. Оттого что все было подернуто пылью сумерек, ему казалось, что у него помутилось зрение, а ноги странно ослабели от мягкого прикосновения песка. Где-то глухо играл оркестр каждый звук был как бы закупорен, трудно дышалось. Давид наметил на пляже место и заказал на завтра купальную корзину. Домой пришлось идти в гору, сердце отлучалось и спешило вернуться, чтоб отбухать свое и вновь удалиться, и сквозь эту боль и тревогу крапива у заборов напоминала Гунгербург.</p>
+   <p>Белая пижама Давида. Иванов из экономии спал нагишом. От земляного холодка чистых простынь ему сперва стало еще хуже, но вскоре полегчало. Луна ощупью добралась до умывальника и там облюбовала один из фацетов стакана, а потом поползла по стене. И в эту ночь, и в следующие Иванов смутно думал о многих вещах зараз и между прочим представлял себе, что мальчик, спящий на соседней кровати, — его сын. Десять лет тому назад, в Сербии единственная женщина, которую он в жизни любил, чужая жена, забеременела от него, выкинула и через ночь, молясь и бредя, скончалась. Был бы сын, мальчишка такого же возраста. Когда по утрам Давид надевал купальные трусики, Иванова умиляло, что его кофейный загар внезапно переходит у поясницы в детскую белизну. Он было запретил Давиду ходить от дома до моря в одних трусиках и даже несколько потерялся, и не сразу сдался, когда Давид с протяжными интонациями немецкого удивления стал доказывать ему, что так он делал прошлым летом, что так делают все. Сам Иванов томился на пляже в печальном образе горожанина. От солнца, от голубого блеска поташнивало, горячие мурашки бегали под шляпой по темени, он живьем сгорал, но не снимал даже пиджака, ибо, как многие русские, стеснялся «появляться при дамах в подтяжках», да и рубашка вконец излохматилась. На третий день он вдруг решился и, озираясь исподлобья, разулся. Устроившись посредине глубокой воронки, вырытой Давидом, и подложив под локоть газетный лист, он слушал яркое, тугое хлопание флагов, а то, бывало, с какой-то нежной завистью глядел поверх песчаного вала на тысячу коричневых трупов, по-разному сраженных солнцем, и была одна девушка, великолепная, литая, загоревшая до черноты, с поразительно светлым взором и бледными, как у обезьяны, ногтями, — и глядя на нее, он старался вообразить, какое это чувство быть такой. Давид, получив позволение искупаться, шумно пускался вплавь, а Иванов подходил к самому приплеску и зорко следил за Давидом, и вдруг отскакивал: волна, разлившись дальше предтечи, облила ему штаны. Он вспомнил студента в России, близкого своего приятеля, который умел так швырнуть камень, что тот дважды, трижды, четырежды подпрыгивал на воде, но когда он захотел показать Давиду, как это делается, камень пробил воду, громко бултыхнув, Давид же рассмеялся и пустил так, что вышло не четыре прыжка, а по крайней мере шесть. Как-то, через несколько дней, он по рассеянности (взгляд побежал, и когда он спохватился, было поздно) прочел открытку, которую Давид начал писать матери и забыл на подоконнике. Давид сообщал, что учитель, должно быть, болен, не купается. В тот же день Иванов принял чрезвычайные меры. Он приобрел черный купальный костюм и, придя на пляж, спрятался в корзину, с опаской разделся, натянул на себя дешевой галантереей пахнувшее трико. Была минута грустного замешательства, когда он вылез на солнце, — бледнокожий, с мохнатыми ляжками. Все же Давид посмотрел на него с одобрением. «Ну-с, — бодро воскликнул Иванов, — чем черт не шутит!» Войдя до поджилок в воду, он сначала смочил голову, пошел дальше, раскинув руки, и чем выше поднималась вода, тем смертельнее сжималось сердце. Наконец, набрав воздуху, заткнув уши большими пальцами, а остальными прикрыв глаза, он присел, окунулся. Ему сделалось так плохо, что пришлось спешно из воды выбраться. Он лег на песок, дрожа от холода, и весь полный какой-то страшной, ничем не разрешающейся тоски. Его согрело солнце, он слегка отошел, но зарекся купаться. Было лень одеваться, он жмурился, по красному фону скользили оптические пятнышки, скрещивались марсовы каналы, а стоило чуть разжать веки, и влажным серебром переливалось между ресниц солнце.</p>
+   <p>Случилось неизбежное. Все, что было у него обнажено, превратилось к вечеру в симметричный архипелаг огненной боли. «Мы сегодня вместо пляжа пойдем погулять в лес», — сказал он на следующий день Давиду. «Ах, нет», — ноющим голосом протянул Давид. «Избыток солнца вреден», — сказал Иванов. «Но я прошу вас», — затосковал Давид. Иванов, однако, настоял на своем.</p>
+   <p>Лес был густой, со стволов спархивали окрашенные под кору пяденицы. Давид шел молча и нехотя. «Мы должны любить лес, — говорил Иванов, стараясь развлечь воспитанника. — Это первая родина человека. В один прекрасный день человек вышел из чащи дремучих наитий на светлую поляну разума. Черника, кажется, поспела, разрешаю попробовать. Чего ты дуешься, — пойми, следует разнообразить удовольствия. Да и нельзя злоупотреблять купанием. Как часто бывает, что неосторожный купальщик гибнет от солнечного удара или от разрыва сердца».</p>
+   <p>Иванов потерся спиной, — она нестерпимо горела и чесалась, — о ствол дерева и задумчиво продолжал: «Любуясь природой данной местности, я всегда думаю о тех странах, которых не увижу никогда. Представь себе, Давид, что мы сейчас не в Померании, а в Малайском лесу. Смотри, сейчас пролетит редчайшая птица птеридофора с парой длинных, из голубых фестонов состоящих, антенн на голове».</p>
+   <p>«Ах, кватч», — уныло сказал Давид.</p>
+   <p>«По-русски надо сказать „ерунда“ или „чушь“. Конечно, это ерунда. Но в том-то и дело, что при известном воображении… Если когда-нибудь ты, не дай Бог, ослепнешь или попадешь в тюрьму, или просто в страшной нищете будешь заниматься гнусной, беспросветной работой, ты вспомнишь об этой нашей прогулке в обыкновенном лесу, как — знаешь — о сказочном блаженстве».</p>
+   <p>На закате распушились темно-розовые тучи, которые рыжели по мере угасания неба, и рыбак сказал, что завтра будет дождь, — однако, утро выдалось дивное, безоблачное, и Давид торопил Иванова, которому немоглось, хотелось валяться в постели и думать о каких-то далеких, неясных полусобытиях, освещенных воспоминанием только с одного бока, о каких-то дымчатых, приятных вещах, — быть может, когда-то случившихся, или близко проплывших когда-то в поле жизни, или еще в эту ночь явившихся ему во сне. Но невозможно было сосредоточить мысль на них, — все ускользало куда-то в сторону, полуоборотясь с приветливым и таинственным лукавством, — ускользало неудержимо, как те прозрачные узелки, которые наискось плывут в глазах, если прищуриться. Увы, надо было вставать, надо было натягивать носки, столь дырявые, что напоминали митенки. Прежде, чем выйти из дому, он надел давидовы желтые очки, и солнце упало в обморок среди умершего смертью бирюзы неба, и утренний свет на ступенях крыльца принял закатный оттенок. Темно-желтый голый Давид побежал вперед; когда же Иванов его окликнул, он раздраженно повел плечами. «Не убегай», — устало сказал Иванов: его кругозор сузился вследствие очков, он боялся возможных автомобилей.</p>
+   <p>Пологая улица сонно спускалась к морю. Понемногу глаза привыкли к стеклам, и он перестал удивляться защитному цвету солнечного дня. На повороте улицы что-то вдруг наполовину вспомнилось, — необыкновенно отрадное и странное, — но оно сразу зашло, и сжалась грудь от тревожного морского воздуха. Смуглые флаги возбужденно хлопали и указывали все в одну сторону, но там еще не происходило ничего. Вот песок, вот глухой плеск моря. В ушах заложено, и если потянуть носом, — гром в голове, и что-то ударяется в перепончатый тупик. «Я прожил не очень долго и не очень хорошо, — мельком подумал Иванов, — а все-таки жаловаться грех, этот чужой мир прекрасен, и я сейчас был бы счастлив, только бы вспомнилось то удивительное, такое удивительное, — но что?»</p>
+   <p>Он опустился на песок. Давид деловито принялся подправлять лопатой слегка осыпавшийся вал. «Сегодня жарко или прохладно? — спросил Иванов. — Что-то не разберу». Погодя Давид бросил лопату и сказал: «Я пойду купаться немного». «Посиди минуту спокойно, — проговорил Иванов. — Мне надо собраться с мыслями. Море от тебя не уйдет». «Пожалуйста», — протянул Давид.</p>
+   <p>Иванов приподнялся на локте и посмотрел на волны. Они были крупные, горбатые, никто в этом месте не купался, только гораздо левее попрыгивало и скопом прокатывалось вбок с дюжину оранжевых голов. «Волны», — со вздохом сказал Иванов и потом добавил: «Ты походи в воде, но не дальше, чем на сажень. В сажени около двух метров».</p>
+   <p>Он склонил голову, подперев щеку, пригорюнившись, высчитывая какие-то меры жизни, жалости, счастья. Башмаки были уже полны песку, он их медленно снял, после чего снова задумался, и снова поплыли неуловимые прозрачные узелки, — и так хотелось вспомнить, так хотелось… Внезапный крик. Иванов выпрямился.</p>
+   <p>В желто-синих волнах, далеко от берега мелькнуло лицо Давида с темным кружком разинутого рта. Раздался захлебывающийся рев, и все исчезло. Появилась на миг рука и исчезла тоже. Иванов скинул пиджак. «Я иду, — крикнул он, — я иду, держись!» Он зашлепал по воде, упал, ледяные штаны прилипли к голеням, ему показалось, что голова Давида мелькнула опять, в это мгновение хлынула волна, сбила шляпу, он ослеп, хотел снять очки, но от волнения, от холода, от томительной слабости во всем теле, не мог с ними справиться, почувствовал, что волна, отступив, оттянула его на большое расстояние от берега; и поплыл, стараясь высмотреть Давида. Тело было в тесном, мучительно-холодном мешке, нечем было дышать, сердце напрягалось невероятно. Внезапно, сквозь него что-то прошло, как молниевидный перебор пальцев по клавишам, — и это было как раз то, что все утро он силился вспомнить. Он вышел на песок. Песок, море и воздух окрашены были в странный цвет, вялый, матовый, и все было очень тихо. Ему смутно подумалось, что наступили сумерки, — и что теперь Давид давно погиб, и он ощутил знакомый по прошлой жизни острый жар рыданий. Дрожа и склоняясь к пепельному песку, он кутался в черный плащ со змеевидной застежкой, который видел некогда на приятеле-студенте, в осенний день, давным-давно, — и так жаль было матери Давида, — и что ей сказать: я не виноват, я сделал все, чтобы его спасти, — но я дурно плаваю, у меня слабое сердце, и он утонул… Что-то однако было не так в этих мыслях, — и осмотревшись, увидя только пустынную муть, увидя, что он один, что нет рядом Давида, он вдруг понял, что, раз Давида с ним нет, значит, Давид не умер.</p>
+   <p>Только тогда были сняты тусклые очки. Ровный, матовый туман сразу прорвался, дивно расцвел, грянули разнообразные звуки — шум волн, хлопание ветра, человеческие крики, — и Давид стоял по щиколке в яркой воде, не знал, что делать, трясся от страха и не смел объяснить, что он барахтался в шутку, а поодаль люди ныряли, ощупывали до дна воду, смотрели друг на друга выпученными глазами и ныряли опять, и возвращались ни с чем, и другие кричали им с берега, советовали искать левее, и бежал человек с краснокрестной повязкой на рукаве, и трое в фуфайках сталкивали в воду скрежещущую лодку, и растерянного Давида уводила полная женщина в пенсне, жена ветеринара, который должен был приехать в пятницу, но задержался, и Балтийское море искрилось от края до края, и поперек зеленой дороги в поредевшем лесу лежали, еще дыша, срубленные осины, и черный от сажи юноша, постепенно белея, мылся под краном на кухне, и над вечным снегом Новозеландских гор порхали черные попугайчики, и, щурясь от солнца, рыбак важно говорил, что только на девятый день волны выдадут тело.</p>
+  </section>
+ </body>
+ <binary id="cover.jpg" content-type="image/jpeg">/9j/4AAQSkZJRgABAQEASABIAAD/2wBDABMNDhEODBMREBEWFBMXHTAfHRoaHTsqLCMwRj1J
+SEQ9Q0JNVm5eTVJoU0JDYINhaHJ2fH18SlyIkYZ4kG55fHf/2wBDARUWFh0aHTkgIDl5UURR
+eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXl5eXn/wAAR
+CAE3AMgDASIAAhEBAxEB/8QAGwAAAQUBAQAAAAAAAAAAAAAAAAECAwQFBgf/xABFEAABAwID
+BAQJCgUEAwEBAAABAAIDBBESITEFE0FRImFxgQYUMlKRkrHR4RYjMzRCU3KTocEVNWJz8CSC
+svFUZKJDg//EABoBAAMBAQEBAAAAAAAAAAAAAAACAwEEBQb/xAAoEQACAgICAgEEAgMBAAAA
+AAAAAQIRAzESIQRBURMiMmEFFCNCcbH/3QAEAA3/2gAMAwEAAhEDEQA/AOVPlZ8bJ180w6py
+0wEhTklkANQlsiyABCEIAEqEWQAIQi6ABIUXQgwEl0IQAJbIQgAtmpaX61B/cb7Uy+SkpPrc
+H91vtCw1GptSQsq6kjMiV3dms7fF56ZJ530VnaN3bTrdfpXi/eqQhceFj16JEki7bdUWaYiK
+axu5pFsI1sdRfgtxlO2t2e9ktjmXNc02z911iQn59kYaC52WpyW3RiSPG1tiBk5hyIK58xTE
+kmzJ25lXtB+5j/4oRt7+Yf8A8o/+KF1R0cz2f//Q5W2at7P2dPtKp3FMGmTCXdI2Fh/2od2P
+vY/Sfct7wQtHtguxB/zLsmXJ1HUiwojHgjtXzIfzPgkPghtbzYfzPgu78ZHmSeoUnjI+7k9Q
+rLN4s4T5H7W8yH8z4JfkhtXzIfzPgu78Zb5knqFHjLfMk9QosOLOE+SG1vMh/M+CPkhtbzIf
+zPgu78Zb5knqFHjLfMk9QrbDizhPkhtXzIfzPgj5I7W8yH8z4LuvGW+ZJ6hS+Mt8yT1CssOL
+OE+SG1vMh/M+CT5IbW8yH8z4LvPGW+ZJ6hR4y37uT1Ciw4s4P5IbV8yH8z4JD4I7U82D8z4L
+vPGW/dyeoUx1Q21t3L6hWcjVE4b5JbTta1P+b8EfJPaY4QfmfBdv4w37qW/4CkdOPupfUKXm
+bwOIPgptIcIPzPgmO8GdoN13A4fScfQt3aE21HVG5gOFp8nAwtLvTxXOV09S/wCbmqHvLDez
+pCcJuhTbdFn49R5Nkw8Ga/nT/mfBTU/g3XsqIpHbjC14cbSXyBz4IofCGoiAZPgmAFg4mzu8
+8VrbN222qndC+PBILloYcWIcQtbYqxqrM+rpzUTyht8bpTY/7vddQeKNILgHYRYX4E2zW6yA
+sc9zGzdNxcbxA6ntTXU14jHhmAJLsohkT3rn+++iicfZlsoBDG99O0mSGUOBOrhYXH6q1JXx
+eKGZh0yLeINtCrm4dhAaJ22N8ohn+qqSbIieLWqG65iMactUvByf3GOSj+Jh7cP+vGn0Mf8A
+xQpNusB2m/MMsxjQH5HJqF2LRzNOz//RnGzKG31WL0LR2NRU0FbjhgZG/ARdo4XCgCvbM+tf
+7SqtdCmshCFIYEIQgAQhCABGSEJQERcIKaRlfist2aLfNI4hAORumEDFyStmpCWGJK63UkKb
+mlY5j1u0YtmxMkqY2yVxucLTm0X58Bay5Ksea6rlmiiw48y0cCuq8IKoRx7hrmkvacbLXOE8
+b8Fzm7bG3qGg5rOVHbiwfUjbfRAzZlQW3cGcThvnpe/ZZTUdDPFVwvY4NkEoDRxeOJv2JQCf
+stU9O8tljbhbhxNyLQSM+aPqMo/Fil0az3ObU1F3tLHOLWDfWLDYXNr6am2o70yU1Iic6CZr
+bPfhLpAQ4Ovbj9kYSpajdPq7MxMk3pY4WuHOLLX15EZqaGhdC5rmzAuEe66TSRbLPXq7Ex5x
+DjG8BxHctiONu/zxDje+gzHaiNszKiJr5A07x5wGS5sR0bi9z2KQUB+dDpi6OVxdIy2RF72B
+vlr3pYKB0U0cz58bmAA9G2IBuEcdetADayhpZqgyS07HvIF3OGeiFPN9J6ELoiukSez/0tAd
+yvbM+tf7SqKvbL+tf7T+yq9CGuhCFIcEIQgAQhCABCEJWAiQpU055JGzRLjlqmON3ZJ9s0yR
+7ImOkkIa0C5JSjITPRU9qVgoKJ0pIDzkwHiUHatKIy5r7uBwiO1nE9hXLbV2jPXzfOAMYwnC
+zl7yls6sGCU5d6IZ6gzSukJLnuNySo8QczCSAb3BTOGaTLUWS0e3wVUiQB1ha2XeLKeG29Ze
+3ltz71Uzvr6FNCS58Q82RvtRXZKaqLaNuWVjHyyhjWubU2Ic43xeTjPVY6aWTn7RkjqDERGQ
+1+EvzsRdouPW68x6G1LqrxiUscd2X5YXAOAsQR2XsUx4q9yMBfjMRAN8i/o2Az18rq1VTwWS
+R7RmcIS9kTWStLgQeAtfjpmVpAkjMEX4HULLw1T5AGF4aXSNxXHQBIwk58BeykpzWvqonTtk
+ZHazm3FrhuZsOBOaGgsszD5w9yETfSFC6ofiiT2f/9PRCvbL+tH8J9oVIacFd2X9aP4T7Qqv
+QprIQhSGBCEIAEIScUtgKkKEhKWzSjPtanhmMXSe4a4RkO9QjblIGGS7sF7F1svauflaI6yq
+ExzDiAb6A3uLciCiKnq6kse2mxFzcy4ANblYHPU29qndnc8EEjqG7TpSzEZC1pFwXNIBCwdq
+7VdV4o2HDB5uhf29SZVULqWnp9+Qxt8JLbuIy/42vf0qmId9NhgeJGnMPsQLczdJK/RXx8eJ
+PkyIgOs1gLjyCuU+zJt42QxxjiGyOtfuQ8Pgghp43PEk7cZ3Yza3nzJPoVrZexojEZ6yPFI/
+yWPN8A4d6xRLZPIddaMmp2dVRSXfGLOJsW5hVchkuxfBTlpY1rQ0DpMGhHDJcpW0ppal8Tru
+wnI8wtKePmc7Xsg7LWUtISKqIX1eLjquoszyS4nxEPiYHSA3ble1uKaiuV1Bs6SSna57/noA
+TMZM9c2YbH2qNtBC2N7RPCN7CInm4OY+03PI5D0BVdmVlXU1McUxjc5zgXfNjIcc+5dEIIr5
+sb6Ans8WWNx2ZD6MPMlqqFoc1tsJGTm+Sf1vZaAmjObpYr8bOFrqaSGJsbiGNyB4BUsX9LPV
+C2MXLRJtIdN5Z7kJjiXG51QumKpUSbtn/9TSGnFXtmfWT+E+0KiFe2Z9aP4T7QqvQhqoQhSH
+BCChYAiQmwzSrmvCbaLw8UcLyBa8hH6BTk6RbDieWaijRqtu0dObB5ldyjzssSu2/PV3jh+Z
+i1JB6RHaskAg4QRmdOajeSWyZnosIb2Kadnq/wBTHiV7ZPsmZr6tjJ3EiZwzeL8dLrtBc6rz
+4FpewMOTLBp5ruNnVRqaKKU2xEWd2jIpmjinbVklbTsrKV0L9HDI8lWnDmu+jxnA4WZ+yvF2
+V+Kq1EjWPY9vSJuMI1ckFh8FejpHtqpKucBsj2hjWDPA0cL81elc4RO3Yu6xwjrVCqnmhYHv
+c0uLgXtb9hnV7+1XY3l7QY2lwd5J4HvRY0l7ZWqZCwvbpiYxvZd1lm7aiZUV0bWnBcAPkOgJ
+0ULqupqfCNtJUSbtrXlrABcNNsj19/NdBLRNbQvYwY5BeQOdq53P9lrTQRyKLTOfdsbdVVPA
+55cXWLyNLX0HcCoamOGOpkigbZoNmkm/aVpzl744pYG3LQG6+RoR/wBrMc+QTFzgA7EcXIG5
+ukbOvC232y3sQDx8XOYjJPbkujI45XXM7FcP4jF1tLb88vgulyvlfrTrRzeT+YkovE89RWdZ
+X5D828dRVJdGHRxZNjUJSEK5I//V0+Cu7M+tf7T7VSCu7M+sn8J9qq9CGqhMmkEUZcQT1DUq
+Leuvnl1KDdFFFsnSqNkgeSNDyTylv2FCE2F1wFVIZaueRziSXk9q7upJFPJbWy89PE653JU5
+s9T+NSuTHXBbYN+ATTFfFbVzbJW2PUpgRpeylyaPVnFPpmfgcwCQjJrrFbeytoupqWohaA5+
+MOjbrrr7FQIDwWmxB4XsmRVL6KVszMi0AAWF7HmqW5I8yeNQuJ01EatsbjM4Y3G/SzI7lJPN
+HTU7nP6ROQxHNx5LKb4QNdG0CAukdnbFYLKraqauqbzvGG4DWt0A4oSIuLbuixPI+SV5DzID
+lci2fVxsui2NtTxqMRSkCZvPLEOa5hrhfzW8BwCkppjBURyDLA8XcOXFKd+TxlLHx9o2doUr
+flLQzgC77ud2tHxHoW20ktyNuKz6yB0s1NVQlrnwkkNOQc0jMe5XGuJZmLJno8dmZVMNLWF7
+Po5GFzm8Nc/bf0qrtCmxM30Wf2nNHHrC069hNM6QeVF029lsx6LrKZWsY8MD8UerSNexYdGO
+Tq0U6RxgqIpWtc1rZA0Hh1/oV1IcSfas2jpo/GKiNzA5jsMga4eScwtECw4XWi5p8mOdfdvJ
+4gqkr77bpxz8k5qgujDo48mxEIKFYmf/1tMaK7sz6yfwlUgruzPrR/CfaFV6FRozuDWgnS4H
+pyUUtm3c7IAXJUs8e9hezzgQqsczXC8mRuGOBPPRc0i0dGftauqaKRojYNMWP9k+g8IIZ4mm
+paYHHifJJ6ioK4GYOo5G4poW4o+kRvG8vZ3rDETnWbI4htxYA3w3zU7Z3Y8UMkaezd2ht1kk
+TmUhabnDiebX7B+65WN5c52mHBiHMZi11pOha2ww4Y7E2vdx4HPsvZV4KVrJ9217ziGb3DDp
+oAjr2VhjcOoaIyx7AXGMgXsb2Fj2XTXStYNc9bKaeJrIx0G4blp/ZZhcJnDfSloa3o3ACVRT
+LZMsscau7FkfI+TA4OEpNraZWUzJKdwLJDkOHOwVWW2G+NwkZcYSb+gpzWtOcxOE5iRvPkrU
+qPPWSSb9k4c5kOQAlkvbs5pkN8nBoaCQBz0TGWF2FxcBcHsvq3mtXZdF49WhjbtiiFyRz96V
+9F4SUvub0QkWyNtNUyaYMeWnUalvsU89K6Sd0DTjMbiCBlpxPeo5qCobGQ8ADgLe5IkvZ0Zf
+IlqB0WzdotrI8F2l8dmutplxWjisLWzXE7Inkg2nDgxEONnDqOXpuu00Bc6wAGZPBbJUeZLZ
+BtN5Zs6d17XbZZdFQbtm/nAJOjTwHNajn79reid3qAftciVXrZxFFe13uNmt5n3JSsG0uKFo
+5A7aFQ0X6MbB33J/cLSF7HLNYeyGuZWTgkuJaCTxNzqtnFkACtFyKnQ6X6N2R8kqgr0jrxvG
+eiorow6OXJsXhwQk4IViZ//X0wVd2Z9ZP4T7QqXJS0752yf6ZjXPIsQ7QDmqS0ZFWzVrauOi
+pZKiY2YwXPMrjP4/UyVznyQOZHU2a0O0sNCBxSVlTPX1zY6p2MMkw4R5ORzy7lUZNJV07XzO
+Lpd6S1pzN7WNuXD0Lm5WjuWBwaXyacO0KiqImMLZJKdpAcHWOftIVZ8olEj2ADF0rZgAjP3q
+pWSlmy4X05LQZOmeIcBoe/2BPlc5kjDa0johI9o0GaRrqzqx5Ic3FKjREgc44L2FgL5XRYCZ
+jnDLGRhOdlUikxQWA6QHs/7SzTDyydbOy67JTooZtF2BrmsObrG2txz/AM5rOia5kNi9oa4c
+Re3YrM8pnlMhy4AdSrxi0bgbtDTcE5p10hHj5STkI6NjbFt8LtQNFaeyBux4S0EyOkLHC+Vh
+qbehQgsfGRm5o5qO4sQS5sf2Ryvr7AtXZPLjimnGuxjQGRm93sFs9HRrttlQRUtFFHCcbSA7
+H51+K41zccNgXOBORGWS7SjdG2kh3P0YYA3sWN2Qy4+FGUxxNTUFuEF0ji70p878ETWgi40T
+JnCPaMzQBYPv6f8AtI5pdzJJsCpnXFKkyrSRvFWyWIAyYsQB07SugLnvF32PsVDZ7A2awGQa
+TfjdXpXtjZckALTlzVypBNKIozLIbNHJYszpKiTG64ccgOQ/y6t7SJZBG+TJ7ndBvmAfvp2L
+P6W74XLzYHsQNij/ALGlse+/qHO1AAv3rVHt0WXsi+8qCeIaNeK08+CZHPmf3sV2UZHUclVV
+qTNrtNFVXRi0cuTYIRZCoTP/0NPgFb2b9bP4T+yqKGqqJaWCSWA2eGm3oVJPoIq3Rizwl9VM
+GSROkxu+bbIMWp4c+pNoAHVsega27if3/VU37PMTWuiqWSTRyNbIwAgxuJyz45rRpfnZKqRp
+w4w5odbS41/VcjSR6UMspRafocTS5S3xUtW6zsWjXcCe3O/YoqV4mqaqokvgJELeWtvcmBtN
+BSSUrXvkZILk62PA8uHWo6cwih8WnxgudiLmfZPBb1RJRldivDqeoLDcW7v8yTX9MXF8Dcx1
+/wCXVivs8snY7ECSAewXH7qu54cAGght/SlO+EuSpjC63ZxUJLt64RC7nWvxTn2LwHOcGgdK
+2RPNLTksnfaLAWEC+ZF75JkqRLJkcpqKdDWAveY9+C69g1p48uSHxva67JD1h2ae6BkMMsjI
+mzdMEXvdrT+905rxLGHgk55317+fFM/lEINt8JbGNcTGRIwNaBmdAtLZW0RSRywklwcMUYOd
+j7lQsCLO0uHc8wmxOu4yFouCQQ3IdZH6fqlpUVlJuSjLs02NJze4l7zdx6lZFnx9Ei+K/PNV
+4KhtycbfJAI09CUztY7J7cLjYm4y61I6WzSoMo3Snog5C/IKrNVukmbK24ZGbgHj1lJVVLJh
+4vA9piaOk5pGfUFDe7XHO9s8tckEKTuTNeupvGYmODcRj6QF9RZY28IsLgmxJPMnit5h6DLX
+0FvQs2qodw18sZxNbmGkZ245pjnxzrpkuxc4pX832v2D4rSBGuqy9iv+YkFtH37rLSYUyJZP
+yZI7ON3KyrKw49A66Ksr4tHNPYIS8EKoh//R0+Cr7Qc5lDM5rsJAGfeFYUFbHvaV8YFy4EW7
+k8/xY2L80YDXAGZ2EY5JMZdfTI8O8qOWobTsayXG6/TETSABfievuR5bbceSJYcIqK18e88j
+BiF2i+Rv2WtZc0e32elnahH/ABiQyxzxvwYmyMGItcQQW8bHqQSGskkde0YBsDqSbBMhLZGu
+nbC2Mhr2uwZNNxllw1Vhse8ifG7oNlbYPcLDEDcXK10mThOUoPsr08+/dhdGGOOQc2+G/AHt
+5qQcdR1Jp3kFPTtzaGSFk0fJ1+I6xp2KxK29TIzEBZxu52gF9SVkkvRTx8j75MijiEjsJOEu
+vYnS/C6aWubdkgOgt3aWKk+jkvcGxBBbmD1hSzAxVYY9gdTzklh811sx35LE2NmUU0/kha1x
+bjbfLUhNAwiwyBOIjrUdVDMWxNjY50hJcAzPhw9CfE7HGxx+0P1W10NGalPjRIWAPaLnCQCT
+7VGx+8FzE6JxGLDnYjmEoDmyPxOaWk4wBq3O1j+ifI9+9kGIPY2xYeQIsR/nJFeiTm200ErR
+G2E5gSDLtH/aALkcOIVrdMnh8Vndc6xSAZ9dusfqFXfGYZQwvDrW6TdDlmkZ0YMztxZGRnnZ
+SeVEDxBsexNPWRYaJWuyeCDZwQdE0kOiL/IDnN6sRUs0Ur37tvSFsWMuzB7Ex0WOMEgtfxHM
+c0zc9FznFrcIvnxK1M5csOr9CSDG4S751M9uUjWki5GhAV6k2vU08jI3u3oPCbJ57Lad6yd7
+hqGtla5jxYB17kcs1NiGsgDnC+Fx1BTs41FS7R2MFTHVUhlivhLTcHVp5FQKh4PF3itVe9sQ
+HfZaCri0c2ZJS6EQluhVIn//0pP43s/L/Uf/AA73J8e0KWsdu4Ji4jpOFi3K/M9y5LeC/wBF
+H+vvV/Yzi6qkDWBp3Z8gEk5jmib6KYl96L0MDKiSqiJDQx5IfxAuf0yVeRktI98EowteLOBz
+a4c1PQxulmq4wS0vieO08E2g309KIagE7uURljsiAW2GeutlA7pSp0yvA0btkFgWAl55uNr2
+J7rKpBUVk0z5WB8t/LZq0g8LexbE1GactnpXidjHEEWzFtR1/wCZLNNNakeyLMYxJEc+llYj
+8Q5dqaL+SeVLpw0SveJIrEBzJGAAnW3K/UQmSsM0T2NIL3uaLnndOa41IBYA0YQXF5DQ0k55
+9pSxgsqMEgLSHC4PA3uFmi32yjXtkYjNO5sZe2VhbiZIzRwvn6Cr9NLaBnjABhNw2UC+HPRw
+9hVGmuIhiGQe8W6sgVbDnU0EjhZ27mALLDpA5H9kPYqT+kmyGoEsLJHROIzwtIPEON7HsATZ
+cDXndkYdRlzzUtQ0w2gyLGEuHeoWnDikOYY0u9Hxssu+iuPGox5sbhwmeZzSMsbhp3d5KWkf
+40AS1rTvMNm5C1rppknqIX+MYzJbpYgb2uDp2KaBjKdjAQSC0vaW5Xucj6AEz0RjbkuOqHU4
+lqZ5w8EQucTG4atIORaE0O3jZRUkNka/LBzAt6Er6iR9wXEA6huV+1QOJ4AHkOaW7KfR4dyZ
+JG0yO6OvWrLOgCQ0tPIcVm+MPp5QSQMQ6TeLe0K+XZ3DieISyVHRiyLKqXoeXAEi3HUpJGh0
+ZtZxsMQHJQF5N8wSO9PieQbXtfTksoeSoryRt3jXWN2tAaOAA0TZJd2wWAxHS6tSw4z83xBc
+Gn2KkbTT4WNbgbcA8XW4qkXezhypY/x9k+zqnxWaORz3MZfpkXzHWFt/xvZ/359R3uWJIzDS
+uJaLgXsqGMfdR/r71WEjjzKmjqf45s/78+o73IXLbwD/APKP9fehPyZGj//T5vxWa/0Z9I96
+sUT6ygnMsEbcdsPTsRr29SmOqFH6h7S/jYb5EDX1jXlwaMRzvcXB5jPVWn7S2m9mAtjtcOvZ
+t7g35phcG6kDtRcEXuLLOf6GfgxbpzY2Cr2jT1Mk8VmukN3Nywk9l02aasmeXGNjC7ysFmh3
+aLqS45hBcALk5c0c/wBGf0IL/crOZUvhdEWDA4hx01ANuPWUv+s3bWFocGizS6xIHK99Fbjj
+dK/CwC/aArLKKM5PrKdp5BwKZSb9E5eLjg7c3ZlAVYJ6AzNzmNfSphUV2JzixhLrE3A1GnFX
+Kqk8WAdvWSNJtdpFwexVrjmFjk0+0PDxoZI2puiKSStkeXPa0k66e9NBq2nJjeHL3qe45hGJ
+vMLOf6Kf01Vc2Qh1aLHMkCwJIvbtv1qu2eRgs2wHK2SvYhzCzzDL91J6hTxfLZw+VieDi4SH
++Ny3+z6EhqZCCDhIOR6KbuZvuZPUKNzL91J6hT0jieXI9sSN+7diaG3GlxeykFXKG2uPQmbi
+X7qT1CjcTfcyeoUNJmRyTh+Lof41L/T6EoqZP6fQo9xLf6KT1Cl3E33UnqFHFDfWyfJK2vnb
+YAtyNx0VEJnB5eLAnqSbmb7qT1CjczfcyeoUUhXkm9slkq5ZGFrsNjkbBQJxjkaLuje0cy0h
+MWitt7F4ISIWin//1MlCq+Of0fqruy4/4jV7j6PoF2LXT/tc7g9n0K83D8kD7mUWIGEE5prH
+fNta3LUk6rf+TtzcztJ57v4o+T3HxhuevQ+Ky+iTzY+TfIwGuJb0nWs3ETxzU1MwSNe+eTBF
+EBjItdxI0C2D4PtbYmdp4WDPipZ9hNle0iRjGtaGtAZoO1Nfsk8sXSUv/TA8YkNNu3EBkbQA
+0C2fM8zom4i17eI0OXFbp8HRfOob+X8UjtgBgHz7ddAy37rLtjLJjiqUjN30g2dTxlwtI95O
+Q8kEAD03VRpL3NAdYG5OmnBdJU7EbMWBr2RsYLNaGaczfmoPk2MRJqG24Dd/FbJ9k8WSMY9v
+ZjR5suc9c+eadYcltfJ//wBkep8UfJ//ANkep8UjO6PlYUkmzFsOS7RpOFuZ0HsWL8nz/wCS
+PU+K2S5sbW43NaOGIgIRxeZmx5K4Mdc8yi7uZQCHAEEEHQjMI9CY4ABPMou7mUnC6X/NUAFz
+zKLnmUx72Mye9rPxEBOBuARYg6FAC3PMoueZSehLbJAGX4RknYswJPlN/wCS4tdp4R/yab8T
+PauL4q0NEp7EQlshOIf/1eVGq2vBb+an+072hYw1XQeCsUeOadxONtmAcgcyf0Q1aBbOmxAc
+78hmkLnWyae/JOaR9m1upI7pOw8Br7lFJFSMucBvCBYC/csPwYY0MqKssze/C08hqQPT+i1N
+s1Ag2VUuBGIswjtOX7rN2XsyvGz4TFtF9PG9uMRiMG1+9ParsX30bNTURx00sjrENYSRzyWZ
+4K0rY9n+MEDeSuIv/SMrem6q7YpKyj2fJJLtN8zSQwx7sDFfrutBlQNj7GiMwvgjGFvnOIvb
+0lZSr7QvvsZte+0amLZURFz87M/XA0ad59yPBeQv2WY3axSuaR25+9V9mPr6ISySbKqJqiZ2
+OSTEBfkLckeDj3M2htCCSN0Ti7ebt2rc9P1CVro1PuxfCRgqazZ1IPKe83PGxIHvVl/g1s5z
+XAMlaeDt4bhVKmF20PCl0bZXxCniHTZqDbh6ybtSKr2O1tVTV88rQ4B8cxxDNar0g/bL21Kx
+2yqGnpqYB9Q8CKLLlYXt6EQbCpsOKuvV1DvLe9xIvyAVN8vjnhPs5zxZu5EjW9ZBct4Pu+zd
+OJWUzemc/UwjYG0aaWmc5tJO7DJETcD/AC91J4QsbU7U2bSWBLnEu/CSPcUvhP8APTbPpGZv
+fJe3VkPeoqlk1f4SVYpnlklPAWxuHnWt+5TL5MfwXa+ukmmOzdmta6W1pH/Yhby7VVnaNkth
+2bswDxyotimcMwOfVx7FN4LzRP2e6JkYjmjd86OLjwcfZ3KKm+d8MKkv1jjIb6AP3KzQFyLY
+FC1nz0ZqZD5UsjiS489clShB2NtyKkje40dSMmON8JOWXf7V0CwNqA1HhJs+BmrLOPUL39gW
+JtmtUJtCCOv8JoaeRt2MhvJbInU694UW0qRuyKqjl2e58b5X4THiJDsx77JaSGfaO19oVNPV
+OpsLsAc1odiHL9AlkbJsnacE9eRWCU4GzuuHR92nFMKX/CT+TTfib7Vxa7Pwk/k0w/qb7Vxi
+bHoyexEJexCcmf/W5YLZ8FxfargdDE72hY62fBb+aO/tO9oWS0EdnVOYAMr3OgThELZ3KG5n
+Ee7sT1NyeiqijE8JWTS0cdNTwSSYnYnljCQABln3/otljWsja1o6LWgDsATkJG7GSMTwiZLU
+yUtPHBLJGJA+RzWEgDTXsuiVku09uM3kMjKSmu6MPYWiR19f85LaxXybmUhuxuLC57uIba6Z
+OkK1bHLELJKfwofUCGUwSR4XvawkA2+AWxvXf+PL/wDPvRvnfcS//PvSro19mBs+eopq+tqp
+9nVbvGHXaWx+SL6H9FJWw1u3Hxx+LupKQOBc6W2J3YFsulc52HxeT+ryfRqgzOa25p5P/n3p
+7Foy9sUEwnpKvZ7QZqcYRH5zRp+6kj2wAzCNnVu++73fHt5K/HI/yjTyXP4fen76T7iX0t96
+G66NS9mXRUM5rH7U2kPng35uFnSwD3+9R+D0M7Zq6ephkikmeCA9pGVyf3Wxvn/+PJ6W+9QV
+m0GUUJmqIpWxggXGE5nvS22bSRl1lNUbO2wNoUkL5YZcpo2C568v17U+tpqiPaEW1qCJ0122
+khILXEWtoer2J/yn2ffSf1B70fKfZ99J/UHvTdi9En8ZL22g2fWPm4MdHhF+sqOjpJqMVO0K
+sGaulabMjGLDyaP09CPlRQf+x6nxSfKfZ/Kf1B70U/gLXyVdiy1GzqaSObZ1W5734y5jNclN
+JTVe16yF9TTmlpIDiDXkYnn/AAKT5T0HKb1B70fKag5T+oPejv4Dr5JPCT+TS/ib7Vxjl0O2
+NuUlbs58EIlxlzSMTbDI9q54lPBNLsSbtiIQhOIf/9fG2ZRU1Y57Z6ncvFsDcul3lbuydkt2
+fM+V8u9LhhaQLC2p/Zc/QU0cgfUVNxSw2xc3u4MHatTYFTJV7allksMURs0aNAIsAOpDdIFs
+6Tes60uMciqe0JHh9PSwu3clS8tLwM2tAuSOtOZs6hp3tmEYY+I4t4XG+mdzfNS+34K9loPL
+tGnvS4C7yjfqGiojaZtFM6mc2lmeGNlLhfPQlvAHtUlRWyU07GyU/wA2+QRtcJBicTxDeXes
+79I3ouAWGSUaKhWbSNMZRFTum3WEPdiDQCTk0czmEVG0XxeNOhpxJHS5SvdJhztewFjdLTNt
+F/gkc7CPYFQqJRVk0wo21D2ta6Vr3hrYyRkL217FXoK14gbE5r55xK+KJtxdwadSdMhldal7
+MbNdosM9ePamHpyf0jXtWfLtV8MVYZacNdTYQQ2TEHF2gBt2J4r5o54qd1C/FKwujAkF8tcX
+m/qt7XZjfo0AlWezaXzcm9gc2Zk25EbHB2N1rgA5fBB2hLFPJFUU7Y8EBnJbLiyHA5JaZto0
+Csjwp/kzv7jPanRgQ+Kzt3wNXKHGEydFrnC5OlzYDRM8KP5M7+432rVsG+jjeCEcULoOcAhC
+PagBUiEIAEcUFCABCEIA/9DnZqp80UUVmsiiFmsbpfi48yVteDNNIyp8YdhaHxkRtcc3C4u6
+3JZFBCyWZ75gTDCwySAfaA0HebLV8HJpKnbUksli90TshoBcWAHILJaCOzdrqKSp3UkUwjqI
+XYo3EXbmMweoqM0lZUxyRVO4hjewtO6JcSSOvQLR4JRdR5stxRmR0FRKKeOpMTY4CHfNkkyE
+DK9wLDjxUUFFtCmGKNtLJPneokLi54vxyy9K2LdqLFbzYcUZLqOcUsUYcwy78Tyl1wHm9z+3
+oTJqCoq4p3zOp2VEjWsswENIBBOI6km3cFsjrTHMaBe2fCy1STMcWiiYauGqqHUpgcKlweS8
+kGN1rHLiPQmjZ01JJTyUbo3ujY6N4muMWI3LrjjdXt061xZId4MjdNV6Zn/TPOzqiV8hc6Is
+kqmzE5glotlbuCutp3/xN9U/CWboRtF89bn9lK1z7WwHJODifsOSSTNVGWNm1UeGRj4XTR1L
+5m4r2eHCxB5GydU7Oqqg1hdJC01EDYwRfokZkdhvqtRKltjUjNNLWSVlJPK6nayC94mXIFxa
+4PEqDwn/AJO7+432rYKyPCf+Tv8A7jPatT7Ma6OMshKkXQc4IQhAAEqRCABCEcEABQkKEAf/
+0cjZrN7Q7SY3y901wHMA3Kn8GGNftQh17bp3EjiFR2dWOoqtkwFx5Lm+c06rotl0MMVf47Sy
+NdSyMcA3i0nh/miyWgjs0Jzu5WsjhdI7DiLcTr2vbnYcdeSj3klujSPd1guA4c+0+hSzGqdM
+7xawDWjN1rOOd+vl1JP9ZxLrYss23w39trdSgWGse9x+qusSBmXC1yPTa59Ct7iPzT6x96qX
+rRq8a3GEt0vxy5X/AETmePl32QwnV1rgYvbZbxYWi4SBYegIa3ibXQBhPG/NO4Jb9Ib/AKHB
+MYL3dz9iek6kX0AJeCTggrDQ9BRoEnaUW7Vpgp0WR4T/AMmf/cb7VrEDiTmsrwjODZLnYWus
+9tg7MJo7Flo4s9yMlZbWSMkdI1keJ1r3bf29xTfG3Z/Nx3Iwk2zItZdBzkW7du8YAw3sT1pE
++SbG0N3cbbaFoI4KNABdIlSIAEuiRKgAKEIQB//S5cLa8FyTtF7MRwGMktvlfmhCyWgjs6ox
+DnZAiHMlCFDnIvxQ9rWjgnIQlts0EqEINEJRdCEAF0IQsARHFCFoBwWT4Tm+xnf3Ge1CFsdi
+y0cYjRCF1HMCEIQAIQhAC2SIQgAQhCAP/9k=</binary>
+</FictionBook>
