@@ -10,6 +10,7 @@ BookSchema = new Schema(
     index:
       unique: true
   filename: String
+  text: String
   created:
     type: Date
     default: Date.now
@@ -27,15 +28,25 @@ exports.addBook = (req, res) ->
   Book.find {}, (err, books) ->
     res.json books: books
 
+exports.viewBook = (req, res) ->
+  Book.findById req.params.id, (err, book) ->
+    res.json book: book
+
+
 exports.upload = (req, res) ->
   console.log req.files
   path = req.files.book.path
   pathParts = path.split('/')
   name = req.files.book.name
+  
   newPath = path.replace(pathParts[pathParts.length - 1], Math.floor((Math.random()*1000)+1) + '_' + name)
   fs.rename path, newPath
+  
   book = new Book({filepath: newPath, filename: name})
-  book.save()
+  fs.readFile newPath, (err, data) ->
+    if !err
+      book.text = data
+      book.save()
 
   # res.send(path.join(__dirname, 'files'), req.files)
   # res.json status: format("\nuploaded %s (%d Kb) to %s as %s", req.files.book.name, req.files.book.size / 1024 | 0, req.files.book.path, req.files.book.name)

@@ -6,6 +6,24 @@ angular.module('myApp').controller('IndexCtrl', function($scope, $http) {
   });
 });
 
+angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $routeParams) {
+  $scope.book = {};
+  $scope.content = {};
+  $http.get("/api/book/" + $routeParams.id).success(function(data) {
+    var t = $(data.book.text);
+    // $scope.content = t.find('body').text();
+    var xmlDoc = $.parseXML( data.book.text );
+    console.log(xmlDoc);
+    var $xml = $( xmlDoc );
+    var body = $($xml.find("body"));
+    $('#text').xslt(body, 'FB2_2_xhtml.xsl');
+
+    // $('#text').html(html);
+
+    return $scope.book = data.book;
+  });
+});
+
 angular.module('myApp').controller('AddBookCtrl', function($scope, $http, $location) {
   $scope.open = function() {
     $http.defaults.headers = {'Content-Type':'multipart/form-data'};

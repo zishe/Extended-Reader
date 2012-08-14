@@ -9,8 +9,6 @@ routes = require './routes'
 api = require './routes/api'
 mongoose = require 'mongoose'
 
-format = require('util').format
-
 db = null
 app = express()
 
@@ -56,6 +54,7 @@ app.get '/partials/:name', routes.partials
 
 # JSON API
 app.get '/api/books', api.books
+app.get '/api/book/:id', api.viewBook
 app.post '/uploadfile', api.upload
 
 # redirect all others to the index (HTML5 history)

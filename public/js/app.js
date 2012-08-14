@@ -11,6 +11,10 @@ angular.module('myApp', ['ui', 'myApp.filters', 'myApp.services', 'myApp.directi
       templateUrl: '/partials/addBook',
       controller: 'AddBookCtrl'
     })
+    .when('/book/:id', {
+      templateUrl: '/partials/viewBook',
+      controller: 'ReadBookCtrl'
+    })
     .otherwise({
       redirectTo: '/'
     });
