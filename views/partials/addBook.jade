@@ -1,0 +1,28 @@
+h3 Add Book
+form.form-horizontal(action="/uploadfile", method="POST", name='form', enctype="multipart/form-data")
+  div.control-group
+    //- div.controls
+    div.input-append.input-prepend
+      //- span.add-on
+      //-   i.icon-file
+      input(ng-model='file', name='book', type='file', size='20')
+      //- button.btn(type='button', ng-click='choose()') Browse
+      //- button.btn(type='button', ng-click='open()') Open
+      button.btn(type='submit') Open
+      div#status {{status}}
+
+
+
+//- h3 Add Book
+//- form.form-horizontal(name='form', enctype="multipart/form-data")
+//-   //- action="/uploadfile", method="POST", 
+//-   div.control-group
+//-     //- div.controls
+//-     div.input-append.input-prepend
+//-       //- span.add-on
+//-       //-   i.icon-file
+//-       input(ng-model='file', name='book', type='file', size='20')
+//-       //- button.btn(type='button', ng-click='choose()') Browse
+//-       button.btn(type='button', ng-click='open()') Open
+//-       //- button.btn(type='submit') Open
+//-       div#status {{status}}      

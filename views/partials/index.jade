@@ -1,0 +1,5 @@
+h2 Books
+div(ng-repeat='book in books')
+  a(href='/book/{{book._id}}')
+    h2 {{book.filename}}
+  div.book-content {{book.filepath}}

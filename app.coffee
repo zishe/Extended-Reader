@@ -1,13 +1,15 @@
 express = require 'express'
 http = require 'http'
 path = require 'path'
-less = require 'less'
 
+stylus = require 'stylus'
 assets = require 'connect-assets'
 
 routes = require './routes'
 api = require './routes/api'
 mongoose = require 'mongoose'
+
+format = require('util').format
 
 db = null
 app = express()
@@ -15,18 +17,22 @@ app = express()
 app.use assets()
 
 app.configure ->
-  app.set 'port', process.env.PORT or 3000
+  app.set 'port', process.env.PORT or 4000
   app.set 'views', __dirname + '/views'
   app.set 'view engine', 'jade'
   app.use express.favicon()
   app.use express.logger('dev')
-  app.use express.bodyParser()
+  app.use express.bodyParser(
+      keepExtensions: true
+      uploadDir: __dirname + '/public/files',
+    )
+  app.use express.limit('5mb')
   app.use express.methodOverride()
   app.use express.cookieParser('your secure key')
   app.use express.session()
-  app.use app.router
+  app.use require('stylus').middleware(__dirname + '/public')
   app.use express.static(path.join(__dirname, 'public'))
-
+  app.use app.router
 
 app.configure "development", ->
   app.use express.errorHandler(
@@ -41,12 +47,16 @@ app.configure "production", ->
 
 
 
+
+
+
  # Routes
 app.get '/', routes.index
 app.get '/partials/:name', routes.partials
 
 # JSON API
-# app.get '/api/posts', api.posts
+app.get '/api/books', api.books
+app.post '/uploadfile', api.upload
 
 # redirect all others to the index (HTML5 history)
 app.get '*',  (req, res) ->
