@@ -1,5 +1,38 @@
 h2 Books
-div(ng-repeat='book in books')
-  a(href='/book/{{book._id}}')
-    h2 {{book.filename}}
-  div.book-content {{book.filepath}}
+//- div(ng-repeat='book in books | orderBy:author')
+  //- div.row
+  //-   div.span6
+  //-     a.pull-left(href='/book/{{book._id}}')
+  //-       h3 {{book.title}}
+  //-   div.span3
+  //-     div.pull-left.book-author {{book.author}}
+  //-   div.span3
+  //-     span.book-opts
+  //-       a(href='/editBook/{{book._id}}')
+  //-         i.icon-pencil
+  //-     span.book-opts
+  //-       a(href='/deleteBook/{{book._id}}')
+  //-         i.icon-remove
+table.table.table-striped
+  thead
+  tr
+    th Title
+    th Author
+    th Words
+    th Chars
+    th
+    th
+  tbody
+    tr(ng-repeat='book in books | orderBy:author')
+      td
+        a.pull-left(href='/book/{{book._id}}')
+          h3 {{book.title}}
+      td {{book.author}}
+      td {{book.count.words}}
+      td {{book.count.chars}}
+      td
+        a(href='/editBook/{{book._id}}')
+          i.icon-pencil
+      td
+        a(href='/deleteBook/{{book._id}}')
+          i.icon-remove

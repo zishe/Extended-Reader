@@ -15,7 +15,7 @@ app = express()
 app.use assets()
 
 app.configure ->
-  app.set 'port', process.env.PORT or 4000
+  app.set 'port', process.env.PORT or 3000
   app.set 'views', __dirname + '/views'
   app.set 'view engine', 'jade'
   app.use express.favicon()
@@ -26,7 +26,7 @@ app.configure ->
     )
   app.use express.limit('5mb')
   app.use express.methodOverride()
-  app.use express.cookieParser('your secure key')
+  app.use express.cookieParser('gfjfkghds9g7fds')
   app.use express.session()
   app.use require('stylus').middleware(__dirname + '/public')
   app.use express.static(path.join(__dirname, 'public'))
@@ -37,15 +37,11 @@ app.configure "development", ->
     dumpExceptions: true
     showStack: true
   )
-  db = mongoose.connect 'mongodb://user:user@ds037007.mongolab.com:37007/speed-read'
+  db = mongoose.connect 'mongodb://user:user@ds037007.mongolab.com:37007/speed-reading'
 
 app.configure "production", ->
   app.use express.errorHandler()
-  db = mongoose.connect 'mongodb://user:user@ds037007.mongolab.com:37007/speed-read'
-
-
-
-
+  db = mongoose.connect 'mongodb://user:user@ds037007.mongolab.com:37007/speed-reading'
 
 
  # Routes
@@ -54,8 +50,14 @@ app.get '/partials/:name', routes.partials
 
 # JSON API
 app.get '/api/books', api.books
-app.get '/api/book/:id', api.viewBook
-app.post '/uploadfile', api.upload
+app.get '/api/book/:id', api.book
+app.get '/api/bookwithtext/:id', api.bookWithText
+app.post '/api/book', api.addBook
+app.put '/api/book/:id', api.editBook
+app.delete '/api/book/:id', api.deleteBook
+
+
+app.post '/api/save_settings/:id', api.saveSettings
 
 # redirect all others to the index (HTML5 history)
 app.get '*',  (req, res) ->

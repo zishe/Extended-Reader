@@ -1,0 +1,17 @@
+form(name='form')
+  div.control-group
+    div.input-prepend
+      span.add-on
+        i.icon-book
+      input(ng-model='book.title', name='title', type='text', placeholder='Title...')
+    div.input-prepend
+      span.add-on
+        i.icon-user
+      input(ng-model='book.author', name='author', type='text', placeholder='Author...')
+    div.input-prepend
+      span.add-on
+        i.icon-th-list
+      textarea.book-text(ng-model='book.text', name='text', placeholder='Text...')
+    div.form-actions
+      button.btn.btn-primary(type='button', ng-click='save()') Save
+      button.btn(type='button', ng-click='cancel()') Cancel

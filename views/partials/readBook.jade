@@ -1,0 +1,27 @@
+//- div(ng-bind-html="html") {{content | html}}
+//- div(ng-bind-html="content")
+div.control-panel
+  .font-opts
+    i.icon-minus(ng-click='font_decrease()')
+    span.label.label-info font size
+    i.icon-plus(ng-click='font_increase()')
+  .line-opts
+    i.icon-minus(ng-click='line_decrease()')
+    span.label.label-info line height
+    i.icon-plus(ng-click='line_increase()')
+  .width-opts
+    i.icon-minus(ng-click='width_decrease()')
+    span.label.label-info width
+    i.icon-plus(ng-click='width_increase()')
+  .bcolor-opts
+  
+.actions
+  a.btn.btn-large.btn-my(href='#', ng-click='prev()', id='btn-prev')
+    i.icon-arrow-left
+  a.btn.btn-large.btn-primary.btn-my(href='#', ng-click='next()', id='btn-next')
+    i.icon-arrow-right.icon-white
+
+.reading-block
+  div.reading-area
+    div#text
+

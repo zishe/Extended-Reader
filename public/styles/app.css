@@ -1,4 +1,72 @@
 body {
   padding-top: 30px;
   position: relative;
+  background-color: #e5e8d3;
+}
+body .book-text {
+  height: 250px;
+  width: 640px;
+}
+body .book-author {
+  margin-top: 4px;
+  padding-left: 40px;
+}
+body .book-opts {
+  display: block;
+  float: left;
+  padding-left: 20px;
+  padding-top: 4px;
+}
+body .control-panel {
+  width: 740px;
+  margin: 0 auto;
+}
+body .control-panel div {
+  float: left;
+  padding-left: 10px;
+}
+body .control-panel div i {
+  margin: 0 7px;
+  cursor: pointer;
+}
+body .control-panel span {
+  cursor: default;
+}
+body .reading-block {
+  width: 640px;
+  margin: 0 auto;
+}
+body .reading-block .reading-area {
+  padding-top: 50px;
+  text-align: justify;
+  text-justify: inter-word;
+  font: 20px;
+}
+body .reading-block .reading-area p {
+  font-family: Tahoma;
+  line-height: 25px;
+}
+body .actions {
+  float: right;
+  margin-right: 50px;
+}
+.navbar-fixed-top .brand {
+  padding-right: 0;
+  padding-left: 0;
+  margin-right: 20px;
+  float: left;
+  font-weight: bold;
+  color: #000;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.1), 0 0 30px rgba(255,255,255,0.125);
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+.table-striped tbody tr:nth-child(odd) td,
+.table-striped tbody tr:nth-child(odd) th {
+  background-color: #ced6c1;
+}
+.btn-my {
+  margin: 0 10px;
+  padding: 9px 42px;
 }

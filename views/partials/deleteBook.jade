@@ -1,0 +1,9 @@
+div#my-modal.modal
+  .modal-header
+      button.close(type='button', data-dismiss='modal') ×
+      h3 Are you sure?
+    .modal-body
+      p Are you sure you want to delete this book?
+    .modal-footer
+      a.btn(href='#', data-dismiss='modal', ng-click='cancel()') Cancel
+      a.btn.btn-primary(href='#', ng-click='delete()') Delete
