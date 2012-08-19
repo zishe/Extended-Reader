@@ -130,7 +130,7 @@ exports.addBook = (req, res) ->
 
     #make parts
     book.lastPos = 0
-    getPart(b.text, book, 500) for i in [0..10]
+    getPart(b.text, book, 2500) for i in [0..10]
     #set first part
     book.currPart = book.nextParts.shift()
     book.prevParts = []

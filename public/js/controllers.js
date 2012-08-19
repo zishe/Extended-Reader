@@ -173,6 +173,11 @@ function setAll($scope) {
   setFont($scope);
   setLineHeight($scope);
   setWidth($scope);
+  $('html, body').animate({
+    scrollTop: $('#btn-next').offset().top// - 48
+    }, 200
+  );
+  $('#btn-next').tipsy({gravity: 'n'});
 };
 
 
