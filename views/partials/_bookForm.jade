@@ -11,7 +11,7 @@ form(name='form')
     div.input-prepend
       span.add-on
         i.icon-th-list
-      textarea.book-text(ng-model='book.text', name='text', placeholder='Text...')
+      textarea.book-text(ng-model='book.text', name='text', row='6', placeholder='Text...')
     div.form-actions
       button.btn.btn-primary(type='button', ng-click='save()') Save
       button.btn(type='button', ng-click='cancel()') Cancel

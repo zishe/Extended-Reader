@@ -62,36 +62,59 @@ angular.module('myApp').controller('DeleteBookCtrl', function($scope, $http, $lo
 
 
 
-
-
-
 // Read Book
 angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $routeParams) {
   $scope.book = {};
   $scope.settings = {};
+
+  $scope.prevTime = null;
+  $scope.nowTime = null;
+  $scope.readingTime = 0;
+  $scope.playing = false;
+
   
   $http.get("/api/book/" + $routeParams.id).success(function(data) {
     $scope.book = data.book;
     $scope.settings = data.settings;
-    
-    $scope.content = '<p>' + $scope.book.currPart.replace(/\n/g, '</p><p>') + '</p>';
-    $('#text').html($scope.content);
-
+    setPart($scope);
     setAll($scope);
+    setGraph($scope);
+    if (($scope.book.parts.length < ($scope.book.partNum + 5)) && !$scope.book.endRead) {
+      $http.put("/api/addparts/" + $routeParams.id).success(function(data) {
+        console.log('loaded new book data');
+        $scope.book = data.book;
+        
+      });
+    }
   });
 
   $scope.next = function() {
-    if ($scope.book.nextParts.length > 0) {
-      if (!$scope.book.prevParts || typeof $scope.book.prevParts === undefined){
-        console.log('undefined');
-        $scope.book.prevParts = new Array();
-      }
-      $scope.book.prevParts.push($scope.book.currPart);
-      $scope.book.currPart = $scope.book.nextParts.shift()
-      $scope.content = '<p>' + $scope.book.currPart.replace(/\n/g, '</p><p>') + '</p>';
-      $('#text').html($scope.content);
+    if ($scope.readingTime != 0) {
+      console.log('update time');
+      $scope.book.parts[$scope.book.partNum].readingTime = Math.round($scope.readingTime / 1000);
+      $http.put("/api/settime/" + $routeParams.id + '/' + $scope.book.partNum, {time: Math.round($scope.readingTime / 1000)}).success(function(data) {
         
+      });
+      $scope.readingTime = 0;
+      $scope.prevTime = (new Date()).getTime();
+    }
+
+    $scope.book.partNum = $scope.book.partNum + 1;
+
+    if ($scope.book.parts.length > $scope.book.partNum) {
+      console.log('next');
+      setPart($scope);
       setAll($scope);
+      
+      $http.put("/api/setnum/" + $routeParams.id + '/' + $scope.book.partNum).success(function(data) {
+        console.log('save part num');
+        if ($scope.book.parts.length < ($scope.book.partNum + 5) && !$scope.book.endRead) {
+          $http.put("/api/addparts/" + $routeParams.id).success(function(data) {
+            console.log('loaded new book data');
+            $scope.book = data.book;
+          });
+        }
+      });
     }
     else{
       $('#text').html("<p>The end</p>");
@@ -101,13 +124,29 @@ angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $rout
   };
 
   $scope.prev = function() {
-    if ($scope.book.prevParts.length > 0) {
-      $scope.book.nextParts.push($scope.book.currPart);
-      $scope.book.currPart = $scope.book.prevParts.pop()
-      $scope.content = '<p>' + $scope.book.currPart.replace(/\n/g, '</p><p>') + '</p>';
-      $('#text').html($scope.content);
+    if ($scope.book.partNum > 0) {
+      $scope.book.partNum = $scope.book.partNum - 1;
+      setPart($scope);
         
+      $http.put("/api/setnum/" + $routeParams.id + '/' + $scope.book.partNum).success(function(data) {
+        console.log('save part num');
+      });
       setAll($scope);
+    }
+  };
+  $scope.play = function() {
+    if (!$scope.playing){
+      $scope.playing = true;
+      $scope.prevTime = (new Date()).getTime();
+      $scope.intervalId = setInterval($scope.sec, 1000) // использовать функцию
+    }
+  };
+
+  $scope.pause = function() {
+    if ($scope.playing){
+      $scope.playing = false;
+      $scope.sec();
+      clearInterval($scope.intervalId);
     }
   };
 
@@ -116,6 +155,25 @@ angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $rout
     saveSettings($scope, $http);
     setFont($scope);
   };
+
+  $scope.sec = function() {
+    $scope.nowTime = (new Date()).getTime();
+    $scope.readingTime += $scope.nowTime - $scope.prevTime;
+    $scope.prevTime = $scope.nowTime;
+
+    // console.log($scope.prevTime);
+    // console.log($scope.readingTime);
+
+    var min = Math.round((($scope.readingTime - ($scope.readingTime % 60000))/ 60000));
+    var sec = Math.round(($scope.readingTime % 60000) / 1000);
+    var text = '';
+    if (min > 0)
+      text = text + min + ' minutes ';
+    if (sec > 0)
+      text = text + sec + ' seconds ';
+
+    $('#time').text(text);
+  }
 
   $scope.font_decrease = function() {
     if (parseInt($scope.settings.font_size) > 0) {
@@ -154,10 +212,27 @@ angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $rout
       setWidth($scope);
     }
   };
+
+
+  $scope.part_increase = function() {
+    $scope.settings.part_length = parseInt($scope.settings.part_length) + 100;
+    saveSettings($scope, $http);
+    setPartLength($scope, $http);
+  };
+
+  $scope.part_decrease = function() {
+    if (parseInt($scope.settings.part_length) > 0) {
+      $scope.settings.part_length = parseInt($scope.settings.part_length) - 100;
+      saveSettings($scope, $http);
+      setPartLength($scope, $http);
+    }
+  };
 });
 
+
+
 function setCssProp($scope, prop_name, prop_val) {
-  console.log('set css: ' + prop_name + " : " + prop_val);
+  // console.log('set css: ' + prop_name + " : " + prop_val);
   $('.reading-area p').each(function() {
     $(this).css(prop_name, prop_val);
   });
@@ -169,15 +244,21 @@ function saveSettings($scope, $http) {
   });
 };
 
+function setPartLength($scope, $http) {
+  $http.post("/api/save_settings/" + $scope.settings._id, $scope.settings).success(function(data) {
+  });
+};
+
 function setAll($scope) {
   setFont($scope);
   setLineHeight($scope);
   setWidth($scope);
   $('html, body').animate({
-    scrollTop: $('#btn-next').offset().top// - 48
-    }, 200
+    scrollTop: $('#btn-next').offset().top
+    }, 300
   );
   $('#btn-next').tipsy({gravity: 'n'});
+  $('#btn-play').tipsy({gravity: 'n'});
 };
 
 
@@ -190,8 +271,45 @@ function setLineHeight($scope) {
 };
 
 function setWidth($scope) {
-  console.log('set width : ' + $scope.settings.width + 'px');
+  // console.log('set width : ' + $scope.settings.width + 'px');
   $('.reading-block').each(function() {
     $(this).css("width", $scope.settings.width + 'px');
   });
+};
+
+function setPart($scope) {
+  $scope.book.currPart = $scope.book.parts[$scope.book.partNum]
+  $scope.content = '<p>' + $scope.book.currPart.text.replace(/\n/g, '</p><p>') + '</p>';
+  $('#text').html($scope.content);
+};
+
+
+
+
+function setGraph($scope) {
+  var num = 0;
+  var fl = true;
+  var text = '';
+  console.log('fdsafdsafsda');
+  while (fl){
+    var part = $scope.book.parts[num];
+    if (part.readingTime == null)
+      fl = false;
+    else
+    {
+      text += num + ',' + (part.countWords / part.readingTime * 60) + '\n';
+    }
+    num++;
+  }
+  console.log(text);
+
+  var g = new Dygraph(
+    document.getElementById("graphdiv"),
+    "Part,Words in minute\n" + text,
+    {
+      // // fractions: true,
+      // errorBars: true,
+      width: 800
+    }
+  );
 };

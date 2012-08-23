@@ -51,6 +51,9 @@ app.get '/partials/:name', routes.partials
 # JSON API
 app.get '/api/books', api.books
 app.get '/api/book/:id', api.book
+app.put '/api/setnum/:id/:pid', api.setNum
+app.put '/api/settime/:id/:pid', api.setTime
+app.put '/api/addparts/:id', api.addParts
 app.get '/api/bookwithtext/:id', api.bookWithText
 app.post '/api/book', api.addBook
 app.put '/api/book/:id', api.editBook

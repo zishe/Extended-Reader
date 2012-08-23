@@ -26,7 +26,7 @@ table.table.table-striped
     tr(ng-repeat='book in books | orderBy:author')
       td
         a.pull-left(href='/book/{{book._id}}')
-          h3 {{book.title}}
+          h3.book-index-title {{book.title}}
       td {{book.author}}
       td {{book.count.words}}
       td {{book.count.chars}}

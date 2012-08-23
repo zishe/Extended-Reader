@@ -1,6 +1,6 @@
 //- div(ng-bind-html="html") {{content | html}}
 //- div(ng-bind-html="content")
-div.control-panel
+div.control-panel.clearfix
   .font-opts
     i.icon-minus(ng-click='font_decrease()')
     span.label.label-info font size
@@ -13,15 +13,37 @@ div.control-panel
     i.icon-minus(ng-click='width_decrease()')
     span.label.label-info width
     i.icon-plus(ng-click='width_increase()')
+  .part-size-opts
+    i.icon-minus(ng-click='part_decrease()')
+    span.label.label-info part size
+    i.icon-plus(ng-click='part_increase()')
   .bcolor-opts
+    //- span(ng-bind='book.parts[book.partNum].startTime')
+    
+    //-  ng-bind='var d = new Date();d - book.parts[book.partNum].startTime'
+  .parts
+    span {{book.parts.length}}
+    span {{book.partNum}}
   
-.actions
-  a.btn.btn-large.btn-my(href='#', ng-click='prev()', id='btn-prev')
-    i.icon-arrow-left
-  a.btn.btn-large.btn-primary.btn-my(href='#', ng-click='next()', id='btn-next', original-title='Press Space or Right for next part')
-    i.icon-arrow-right.icon-white
+  
+.actions.clearfix
+  div.pull-left
+    .show-graph
+  div.pull-right
+    span#time
+    a.btn.btn-large.btn-my(href='#', ng-click='pause()', id='btn-pause')
+      i.icon-pause
+    a.btn.btn-large.btn-primary.btn-my(href='#', ng-click='play()', id='btn-play', original-title='Start when you are ready')
+      i.icon-play.icon-white
+
+    a.btn.btn-large.btn-my(href='#', ng-click='prev()', id='btn-prev')
+      i.icon-arrow-left
+    a.btn.btn-large.btn-primary.btn-my(href='#', ng-click='next()', id='btn-next', original-title='Press Space or Right for next part')
+      i.icon-arrow-right.icon-white
 
 .reading-block
   div.reading-area
     div#text
 
+.graph-block
+  #graphdiv

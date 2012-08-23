@@ -1,51 +1,9 @@
 fs = require 'fs'
 path = require 'path'
-
-mongoose = require 'mongoose'
-Schema = mongoose.Schema
-ObjectId = Schema.ObjectId
-
-BookSchema = new Schema(
-  title:String
-  author: String
-  text: String
-  count:
-    words: Number
-    chars: Number
-    charsNoSpaces: Number
-  currPart: String
-  lastPos: Number
-  nextParts: [String]
-  prevParts: [String]
-  path: String
-  created:
-    type: Date
-    default: Date.now
-)
-
-
-mongoose.model "Book", BookSchema
-Book = mongoose.model "Book"
-exports.Book = Book
-
-handleError = (err) ->
-  if err
-    console.log err
-    throw err
-
-Book.on('error', handleError)
-
-
-UserSettingsSchema = new Schema(
-  font_size: Number
-  line_height: Number
-  width: Number
-  part_length: Number
-)
-
-mongoose.model "UserSettings", UserSettingsSchema
-UserSettings = mongoose.model "UserSettings"
-exports.UserSettings = UserSettings
+models = require './models'
+Book = models.Book
+Part = models.Part
+UserSettings = models.UserSettings
 
 exports.books = (req, res) ->
   Book.find {}, (err, books) ->
@@ -73,20 +31,31 @@ exports.bookWithText = (req, res) ->
 
 exports.editBook = (req, res) ->
   Book.findById req.params.id, (err, book) ->
-    if !err
+      if err
+        console.log err
+      
       book.title = req.body.title
       book.author = req.body.author
-      book.text = req.body.text
-      book.save (err1) ->
-        res.json book: book
+      book.text = null
+      
+      fs.writeFile book.path, req.body.text, (err1) ->
+        if err1
+          console.log err1
+        console.log "text saved in file"
+
+        book.save (err2) ->
+          if err2
+            console.log err2
+          res.json book: book
 
 exports.deleteBook = (req, res) ->
   id = req.params.id
   Book.findById req.params.id, (err, book) ->
     if !err
-      fs.unlink book.path, (err1) ->
-        if err1
-          console.log err1
+      if book.path?
+        fs.unlink book.path, (err1) ->
+          if err1
+            console.log err1
     Book.remove {_id: id}, (err2, book) ->
       unless err2
         console.log book.path
@@ -120,21 +89,24 @@ exports.addBook = (req, res) ->
       console.log 'book saved: ' + book.title
     
     #path
-    newPath = __dirname + '/../public/files/' + book._id.toString()
-    book.path = newPath
-    console.log newPath
+    book.path = __dirname + '/../public/files/' + book._id.toString()
+    console.log book.path
 
     #words count
     setWordsCount(book, b.text)
     console.log 'check counts: ' + book.count.words
 
+    book.reading = false
+    book.endRead = false
     #make parts
     book.lastPos = 0
-    getPart(b.text, book, 2500) for i in [0..10]
+    for i in [0..9]
+      if !book.endRead
+        getPart(b.text, book, 800) 
     #set first part
-    book.currPart = book.nextParts.shift()
-    book.prevParts = []
-    console.log 'parts num: ' + book.nextParts.length
+    book.partNum = 0
+    # book.currPart = book.parts[book.partNum]
+    console.log 'parts num: ' + book.parts.length
     
     console.log 'saving book...'
     book.save (arr0) ->
@@ -142,7 +114,7 @@ exports.addBook = (req, res) ->
         console.log arr0
       console.log 'saved'
       
-      fs.writeFile newPath, b.text, (err1) ->
+      fs.writeFile book.path, b.text, (err1) ->
         if err1
           console.log err1
         console.log "text saved in file"
@@ -157,28 +129,87 @@ exports.addBook = (req, res) ->
 
 
 
+exports.setNum = (req, res) ->
+  num = parseInt(req.params.pid)
+  Book.findById req.params.id, (err, book) ->
+    book.partNum = num
+    # book.reading = false
+    book.save () ->
+      console.log 'set num ' + num
+      res.json true
+
+
+exports.setTime = (req, res) ->
+  num = parseInt(req.params.pid)
+  time = req.body.time
+  console.log time
+  Book.findById req.params.id, (err, book) ->
+    book.parts[num].readingTime = time;
+    book.save () ->
+      console.log 'set num ' + num
+      res.json true
+
+
+exports.addParts = (req, res) ->
+  Book.findById req.params.id, (err, book) ->
+    num = 0
+    while num < (book.parts.length - 10)
+      if (book.parts[num].text != null)
+        console.log 'remove text part number ' + num
+        book.parts[num].text = null
+      num++
+    book.save (err3) ->
+      if err3
+        console.log err3
+      console.log "read file"
+      fs.readFile book.path, (err2, data) ->
+        for i in [0..4]
+          if !book.endRead
+            getPart(data.toString(), book, 800)
+        book.save (arr0) ->
+          if arr0
+            console.log arr0
+
+          console.log 'saved'
+          res.json book: book
+
+
 getPart = (text, book, min_length) ->
   console.log 'select parts from text'
   console.log 'last pos: ' + book.lastPos
+
   #remove used text
   text = text.substr book.lastPos, text.length - 1
-  #select paragraphs
-  paragraph = text.split '\n'
-  console.log 'paragraphs: ' + paragraph.length
-
-  #make one part
-  next = ''
-  num = 0
-  while next.length < min_length and paragraph.length > num
-    next += paragraph[num] + '\n'
-    # console.log num
-    # console.log (paragraph[num]).length if paragraph.length > 0
-    num++
   
-  console.log next
+  if (text.length < 10)
+    console.log "end of file"
+    book.endRead = true
+  else
+    # create Part
+    part = new Part()
+    part.startPos = book.lastPos
 
-  book.lastPos += next.length
-  book.nextParts.push next
+    #select paragraphs
+    paragraph = text.split '\n'
+    console.log 'paragraphs: ' + paragraph.length
+
+    #make one part
+    next = ''
+    num = 0
+    while next.length < min_length and paragraph.length > num
+      next += paragraph[num] + '\n'
+      # console.log num
+      # console.log (paragraph[num]).length if paragraph.length > 0
+      num++
+    
+    console.log "next length: " + next.length
+    part.text = next
+    part.lengthChars = next.length
+    part.countWords = next.replace(/[\,\.\:\?\-\—\;\(\)\«\»\…]/g, '').replace(/\s+/gi,' ').split(' ').length
+    book.lastPos += next.length
+    part.endPos = book.lastPos
+
+    book.parts.push part
 
 
 

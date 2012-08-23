@@ -1,7 +1,9 @@
 body {
-  padding-top: 30px;
   position: relative;
   background-color: #e5e8d3;
+}
+body .navbar {
+  margin-bottom: 10px;
 }
 body .book-text {
   height: 250px;
@@ -18,8 +20,8 @@ body .book-opts {
   padding-top: 4px;
 }
 body .control-panel {
-  width: 740px;
-  margin: 0 auto;
+  margin-left: 50px;
+  margin-bottom: 20px;
 }
 body .control-panel div {
   float: left;
@@ -50,6 +52,9 @@ body .actions {
   float: right;
   margin-right: 50px;
 }
+body .parts span {
+  padding-left: 10px;
+}
 .navbar-fixed-top .brand {
   padding-right: 0;
   padding-left: 0;
@@ -69,4 +74,20 @@ body .actions {
 .btn-my {
   margin: 0 10px;
   padding: 9px 42px;
+}
+.book-index-title {
+  font-size: 20px;
+  line-height: 30px;
+  margin: 0px;
+}
+#time {
+  color: #364d9f;
+}
+.graph-block {
+  margin: 0 auto;
+  padding: 40px 0;
+  width: 840px;
+}
+.graph-block #graphdiv {
+  margin-right: 30px;
 }
