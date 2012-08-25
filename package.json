@@ -23,7 +23,7 @@
     "supervisor": ">= 0.4.1"
   },
   "engines": {
-    "node": "~ 0.6.x"
+    "node": "~ 0.8.6"
   },
   "subdomain": "speed-reading-apps"
 }
