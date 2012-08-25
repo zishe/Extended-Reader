@@ -82,26 +82,29 @@ body .parts span {
 #time {
   color: #364D9F;
 }
-.dl-horizontal dt {
+.view-book-page .dl-horizontal dt {
   width: 200px;
   font-size: 15px;
   line-height: 26px;
 }
-.dl-horizontal dd {
+.view-book-page .dl-horizontal dd {
   margin-left: 220px;
   line-height: 26px;
   font-size: 17px;
+}
+.view-book-page .read-actions {
+  padding-top: 15px;
 }
 .graph-block {
   margin: 0 auto;
   padding: 40px 0;
   width: 840px;
 }
-#graph {
+.graph-block #graph {
   /*width: 600px;*/
 
   height: 300px;
 }
 /*small.author{
-  padding-left: 20px;
+    padding-left: 20px;
 }*/

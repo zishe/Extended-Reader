@@ -121,7 +121,9 @@ function getGraph($scope) {
     xkey: 'x',
     ykeys: ['y'],
     labels: ['Speed'],
-    parseTime: false
+    parseTime: false,
+    hideHover: true
+    
   });
 };
 

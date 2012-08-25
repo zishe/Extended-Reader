@@ -1,7 +1,7 @@
 h1.page-header {{book.title}}   
   small.author {{book.author}}
 
-.row
+.row.view-book-page
   .span9
     dl.dl-horizontal
       dt Name
@@ -28,8 +28,8 @@ h1.page-header {{book.title}}
       dd {{book.createdDate}}
 
       
-  .span3.actions
-    a.pull-left(href='/readBook/{{book._id}}') Per Page Read
+  .span3.read-actions
+    a.btn.btn-primary.btn-large.pull-left(href='/readBook/{{book._id}}') Per Page Read
 
 .row.graph-block
   #graph
