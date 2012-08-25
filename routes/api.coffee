@@ -1,6 +1,7 @@
 fs = require 'fs'
 path = require 'path'
 models = require './models'
+
 Book = models.Book
 Part = models.Part
 UserSettings = models.UserSettings
@@ -10,6 +11,11 @@ exports.books = (req, res) ->
     res.json books: books
 
 exports.book = (req, res) ->
+  Book.findById req.params.id, (err, book) ->
+    console.log err if err
+    res.json book: book
+
+exports.readBook = (req, res) ->
   Book.findById req.params.id, (err, book) ->
     # if not UserSettings.findOne()
     UserSettings.findOne (err1, settings) ->

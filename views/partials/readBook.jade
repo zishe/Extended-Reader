@@ -21,16 +21,16 @@ div.control-panel.clearfix
     //- span(ng-bind='book.parts[book.partNum].startTime')
     
     //-  ng-bind='var d = new Date();d - book.parts[book.partNum].startTime'
-  .parts
-    span {{book.parts.length}}
-    span {{book.partNum}}
+  //- .parts
+  //-   span {{book.parts.length}}
+  //-   span {{book.partNum}}
   
   
 .actions.clearfix
-  div.pull-left
-    .show-graph
+  //- div.pull-left
+  //-   a.show-graph(ng-click='showGraph()') Show graph
   div.pull-right
-    span#time
+    //- span#time
     a.btn.btn-large.btn-my(href='#', ng-click='pause()', id='btn-pause')
       i.icon-pause
     a.btn.btn-large.btn-primary.btn-my(href='#', ng-click='play()', id='btn-play', original-title='Start when you are ready')
@@ -41,9 +41,10 @@ div.control-panel.clearfix
     a.btn.btn-large.btn-primary.btn-my(href='#', ng-click='next()', id='btn-next', original-title='Press Space or Right for next part')
       i.icon-arrow-right.icon-white
 
+//- .graph-block.clearfix.hide
+//-   #graphdiv
+
+
 .reading-block
   div.reading-area
     div#text
-
-.graph-block
-  #graphdiv

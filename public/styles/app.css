@@ -1,6 +1,6 @@
 body {
   position: relative;
-  background-color: #e5e8d3;
+  background-color: #E5E8D3;
 }
 body .navbar {
   margin-bottom: 10px;
@@ -49,7 +49,6 @@ body .reading-block .reading-area p {
   line-height: 25px;
 }
 body .actions {
-  float: right;
   margin-right: 50px;
 }
 body .parts span {
@@ -61,15 +60,15 @@ body .parts span {
   margin-right: 20px;
   float: left;
   font-weight: bold;
-  color: #000;
-  text-shadow: 0 1px 0 rgba(255,255,255,0.1), 0 0 30px rgba(255,255,255,0.125);
-  -webkit-transition: all 0.2s linear;
-  -moz-transition: all 0.2s linear;
-  transition: all 0.2s linear;
+  color: black;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px rgba(255, 255, 255, 0.125);
+  -webkit-transition: all .2s linear;
+  -moz-transition: all .2s linear;
+  transition: all .2s linear;
 }
 .table-striped tbody tr:nth-child(odd) td,
 .table-striped tbody tr:nth-child(odd) th {
-  background-color: #ced6c1;
+  background-color: #CED6C1;
 }
 .btn-my {
   margin: 0 10px;
@@ -81,13 +80,28 @@ body .parts span {
   margin: 0px;
 }
 #time {
-  color: #364d9f;
+  color: #364D9F;
+}
+.dl-horizontal dt {
+  width: 200px;
+  font-size: 15px;
+  line-height: 26px;
+}
+.dl-horizontal dd {
+  margin-left: 220px;
+  line-height: 26px;
+  font-size: 17px;
 }
 .graph-block {
   margin: 0 auto;
   padding: 40px 0;
   width: 840px;
 }
-.graph-block #graphdiv {
-  margin-right: 30px;
+#graph {
+  /*width: 600px;*/
+
+  height: 300px;
 }
+/*small.author{
+  padding-left: 20px;
+}*/

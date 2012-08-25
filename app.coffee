@@ -2,7 +2,6 @@ express = require 'express'
 http = require 'http'
 path = require 'path'
 
-stylus = require 'stylus'
 assets = require 'connect-assets'
 
 routes = require './routes'
@@ -28,7 +27,8 @@ app.configure ->
   app.use express.methodOverride()
   app.use express.cookieParser('gfjfkghds9g7fds')
   app.use express.session()
-  app.use require('stylus').middleware(__dirname + '/public')
+  # app.use require('stylus').middleware(__dirname + '/public')
+  app.use require('less-middleware')(src: __dirname + '/public')
   app.use express.static(path.join(__dirname, 'public'))
   app.use app.router
 
@@ -51,6 +51,7 @@ app.get '/partials/:name', routes.partials
 # JSON API
 app.get '/api/books', api.books
 app.get '/api/book/:id', api.book
+app.get '/api/readBook/:id', api.readBook
 app.put '/api/setnum/:id/:pid', api.setNum
 app.put '/api/settime/:id/:pid', api.setTime
 app.put '/api/addparts/:id', api.addParts

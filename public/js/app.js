@@ -8,6 +8,10 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives'])
       controller: 'IndexCtrl'
     })
     .when('/book/:id', {
+      templateUrl: '/partials/viewBook',
+      controller: 'ViewBookCtrl'
+    })
+    .when('/readBook/:id', {
       templateUrl: '/partials/readBook',
       controller: 'ReadBookCtrl'
     })

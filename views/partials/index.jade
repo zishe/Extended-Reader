@@ -20,16 +20,20 @@ table.table.table-striped
     th Author
     th Words
     th Chars
+    th Read
     th
     th
   tbody
-    tr(ng-repeat='book in books | orderBy:author')
+    tr(ng-repeat='book in books | orderBy:created')
       td
         a.pull-left(href='/book/{{book._id}}')
           h3.book-index-title {{book.title}}
       td {{book.author}}
       td {{book.count.words}}
       td {{book.count.chars}}
+      td
+        a(href='/readBook/{{book._id}}')
+          i.icon-book
       td
         a(href='/editBook/{{book._id}}')
           i.icon-pencil

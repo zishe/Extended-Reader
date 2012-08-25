@@ -62,6 +62,71 @@ angular.module('myApp').controller('DeleteBookCtrl', function($scope, $http, $lo
 
 
 
+// View Book
+angular.module('myApp').controller('ViewBookCtrl', function($scope, $http, $routeParams) {
+  $scope.book = {};
+  $scope.readingTime = 0;
+  $scope.readWords = 0;
+  
+  return $http.get("/api/book/" + $routeParams.id).success(function(data) {
+    $scope.book = data.book;
+    $scope.book.complete = Math.round($scope.book.parts[$scope.book.partNum].startPos * 100 / $scope.book.count.chars);
+    
+    angular.forEach($scope.book.parts, function(part, num){
+      if (part.readingTime != null)
+        $scope.readingTime += part.readingTime;
+    });
+    $scope.book.readingTime = TimeToString($scope.readingTime);
+
+    var i = 1;
+    angular.forEach($scope.book.parts, function(part, num){
+      if (i < $scope.book.partNum) {
+          $scope.readWords += part.countWords;
+          i++;
+        }
+    });
+    $scope.book.readWords = $scope.readWords;
+    //var sampleDate = new Date($scope.book.created);
+    //sampleDate.format('dd mmm yyyy');
+    $scope.book.createdDate = $.format.date($scope.book.created, "dd MMMM yyyy");
+
+    getGraph($scope);
+    return $scope.book;
+  });
+});
+
+
+function getGraph($scope) {
+  var num = 0;
+  var fl = true;
+  var decimal_data = [];
+  while (fl){
+    var part = $scope.book.parts[num];
+    if (part.readingTime == null)
+      fl = false;
+    else
+    {
+      decimal_data.push({
+        x: num,
+        y: Math.round(part.countWords / part.readingTime * 60)
+      });
+    }
+    num++;
+  }
+  console.log(decimal_data);
+
+  Morris.Line({
+    element: 'graph',
+    data: decimal_data,
+    xkey: 'x',
+    ykeys: ['y'],
+    labels: ['Speed'],
+    parseTime: false
+  });
+};
+
+
+
 // Read Book
 angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $routeParams) {
   $scope.book = {};
@@ -73,7 +138,7 @@ angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $rout
   $scope.playing = false;
 
   
-  $http.get("/api/book/" + $routeParams.id).success(function(data) {
+  $http.get("/api/readBook/" + $routeParams.id).success(function(data) {
     $scope.book = data.book;
     $scope.settings = data.settings;
     setPart($scope);
@@ -123,6 +188,10 @@ angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $rout
     }
   };
 
+  $scope.showGraph = function() {
+    $('.graph-block').show(500);
+  };
+
   $scope.prev = function() {
     if ($scope.book.partNum > 0) {
       $scope.book.partNum = $scope.book.partNum - 1;
@@ -164,15 +233,7 @@ angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $rout
     // console.log($scope.prevTime);
     // console.log($scope.readingTime);
 
-    var min = Math.round((($scope.readingTime - ($scope.readingTime % 60000))/ 60000));
-    var sec = Math.round(($scope.readingTime % 60000) / 1000);
-    var text = '';
-    if (min > 0)
-      text = text + min + ' minutes ';
-    if (sec > 0)
-      text = text + sec + ' seconds ';
-
-    $('#time').text(text);
+    $('#time').text(TimeToString($scope.readingTime));
   }
 
   $scope.font_decrease = function() {
@@ -312,4 +373,26 @@ function setGraph($scope) {
       width: 800
     }
   );
+};
+
+function TimeToString(time) {
+  var sec = Math.round(time % 60);
+  var min = Math.round(((time - (time % 60))/ 60));
+  var hour = Math.round(((time - (time % 3600))/ 3600));
+  var text = '';
+  if (hour == 1)
+    text = text + hour + ' hour ';
+  if (hour > 1)
+    text = text + hour + ' hours ';
+
+  if (min == 1)
+    text = text + min + ' minute ';
+  if (min > 1)
+    text = text + min + ' minutes ';
+
+  if (sec == 1)
+    text = text + sec + ' second ';
+  if (sec > 1)
+    text = text + sec + ' seconds ';
+  return text;
 };
