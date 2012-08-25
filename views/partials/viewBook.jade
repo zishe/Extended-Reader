@@ -1,0 +1,35 @@
+h1.page-header {{book.title}}   
+  small.author {{book.author}}
+
+.row
+  .span9
+    dl.dl-horizontal
+      dt Name
+      dd {{book.title}}
+      dt Author
+      dd {{book.author}}
+      //- dt Current Part
+      //- dd {{book.partNum}}
+      //- dt Curr
+      //- dd {{book.parts[book.partNum].startPos}}
+      dt Complete
+      dd {{book.complete}} %
+      dt Chars
+      dd {{book.count.chars}}
+      dt Chars without spaces
+      dd {{book.count.charsNoSpaces}}
+      dt Words
+      dd {{book.count.words}}
+      dt Read Words
+      dd {{book.readWords}}
+      dt Reading Time
+      dd {{book.readingTime}}
+      dt Created
+      dd {{book.createdDate}}
+
+      
+  .span3.actions
+    a.pull-left(href='/readBook/{{book._id}}') Per Page Read
+
+.row.graph-block
+  #graph
