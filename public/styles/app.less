@@ -1,7 +1,7 @@
 body {
   // padding-top: 50px
   position: relative;
-  background-color: #E5E8D3;
+  
 
   .navbar {
       margin-bottom: 10px;
@@ -20,17 +20,44 @@ body {
       padding-left: 20px;
       padding-top: 4px;
   }
+
+  .hide-button, .show-button{
+    padding: 7px 20px;
+    a{
+      font-family: "Comic Sans MS", cursive, sans-serif;
+    }
+    a, a:active, a:hover, a:focus{
+      cursor:pointer;
+      text-decoration: none;
+      border-bottom: 1px dashed;
+    }
+  }
   .control-panel {
-    // width: 740px
-    // margin: 0 auto
-    margin-left: 50px;
-    margin-bottom: 20px;
-    div {
+    padding-bottom: 10px;
+
+    .well-small {
+      padding: 7px;
+      margin-right: 10px;
+    }
+    .well{
+      margin-bottom: 0px;
+    }
+
+    .opts {
       float:left;
       padding-left: 10px;
       i {
-        margin: 0 7px;
+        /*margin: 0 7px;*/
         cursor: pointer;
+      }
+      .icon-minus-sign{
+        margin-right: 5px;
+      }
+      .icon-plus-sign{
+        margin-left: 5px;
+      }
+      .prop{
+        font-family: "Comic Sans MS", cursive, sans-serif;
       }
     }
     span {
@@ -42,25 +69,35 @@ body {
     margin: 0 auto;
       
     .reading-area {
-      padding-top: 50px;
+      /*padding-top: 50px;*/
       text-align: justify;
       text-justify: inter-word;
-      font: 20px;
+      font-size: 20px;
 
       p {
         font-family: Tahoma;//"Times new Roman"
         line-height: 25px;
       }
     }
+    .text-area{
+      padding-top: 50px;
+      text-align: justify;
+      font-size: 25px;
+
+      #text{
+        font-size: 25px;
+      }
+    }
   }
   .actions {
-      // float: right
       margin-right: 50px;
-      // margin-top: 150px
-      // width: 240px
-      // padding-top: 20px
-      // margin: 0 auto
+      margin-bottom: 30px;
   }
+
+  .line-actions{
+    margin: 0 auto;
+  }
+
   .parts {
     span {
       padding-left: 10px;

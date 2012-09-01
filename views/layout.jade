@@ -16,19 +16,13 @@ html(ng-app="myApp")
     link(rel="stylesheet", href="/bootstrap/css/bootstrap.css")
     link(rel="stylesheet", href="/bootstrap/css/bootstrap-responsive.css")
     link(rel='stylesheet', href='/styles/app.css')
-    link(rel='stylesheet', href='/styles/tipsy.css')
     //- link(rel='stylesheet', href='/styles/angular-ui.css')
 
     // JS
     script(src='/js/lib/jquery.js')
     script(src='/bootstrap/js/bootstrap.min.js')
-    // script(src='/js/lib/keyboardJS.js')
     script(src='/js/lib/mousetrap.js')
     script(src='/js/lib/jquery.dateFormat-1.0.js')
-    script(src='/js/lib/date.js')
-    script(src='/js/lib/jquery.tipsy.js')
-    script(src='/js/lib/jquery.flot.js')
-    script(src='/js/lib/dygraph-combined.js')
     script(src='/js/lib/raphael-min.js')
     script(src='/js/lib/morris.min.js')
 
@@ -37,12 +31,21 @@ html(ng-app="myApp")
     script(src='/js/angular/angular-sanitize.js')
     // script(src='/js/angular-ui/angular-ui.min.js')
 
-    script(src='/js/app.js')
-    script(src='/js/controllers.js')
-    script(src='/js/directives.js')
-    script(src='/js/filters.js')
-    script(src='/js/services.js')
+    script(src='/js/application.js')
 
-    script(src='/js/onload.js')
+    script(src='/js/myApp/app.js')
+
+    script(src='/js/myApp/controllers/index.js')
+    script(src='/js/myApp/controllers/addBook.js')
+    script(src='/js/myApp/controllers/editBook.js')
+    script(src='/js/myApp/controllers/deleteBook.js')
+    script(src='/js/myApp/controllers/viewBook.js')
+    script(src='/js/myApp/controllers/readBook.js')
+    script(src='/js/myApp/controllers/readByLines.js')
+
+    script(src='/js/myApp/directives.js')
+    script(src='/js/myApp/filters.js')
+    script(src='/js/myApp/services.js')
+
   body(data-spy="scroll")
     block body
