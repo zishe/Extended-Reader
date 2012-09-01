@@ -33,7 +33,7 @@ exports.readBook = (req, res) ->
         
         if not settings?
           console.log "create settings"
-          settings = Settings({font_size: 22, line_height: 33, width: 820, part_length: 1000})
+          settings = Settings()
           
           settings.save (err2) ->
             console.log err if err2
@@ -106,57 +106,57 @@ exports.addBook = (req, res) ->
     else
       console.log 'book saved: ' + book.title
     
-    #path
-    book.path = __dirname + '/../public/files/' + book._id.toString()
-    console.log book.path
-
-    #words and chars count
-    book.count = getWordsCount(b.text)
-    console.log 'check count: ' + book.count.words
-    
-    book.complete = 0
-    book.readingTime = 0
-    book.readCount = {words: 0, chars: 0, charsWithoutSpaces: 0}
-    book.lastPosParsed = 0
-    book.currPartNum = 0
-
-    book.timing = false
-    book.finished = false
-    book.parsed = false
-    console.log 'set start params'
-
-    #make parts
-    for i in [0..9]
-      if !book.parsed
-        savePart(b.text, book, i, 1000) 
-    
-    #set current part
-    Part.findOne {book: book._id, num: book.currPartNum}, (err3, cpart) ->
-      if err3
-        console.log err3
-      else
-        console.log cpart
-      book.currPart = cpart
-      console.log 'parts num: ' + book.parts.length
+    # load settings
+    Settings.findOne (err6, settings) ->
+      console.log err6 if err6
+      console.log 'settings loaded'
       
-      console.log 'saving book...'
-      book.save (err0) ->
-        if err0
-          console.log err0
-        console.log 'saved'
-        
-        fs.writeFile book.path, b.text, (err1) ->
-          if err1
-            console.log err1
-          console.log "text saved in file"
-          res.json true
 
-        # #load settings
-        # Settings.findOne (err2, settings) ->
-        #   if not settings?
-        #     console.log "create settings"
-        #     settings = Settings({font_size: 16, line_height: 24, width: 640, part_length: 1000})
-        #     settings.save()
+      #path
+      book.path = __dirname + '/../public/files/' + book._id.toString()
+      console.log book.path
+
+      #words and chars count
+      book.count = getWordsCount(b.text)
+      console.log 'check count: ' + book.count.words
+      
+      book.complete = 0
+      book.readingTime = 0
+      book.readCount = {words: 0, chars: 0, charsWithoutSpaces: 0}
+      book.lastPosParsed = 0
+      book.currPartNum = 0
+
+      book.timing = false
+      book.finished = false
+      book.parsed = false
+      console.log 'set start params'
+
+      #make parts
+      for i in [0..9]
+        if !book.parsed
+          savePart(b.text, book, i, 1000) 
+      
+      #set current part
+      Part.findOne {book: book._id, num: book.currPartNum}, (err3, cpart) ->
+        if err3
+          console.log err3
+        else
+          console.log cpart
+        book.currPart = cpart
+        console.log 'parts num: ' + book.parts.length
+        
+        console.log 'saving book...'
+        book.save (err0) ->
+          if err0
+            console.log err0
+          console.log 'saved'
+          
+          fs.writeFile book.path, b.text, (err1) ->
+            if err1
+              console.log err1
+            console.log "text saved in file"
+            res.json true
+
 
 # Put Book, save changed info and generate parts if need
 exports.saveBook = (req, res) ->
@@ -222,6 +222,17 @@ exports.finishBook = (req, res) ->
       console.log err1 if err1
       console.log 'saved book'
 
+
+
+# Part
+
+# Get Part
+exports.getBookPart = (req, res) ->
+  Part.findOne {book: req.params.id, num: req.params.num}, (err, part) ->
+    console.log err if err
+    console.log 'get part number ' + req.params.num
+    res.json part
+
 # Get Parts for statistics collect
 exports.bookParts = (req, res) ->
   Part.find {book: req.params.id}, (err, parts) ->
@@ -231,16 +242,36 @@ exports.bookParts = (req, res) ->
 
 # Put Part, save reading time (only can change)
 exports.savePartTime = (req, res) ->
-  Part.findById req.params.id, (err, part) ->
+  Part.findByIdAndUpdate req.params.id, { readingTime: req.body.readingTime }, (err, part) ->
     console.log err if err
-    part.readingTime = req.body.readingTime
     console.log 'set reading time for part ' + part.num
-    part.save (err1) ->
+    res.json true
+
+# Update Parts
+exports.resetParts = (req, res) ->
+  part_length = parseInt(req.params.plen)
+  console.log 'load book'
+  Book.findById req.params.id, (err, book) ->
+    last = book.lastPosParsed
+    curr = book.currPartNum
+
+    console.log 'load current part to check last pos'
+    Part.findOne {book: book._id, num: curr}, (err1, part) ->
+
+
+    Part.where('book').equals(book._id).where('num').gt(curr).remove (err2) ->
       console.log err1 if err1
-      console.log 'saved part'
+      console.log 'futher parts deleted'
+
+    book.save () ->
+      console.log 'set num ' + num
       res.json true
 
 
+
+# Settings
+
+# Get
 exports.settings = (req, res) ->
   Settings.findOne (err, settings) ->
     console.log err if err
@@ -270,15 +301,6 @@ exports.saveSettings = (req, res) ->
       res.json true
 
 
-
-
-# exports.resetParts = (req, res) ->
-#   part_length = parseInt(req.params.pid)
-#   Book.findById req.params.id, (err, book) ->
-    # book.parts[book.partNum].readingTime = time;
-    # book.save () ->
-    #   console.log 'set num ' + num
-    #   res.json true
 
 
 savePart = (text, book, i, min_length) ->

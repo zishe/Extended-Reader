@@ -44,6 +44,5 @@ function getGraph($scope) {
     labels: ['Speed'],
     parseTime: false,
     hideHover: true
-    
   });
 };

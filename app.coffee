@@ -65,15 +65,17 @@ app.delete '/api/book/:id', api.deleteBook
 app.get '/api/readBook/:id', api.readBook
 app.get '/api/readByLines/:id', api.readByLines
 
-app.put '/api/part/:id', api.savePartTime
-# app.put '/api/reset_parts/:id/:pid', api.resetParts
+app.put '/api/save_book/:id', api.saveBook
+app.put '/api/book_finished/:id', api.finishBook
 
 # app.put '/api/addparts/:id', api.addParts
 app.get '/api/book_with_text/:id', api.bookWithText
+app.put '/api/reset_parts/:id/:plen', api.resetParts
+
 
 app.get '/api/book_parts/:id', api.bookParts
-app.put '/api/save_book/:id', api.saveBook
-app.put '/api/book_finished/:id', api.finishBook
+app.get '/api/book_part/:id/:num', api.getBookPart
+app.put '/api/part/:id', api.savePartTime
 
 
 app.get '/api/settings', api.settings

@@ -49,12 +49,24 @@ BookSchema = new Schema(
 )
 
 SettingsSchema = new Schema(
-  font_size: Number
-  line_height: Number
+  font_size:
+    type: Number
+    default: 22
+  line_height:
+    type: Number
+    default: 33
   width: Number
-  part_length: Number
-  words_font_size: Number
-  words_count: Number
+    type: Number
+    default: 820
+  part_length:
+    type: Number
+    default: 800
+  words_font_size:
+    type: Number
+    default: 31
+  words_count:
+    type: Number
+    default: 3
 )
 
 

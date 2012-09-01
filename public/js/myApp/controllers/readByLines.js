@@ -1,18 +1,15 @@
 "use strict";
 
-/**
- * myApp ReadByLinesCtrl
- *
- * Reading by few words
- */
-angular.module('myApp').controller('ReadByLinesCtrl', function($scope, $http, $routeParams) {
+angular.module('myApp').controller('ReadByLinesCtrl', function($scope, $http, $routeParams, $timeout) {
   $scope.book = {};
   $scope.settings = {};
   $scope.showOpts = false;
   $scope.playing = false;
   $scope.parts = [];
   $scope.curr = '';
+  $scope.currText = '';
   $scope.num = 0;
+  var timeout;
 
   $http.get("/api/book_with_text/" + $routeParams.id).success(function(data) {
     $scope.book = data.book;
@@ -36,27 +33,33 @@ angular.module('myApp').controller('ReadByLinesCtrl', function($scope, $http, $r
       if (changed) saveSettings($scope, $http);
       
       collect_parts($scope);
-
-      $('#text').text("Pull play to start");
+      //$('#text').text("Pull play to start");
     });
-
-
   });
 
   $scope.play = function() {
     if (!$scope.playing){
       $scope.playing = true;
-      $scope.intervalId = setInterval($scope.change_text, 300) // использовать функцию
+      tick();
+      // $scope.intervalId = setInterval($scope.change_text, 300) // использовать функцию
     }
   };
 
   $scope.pause = function() {
     if ($scope.playing){
       $scope.playing = false;
-      $scope.change_text();
-      clearInterval($scope.intervalId);
+      $timeout.cancel(timeout);
+      // $scope.change_text();
+      // clearInterval($scope.intervalId);
     }
   };
+
+  var tick = function() {
+    $scope.currText = $scope.parts[$scope.num];
+    $scope.num++;
+    timeout = $timeout(tick, 300);
+  };
+
 
   $scope.change_text = function() {
     $('#text').text($scope.parts[$scope.num]);
@@ -91,25 +94,25 @@ angular.module('myApp').controller('ReadByLinesCtrl', function($scope, $http, $r
     saveSettings($scope, $http);
   };
 
+  var setWordsFont = function() {
+    $('#text').css('font-size', $scope.settings.words_font_size + 'px');
+    $('#text').css('line-height', ($scope.settings.words_font_size + 10)+ 'px');
+  };
+
+  var reset_parts = function() {
+    $scope.parts = [];
+    collect_parts($scope);
+  };
+
+  var collect_parts = function() {
+    angular.forEach($scope.book.text.replace(/[\s\n\t\r]+/gi, ' ').split(' '), function(word, num){
+      $scope.curr +=  ' ' + word;
+      var m = $scope.curr.match(/\S+/gi);
+      if (m && (m.length >= $scope.settings.words_count || endsWithArr($scope.curr, ['.', ';']))) {
+        $scope.parts.push($scope.curr.trim());
+        $scope.curr = '';
+      }
+    });
+  };
+
 });
-
-function setWordsFont($scope) {
-  $('#text').css('font-size', $scope.settings.words_font_size + 'px');
-  $('#text').css('line-height', ($scope.settings.words_font_size + 10)+ 'px');
-};
-
-function reset_parts($scope) {
-  $scope.parts = [];
-  collect_parts($scope);
-};
-
-function collect_parts($scope) {
-  angular.forEach($scope.book.text.replace(/[\s\n\t\r]+/gi, ' ').split(' '), function(word, num){
-    $scope.curr +=  ' ' + word;
-    var m = $scope.curr.match(/\S+/gi);
-    if (m && (m.length >= $scope.settings.words_count || endsWithArr($scope.curr, ['.', ';']))) {
-      $scope.parts.push($scope.curr.trim());
-      $scope.curr = '';
-    }
-  });
-}

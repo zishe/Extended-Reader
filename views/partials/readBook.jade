@@ -33,14 +33,14 @@ div.control-panel.clearfix(ng-show='showOpts')
     .show-button
       a(href='#', ng-hide='showOpts', ng-click='showOpts=true') Show Options
   div.pull-right
-    //- span#time
+    span#time
     a.btn.btn-large.btn-my(href='#', ng-click='pause()', id='btn-pause')
       i.icon-pause
     a.btn.btn-large.btn-primary.btn-my(href='#', ng-click='play()', id='btn-play', rel="tooltip", data-placement="bottom", title='Start when you are ready')
       i.icon-play.icon-white
 
-    a.btn.btn-large.btn-my(href='#', ng-click='prev()', id='btn-prev')
-      i.icon-arrow-left
+    //- a.btn.btn-large.btn-my(href='#', ng-click='prev()', id='btn-prev')
+    //-   i.icon-arrow-left
     a.btn.btn-large.btn-primary.btn-my(href='#', ng-click='next()', id='btn-next', rel="tooltip", data-placement="bottom", title='Press Right or N for next part')
       i.icon-arrow-right.icon-white
 

@@ -27,10 +27,6 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives'])
       templateUrl: '/partials/editBook',
       controller: 'EditBookCtrl'
     })
-    .when('/deleteBook/:id', {
-      templateUrl: '/partials/deleteBook',
-      controller: 'DeleteBookCtrl'
-    })
     .otherwise({
       redirectTo: '/'
     });

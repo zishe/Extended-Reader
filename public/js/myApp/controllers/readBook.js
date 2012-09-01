@@ -88,17 +88,17 @@ angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $rout
     });
   };
 
-  $scope.prev = function() {
-    if ($scope.book.partNum > 0) {
-      $scope.book.partNum = $scope.book.partNum - 1;
-      setPart($scope);
+  // $scope.prev = function() {
+  //   if ($scope.part.num > 0) {
+  //     $scope.book.currPartNum--;
         
-      $http.put("/api/setnum/" + $routeParams.id + '/' + $scope.book.partNum).success(function(data) {
-        console.log('save part num');
-      });
-      setAll($scope);
-    }
-  };
+  //     $http.get("/api/book_part/" + $routeParams.id + '/' + $scope.book.currPartNum).success(function(data) {
+  //       console.log('get previous part');
+  //       $scope.part = data;
+  //     });
+  //     setAll($scope);
+  //   }
+  // };
 
 
   $scope.play = function() {
@@ -193,9 +193,9 @@ function saveSettings($scope, $http) {
 };
 
 function ResetParts($scope, $http) {
-  // $http.post("/api/reset_parts/" + $scope.book._id + '/' + scope.settings.part_length).success(function(data) {
+  $http.post("/api/reset_parts/" + $scope.book._id + '/' + $scope.settings.part_length).success(function(data) {
   
-  // });
+  });
 };
 
 
@@ -246,21 +246,36 @@ function TimeToString(time, brief) {
   var hour = Math.round(((time - (time % 3600))/ 3600));
   var text = '';
   
+  if (sec == 0 && min == 0 && hour == 0) return '-'
+
   if (hour == 1)
-    text = text + hour + ' hour ';
+    text += hour + ' hour ';
   if (hour > 1)
-    text = text + hour + ' hours ';
+    text += hour + ' hours ';
 
   if (min == 1)
-    text = text + min + ' minute ';
+    text += min + ' minute ';
   if (min > 1)
-    text = text + min + ' minutes ';
+    text += min + ' minutes ';
 
   if (sec < 2)
-    text = text + sec + ' second';
+    text += sec + ' second';
   if (sec > 1)
-    text = text + sec + ' seconds';
+    text += sec + ' seconds';
 
-  if (brief) text = text.replace(/minute(s)*/g, ':').replace(/second(s)*/g, '').replace(/\s+/g, '');
+  if (brief){
+    text = '';
+    if (hour > 0) text = hour + ':';
+
+    if (min > 0 && min < 10 && hour > 0) text += '0' + min + ':';//12:[0]3:33
+    else if (min == 0 && hour > 0) text += '00:';//12:[00]:35
+    else if (min == 0 && hour == 0) text = '';
+    else text += min + ':';
+
+    if (sec > 0 && sec < 10 && (hour > 0 || min > 0)) text += '0' + sec;//12:34:[0]2
+    else if (sec == 0 && (hour > 0 || min > 0)) text += '00';//12:34:[00]
+    else text += sec;
+
+  }
   return text;
 };
