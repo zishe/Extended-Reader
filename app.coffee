@@ -14,49 +14,70 @@ mongoose = require 'mongoose'
 
 passport = require 'passport'
 util = require 'util'
+
 GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
+GitHubStrategy = require('passport-github').Strategy
+TwitterStrategy = require('passport-twitter').Strategy
 
-# API Access link for creating client ID and secret:
-# https://code.google.com/apis/console/
-GOOGLE_CLIENT_ID = "236823754682-c22gabjasrta49kj9cnjcqo0cmmfppov.apps.googleusercontent.com"
-GOOGLE_CLIENT_SECRET = "egJtIvQgODZzTR4NubcJ2qgr"
 
-# Passport session setup.
-#   To support persistent login sessions, Passport needs to be able to
-#   serialize users into and deserialize users out of the session.  Typically,
-#   this will be as simple as storing the user ID when serializing, and finding
-#   the user by ID when deserializing.  However, since this example does not
-#   have a database of user records, the complete Google profile is
-#   serialized and deserialized.
+# Google
+GOOGLE_CLIENT_ID = "236823754682-5nahqamp1svokqakee0d6fhhbrru07g8.apps.googleusercontent.com"
+GOOGLE_CLIENT_SECRET = "WMTpbfvnJGKEqvu83Qrg6niR"
+
+# Google
+GITHUB_CLIENT_ID = "79021490aa56a31ffbc7"
+GITHUB_CLIENT_SECRET = "2cb82b73453eb054945893f615b4afc7ca828be3"
+
+# Twitter
+TWITTER_CONSUMER_KEY = "k6a3LMZJMP3Jzptt2KiQ"
+TWITTER_CONSUMER_SECRET = "GbQfsouBoLillhhVYiYLJfQUDNMnhyKQu55zvk7hg"
+
+
+# Serializers
+
 passport.serializeUser (user, done) ->
   done null, user
 
 passport.deserializeUser (obj, done) ->
   done null, obj
 
-# Use the GoogleStrategy within Passport.
-#   Strategies in Passport require a `verify` function, which accept
-#   credentials (in this case, an accessToken, refreshToken, and Google
-#   profile), and invoke a callback with a user object.
+
+# Stratagies
+
 passport.use new GoogleStrategy(
   clientID: GOOGLE_CLIENT_ID
   clientSecret: GOOGLE_CLIENT_SECRET
-  callbackURL: "http://localhost:4000/oauth2callback"
+  callbackURL: "http://speed-reading.herokuapp.com/oauth2callback" # localhost:3000
 , (accessToken, refreshToken, profile, done) ->
-    # asynchronous verification, for effect...
+  
+  # asynchronous verification, for effect...
   process.nextTick ->
-      
-      # To keep the example simple, the user's Google profile is returned to
-      # represent the logged-in user.  In a typical application, you would want
-      # to associate the Google account with a user record in your database,
-      # and return that user instead.
-      # return done(null, profile);
+    done null, profile
 )
 
+passport.use new GitHubStrategy(
+  clientID: GITHUB_CLIENT_ID
+  clientSecret: GITHUB_CLIENT_SECRET
+  callbackURL: "http://speed-reading.herokuapp.com/auth/github/callback"
+, (accessToken, refreshToken, profile, done) ->
+  # User.findOrCreate
+  #   githubId: profile.id
+  # , (err, user) ->
+  #   done err, user
 
+)
 
+passport.use new TwitterStrategy(
+  consumerKey: TWITTER_CONSUMER_KEY
+  consumerSecret: TWITTER_CONSUMER_SECRET
+  callbackURL: "http://speed-reading.herokuapp.com/auth/twitter/callback"
+, (token, tokenSecret, profile, done) ->
+  # User.findOrCreate
+  #   twitterId: profile.id
+  # , (err, user) ->
+  #   done err, user
 
-
+)
 
 
 
@@ -69,11 +90,10 @@ app = express()
 #   appName: 'Node.js Application'
 
 
-
 app.use assets()
 
 app.configure ->
-  app.set 'port', process.env.PORT or 4000
+  app.set 'port', process.env.PORT or 3000
   app.set 'views', __dirname + '/views'
   app.set 'view engine', 'jade'
   app.use express.favicon()
@@ -139,26 +159,58 @@ app.post '/api/settings/:id', api.saveSettings
 
 
 
-# app.get "/oauth2callback", passport.authenticate("google", failureRedirect: "/login"), (req, res) ->
-#   res.json user:req.user
+# Google Auth
 
-app.get "/auth/google", passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email'] }), (req, res) ->
+app.get "/auth/google", passport.authenticate("google",
+  scope: ["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email"]
+), (req, res) ->
 
-app.get "/oauth2callback", passport.authenticate("google", {failureRedirect: "/login"}), (req, res) ->
+app.get "/oauth2callback", passport.authenticate("google",
+  failureRedirect: "/login"
+), (req, res) ->
   res.redirect "/"
 
 
-app.get "/login", (req, res) ->
-  res.render "index",
-    user: req.user
+# Github Auth
+
+app.get "/auth/github", passport.authenticate("github"), (req, res) ->
+
+app.get "/auth/github/callback", passport.authenticate("github",
+  failureRedirect: "/login"
+), (req, res) ->
+  res.redirect "/"
+
+# twitter Auth
+
+app.get "/auth/twitter", passport.authenticate("twitter")
+app.get "/auth/twitter/callback", passport.authenticate("twitter",
+  failureRedirect: "/login"
+), (req, res) ->
+  res.redirect "/"
+
+
+
+
+
+
+# app.get "/auth/google", passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email'] }), (req, res) ->
+
+# app.get "/oauth2callback", passport.authenticate("google", {failureRedirect: "/login"}), (req, res) ->
+#   res.redirect "/"
+
+
+# app.get "/login", (req, res) ->
+#   res.redirect "/"
+#   # res.render "index",
+#   #   user: req.user
 
 app.get "/logout", (req, res) ->
   req.logout()
   res.redirect "/"
 
 # redirect all others to the index (HTML5 history)
-# app.get '*',  (req, res) ->
-#   res.render "index"
+app.get '*',  (req, res) ->
+  res.render "index"
 
 
 http.createServer(app).listen app.get('port'), ->
@@ -169,7 +221,7 @@ http.createServer(app).listen app.get('port'), ->
 #   the request is authenticated (typically via a persistent login session),
 #   the request will proceed.  Otherwise, the user will be redirected to the
 #   login page.
-ensureAuthenticated = (req, res, next) ->
-  return next() if req.isAuthenticated()
-  res.redirect "/login"
+# ensureAuthenticated = (req, res, next) ->
+#   return next() if req.isAuthenticated()
+#   res.redirect "/login"
 

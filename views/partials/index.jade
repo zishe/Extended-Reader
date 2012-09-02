@@ -1,3 +1,12 @@
+div(ng-hide='user.id')
+  a.btn(href='#', ng-click='google_login()') Login with Google
+  a.btn(href='#', ng-click='github_login()') Login with GitHub
+  a.btn(href='#', ng-click='twitter_login()') Login with Twitter
+div(ng-show='user.id')
+  a.btn(href='#', ng-click='logout()') Logout
+  p {{user.id}}
+  p {{user.displayName}}
+  p {{user.username}}
 h2 Books
 table.table.table-hover
   thead

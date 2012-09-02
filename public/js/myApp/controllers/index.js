@@ -6,16 +6,24 @@ angular.module('myApp').controller('IndexCtrl', function($scope, $http, $locatio
 
   $http.get("/api/books").success(function(data) {
     $scope.books = data.books;
+    $scope.user = data.user;
     formatBook();
   });
 
-  $scope.googleLogin = function() {
-    $location.path("/auth/twitter").replace();
-    // $http.get("/login").success(function(data) {
-    //   console.log('logged');
-    //   $scope.user = data.user;
-    //   formatBook();
-    // });
+  $scope.google_login = function() {
+    window.location = "/auth/google";
+  };
+
+  $scope.github_login = function() {
+    window.location = "/auth/github";
+  };
+
+  $scope.twitter_login = function() {
+    window.location = "/auth/twitter";
+  };
+
+  $scope.logout = function() {
+    window.location = "/logout";
   };
 
   $scope.deleteDialog = function(book) {

@@ -12,7 +12,7 @@ Settings = models.Settings
 # Get all Books for viewing list and select one
 exports.books = (req, res) ->
   Book.find {}, (err, books) ->
-    res.json books: books
+    res.json {books: books, user: req.user}
 
 # Get Book for statistics and select exercise
 exports.book = (req, res) ->

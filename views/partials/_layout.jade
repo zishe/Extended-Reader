@@ -1,5 +1,4 @@
-extends layout
-block body
+div(ng-view)
   div.navbar
     div.navbar-inner
       div.container
@@ -18,4 +17,4 @@ block body
                     //- img(src='/img/google.png')
                     //- span Login with Google
   div.container
-    div(ng-view)
+    block container

@@ -12,6 +12,10 @@
     "markdown": "*",
     "everyauth": "*",
     "passport": "*",
+    "passport-facebook": "*",
+    "passport-github": "*",
+    "passport-twitter": "*",
+    "passport-vkontakte": "*",
     "passport-google-oauth": "*"
   },
   "scripts": {
