@@ -18,6 +18,7 @@ util = require 'util'
 GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 GitHubStrategy = require('passport-github').Strategy
 TwitterStrategy = require('passport-twitter').Strategy
+VKontakteStrategy = require('passport-vkontakte').Strategy
 
 
 # Google
