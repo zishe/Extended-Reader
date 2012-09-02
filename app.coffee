@@ -32,6 +32,10 @@ GITHUB_CLIENT_SECRET = "2cb82b73453eb054945893f615b4afc7ca828be3"
 TWITTER_CONSUMER_KEY = "k6a3LMZJMP3Jzptt2KiQ"
 TWITTER_CONSUMER_SECRET = "GbQfsouBoLillhhVYiYLJfQUDNMnhyKQu55zvk7hg"
 
+# Vk
+VKONTAKTE_APP_ID = "3108473"
+VKONTAKTE_APP_SECRET = "OJm81O8ieCMV2E5KCgYH"
+
 
 # Serializers
 
@@ -66,7 +70,6 @@ passport.use new GitHubStrategy(
   #   done err, user
   process.nextTick ->
     done null, profile
-
 )
 
 passport.use new TwitterStrategy(
@@ -80,10 +83,20 @@ passport.use new TwitterStrategy(
   #   done err, user
   process.nextTick ->
     done null, profile
-
 )
 
-
+passport.use new VKontakteStrategy(
+  clientID: VKONTAKTE_APP_ID
+  clientSecret: VKONTAKTE_APP_SECRET
+  callbackURL: "http://speed-reading.herokuapp.com/auth/vkontakte/callback"
+, (accessToken, refreshToken, profile, done) ->
+  # User.findOrCreate
+  #   vkontakteId: profile.id
+  # , (err, user) ->
+  #   done err, user
+  process.nextTick ->
+    done null, profile
+)
 
 
 db = null
@@ -192,6 +205,16 @@ app.get "/auth/twitter/callback", passport.authenticate("twitter",
 ), (req, res) ->
   res.redirect "/"
 
+# vkontakte Auth
+
+app.get "/auth/vkontakte", passport.authenticate("vkontakte"), (req, res) ->
+
+app.get "/auth/vkontakte/callback", passport.authenticate("vkontakte",
+  failureRedirect: "/login"
+), (req, res) ->
+  
+  # Successful authentication, redirect home.
+  res.redirect "/"
 
 
 
