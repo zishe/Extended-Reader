@@ -21,10 +21,10 @@ TwitterStrategy = require('passport-twitter').Strategy
 
 
 # Google
-GOOGLE_CLIENT_ID = "236823754682-5nahqamp1svokqakee0d6fhhbrru07g8.apps.googleusercontent.com"
-GOOGLE_CLIENT_SECRET = "WMTpbfvnJGKEqvu83Qrg6niR"
+GOOGLE_CLIENT_ID = "236823754682.apps.googleusercontent.com"
+GOOGLE_CLIENT_SECRET = "G4OHfDVVDg4Cv2qUuC9oYdfK"
 
-# Google
+# GitHub
 GITHUB_CLIENT_ID = "79021490aa56a31ffbc7"
 GITHUB_CLIENT_SECRET = "2cb82b73453eb054945893f615b4afc7ca828be3"
 
@@ -191,14 +191,6 @@ app.get "/auth/twitter/callback", passport.authenticate("twitter",
 
 
 
-
-
-# app.get "/auth/google", passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email'] }), (req, res) ->
-
-# app.get "/oauth2callback", passport.authenticate("google", {failureRedirect: "/login"}), (req, res) ->
-#   res.redirect "/"
-
-
 # app.get "/login", (req, res) ->
 #   res.redirect "/"
 #   # res.render "index",
@@ -215,13 +207,3 @@ app.get '*',  (req, res) ->
 
 http.createServer(app).listen app.get('port'), ->
   console.log 'Express server listening on port ' + app.get('port')
-
-# Simple route middleware to ensure user is authenticated.
-#   Use this route middleware on any resource that needs to be protected.  If
-#   the request is authenticated (typically via a persistent login session),
-#   the request will proceed.  Otherwise, the user will be redirected to the
-#   login page.
-# ensureAuthenticated = (req, res, next) ->
-#   return next() if req.isAuthenticated()
-#   res.redirect "/login"
-
