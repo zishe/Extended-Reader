@@ -1,35 +1,38 @@
-h1.page-header {{book.title}}   
-  small.author {{book.author}}
+include _navbar
+div.container
 
-.row.view-book-page
-  .span9
-    dl.dl-horizontal
-      dt Name
-      dd {{book.title}}
-      dt Author
-      dd {{book.author}}
-      //- dt Current Part
-      //- dd {{book.partNum}}
-      //- dt Curr
-      //- dd {{book.parts[book.partNum].startPos}}
-      dt Complete
-      dd {{book.complete}} %
-      dt Chars
-      dd {{book.count.chars}}
-      dt Chars without spaces
-      dd {{book.count.charsWithoutSpaces}}
-      dt Words
-      dd {{book.count.words}}
-      dt Read Words
-      dd {{book.readCount.words}}
-      dt Reading Time
-      dd {{book.readTime}}
-      dt Created
-      dd {{book.createdDate}}
+  h1.page-header {{book.title}}   
+    small.author {{book.author}}
 
-      
-  .span3.read-actions
-    a.btn.btn-primary.btn-large.pull-left(href='/readBook/{{book._id}}') Per Page Read
+  .row.view-book-page
+    .span9
+      dl.dl-horizontal
+        dt Name
+        dd {{book.title}}
+        dt Author
+        dd {{book.author}}
+        //- dt Current Part
+        //- dd {{book.partNum}}
+        //- dt Curr
+        //- dd {{book.parts[book.partNum].startPos}}
+        dt Complete
+        dd {{book.complete}} %
+        dt Chars
+        dd {{book.count.chars}}
+        dt Chars without spaces
+        dd {{book.count.charsWithoutSpaces}}
+        dt Words
+        dd {{book.count.words}}
+        dt Read Words
+        dd {{book.readCount.words}}
+        dt Reading Time
+        dd {{book.readTime}}
+        dt Created
+        dd {{book.createdDate}}
 
-.row.graph-block
-  #graph
+        
+    .span3.read-actions
+      a.btn.btn-primary.btn-large.pull-left(href='/readBook/{{book._id}}') Per Page Read
+
+  .row.graph-block
+    #graph

@@ -1,29 +1,31 @@
-.control-panel.clearfix(ng-show='showOpts')
-  .hide-button.pull-left
-    a(href='#', ng-click='showOpts=false') Hide Options
-  .opts.well.well-small
-    i.icon-minus-sign(ng-click='font_decrease();save_settings()')
-    span.prop font size
-    i.icon-plus-sign(ng-click='font_increase();save_settings()')
-  .opts.well.well-small
-    i.icon-minus-sign(ng-click='words_decrease();save_settings()')
-    span.prop words
-    i.icon-plus-sign(ng-click='words_increase();save_settings()')
-  .parts
-    span {{num}} from
-    span {{parts.length}}
+include _navbar
+div.container
+  .control-panel.clearfix(ng-show='showOpts')
+    .hide-button.pull-left
+      a(href='#', ng-click='showOpts=false') Hide Options
+    .opts.well.well-small
+      i.icon-minus-sign(ng-click='font_decrease();save_settings()')
+      span.prop font size
+      i.icon-plus-sign(ng-click='font_increase();save_settings()')
+    .opts.well.well-small
+      i.icon-minus-sign(ng-click='words_decrease();save_settings()')
+      span.prop words
+      i.icon-plus-sign(ng-click='words_increase();save_settings()')
+    .parts
+      span {{num}} from
+      span {{parts.length}}
 
-.line-actions.clearfix
-  .pull-left
-    .show-button
-      a(href='#', ng-hide='showOpts', ng-click='showOpts=true') Show Options
-  .pull-right
-    span#time
-    a.btn.btn-large.btn-my(href='#', ng-click='pause()', id='btn-pause')
-      i.icon-pause
-    a.btn.btn-large.btn-primary.btn-my(href='#', ng-click='play()', id='btn-play', rel="tooltip", data-placement="bottom", title='Start when you are ready')
-      i.icon-play.icon-white
+  .line-actions.clearfix
+    .pull-left
+      .show-button
+        a(href='#', ng-hide='showOpts', ng-click='showOpts=true') Show Options
+    .pull-right
+      span#time
+      a.btn.btn-large.btn-my(href='#', ng-click='pause()', id='btn-pause')
+        i.icon-pause
+      a.btn.btn-large.btn-primary.btn-my(href='#', ng-click='play()', id='btn-play', rel="tooltip", data-placement="bottom", title='Start when you are ready')
+        i.icon-play.icon-white
 
-.reading-block
-  .text-area
-    center#text {{currText}}
+  .reading-block
+    .text-area
+      center#text {{currText}}

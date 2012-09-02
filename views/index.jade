@@ -1,21 +1,20 @@
 extends layout
 block body
-  div.navbar
-    div.navbar-inner
-      div.container
-        a.brand(href='/') Library
-        ul.nav
-          li
-            a(href='/addBook') Add Book
-          li {{user.id}}
-        ul.nav.pull-right
-          li.dropdown.pull-right
-            a#drop2.dropdown-toggle(href='#', role='button', data-toggle='dropdown') Login
-                b.caret
-              ul.dropdown-menu(role='menu', aria-labelledby='drop2')
-                li
-                  a(tabindex='-1', ng-click='googleLogin()') Google
-                    //- img(src='/img/google.png')
-                    //- span Login with Google
-  div.container
-    div(ng-view)
+  //- div.navbar
+  //-   div.navbar-inner
+  //-     div.container
+  //-       a.brand(href='/') Library
+  //-       ul.nav
+  //-         li
+  //-           a(href='/addBook') Add Book
+  //-         li {{user.id}}
+  //-       ul.nav.pull-right
+  //-         li.dropdown.pull-right
+  //-           a#drop2.dropdown-toggle(href='#', role='button', data-toggle='dropdown') Login
+  //-               b.caret
+  //-             ul.dropdown-menu(role='menu', aria-labelledby='drop2')
+  //-               li
+  //-                 a(tabindex='-1', ng-click='googleLogin()') Google
+  //-                   //- img(src='/img/google.png')
+  //-                   //- span Login with Google
+  div(ng-view)

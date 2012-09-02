@@ -18,7 +18,7 @@ angular.module('myApp').controller('ReadByLinesCtrl', function($scope, $http, $r
     $http.get("/api/settings").success(function(data) {
       $scope.settings = data.settings;
       console.log(data.settings);
-      setBgColor($scope);
+      // setBgColor($scope);
       setWordsFont($scope);
       
       var changed = false;

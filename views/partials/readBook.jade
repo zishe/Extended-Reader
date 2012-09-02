@@ -1,54 +1,56 @@
-//- div(ng-bind-html="html") {{content | html}}
-//- div(ng-bind-html="content")
-//- .body-container
-div.control-panel.clearfix(ng-show='showOpts')
-  .hide-button.pull-left.opts-link
-    a(href='#', ng-click='showOpts=false') Hide Options
-  .opts.well.well-small
-    i.icon-minus-sign(ng-click='font_decrease();save_settings()')
-    span.prop font size
-    i.icon-plus-sign(ng-click='font_increase();save_settings()')
-  .opts.well.well-small
-    i.icon-minus-sign(ng-click='line_decrease();save_settings()')
-    span.prop line height
-    i.icon-plus-sign(ng-click='line_increase();save_settings()')
-  .opts.well.well-small
-    i.icon-minus-sign(ng-click='width_decrease();save_settings()')
-    span.prop width
-    i.icon-plus-sign(ng-click='width_increase();save_settings()')
-  .opts.well.well-small
-    i.icon-minus-sign(ng-click='part_decrease();save_settings()')
-    span.prop part size
-    i.icon-plus-sign(ng-click='part_increase();save_settings()')
-  //- .bcolor-opts.well.well-small
-    //- span(ng-bind='book.parts[book.partNum].startTime')
-    
-    //-  ng-bind='var d = new Date();d - book.parts[book.partNum].startTime'
-  .parts
-    //- span {{book.parts.length}}
-    //- span {{book.currPartNum}}
- 
-.actions.clearfix
-  div.pull-left
-    .show-button.opts-link
-      a(href='#', ng-hide='showOpts', ng-click='showOpts=true') Show Options
-  div.pull-right
-    span(ng-show='showStats')
-      span#time
-      span.opts-link
-        a(href='#', ng-click='showStats=false') Hide Time
-    span.opts-link(ng-hide='showStats')
-      a(href='#', ng-click='showStats=true') Show Time
-    a.btn.btn-large.btn-my(href='#', ng-click='pause()', id='btn-pause')
-      i.icon-pause
-    a.btn.btn-large.btn-primary.btn-my(href='#', ng-click='play()', id='btn-play', rel="tooltip", data-placement="bottom", title='Start when you are ready')
-      i.icon-play.icon-white
+include _navbar
+div.container
+  //- div(ng-bind-html="html") {{content | html}}
+  //- div(ng-bind-html="content")
+  //- .body-container
+  div.control-panel.clearfix(ng-show='showOpts')
+    .hide-button.pull-left.opts-link
+      a(href='#', ng-click='showOpts=false') Hide Options
+    .opts.well.well-small
+      i.icon-minus-sign(ng-click='font_decrease();save_settings()')
+      span.prop font size
+      i.icon-plus-sign(ng-click='font_increase();save_settings()')
+    .opts.well.well-small
+      i.icon-minus-sign(ng-click='line_decrease();save_settings()')
+      span.prop line height
+      i.icon-plus-sign(ng-click='line_increase();save_settings()')
+    .opts.well.well-small
+      i.icon-minus-sign(ng-click='width_decrease();save_settings()')
+      span.prop width
+      i.icon-plus-sign(ng-click='width_increase();save_settings()')
+    .opts.well.well-small
+      i.icon-minus-sign(ng-click='part_decrease();save_settings()')
+      span.prop part size
+      i.icon-plus-sign(ng-click='part_increase();save_settings()')
+    //- .bcolor-opts.well.well-small
+      //- span(ng-bind='book.parts[book.partNum].startTime')
+      
+      //-  ng-bind='var d = new Date();d - book.parts[book.partNum].startTime'
+    .parts
+      //- span {{book.parts.length}}
+      //- span {{book.currPartNum}}
+   
+  .actions.clearfix
+    div.pull-left
+      .show-button.opts-link
+        a(href='#', ng-hide='showOpts', ng-click='showOpts=true') Show Options
+    div.pull-right
+      span(ng-show='showStats')
+        span#time
+        span.opts-link
+          a(href='#', ng-click='showStats=false') Hide Time
+      span.opts-link(ng-hide='showStats')
+        a(href='#', ng-click='showStats=true') Show Time
+      a.btn.btn-large.btn-my(href='#', ng-click='pause()', id='btn-pause')
+        i.icon-pause
+      a.btn.btn-large.btn-primary.btn-my(href='#', ng-click='play()', id='btn-play', rel="tooltip", data-placement="bottom", title='Start when you are ready')
+        i.icon-play.icon-white
 
-    //- a.btn.btn-large.btn-my(href='#', ng-click='prev()', id='btn-prev')
-    //-   i.icon-arrow-left
-    a.btn.btn-large.btn-primary.btn-my(href='#', ng-click='next()', id='btn-next', rel="tooltip", data-placement="bottom", title='Press Right or N for next part')
-      i.icon-arrow-right.icon-white
+      //- a.btn.btn-large.btn-my(href='#', ng-click='prev()', id='btn-prev')
+      //-   i.icon-arrow-left
+      a.btn.btn-large.btn-primary.btn-my(href='#', ng-click='next()', id='btn-next', rel="tooltip", data-placement="bottom", title='Press Right or N for next part')
+        i.icon-arrow-right.icon-white
 
-.reading-block
-  div.reading-area
-    div#text
+  .reading-block
+    div.reading-area
+      div#text
