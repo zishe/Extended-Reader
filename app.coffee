@@ -200,7 +200,8 @@ app.get "/auth/github/callback", passport.authenticate("github",
 
 # twitter Auth
 
-app.get "/auth/twitter", passport.authenticate("twitter")
+app.get "/auth/twitter", passport.authenticate("twitter"), (req, res) ->
+  
 app.get "/auth/twitter/callback", passport.authenticate("twitter",
   failureRedirect: "/login"
 ), (req, res) ->

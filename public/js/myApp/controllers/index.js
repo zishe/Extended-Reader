@@ -22,6 +22,10 @@ angular.module('myApp').controller('IndexCtrl', function($scope, $http, $locatio
     window.location = "/auth/twitter";
   };
 
+  $scope.vk_login = function() {
+    window.location = "/auth/vkontakte";
+  };
+
   $scope.logout = function() {
     window.location = "/logout";
   };
