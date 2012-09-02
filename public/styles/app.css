@@ -18,22 +18,16 @@ body .book-opts {
   padding-left: 20px;
   padding-top: 4px;
 }
-body .hide-button,
-body .show-button {
+body .opts-link {
   padding: 7px 20px;
 }
-body .hide-button a,
-body .show-button a {
+body .opts-link a {
   font-family: "Comic Sans MS", cursive, sans-serif;
 }
-body .hide-button a,
-body .show-button a,
-body .hide-button a:active,
-body .show-button a:active,
-body .hide-button a:hover,
-body .show-button a:hover,
-body .hide-button a:focus,
-body .show-button a:focus {
+body .opts-link a,
+body .opts-link a:active,
+body .opts-link a:hover,
+body .opts-link a:focus {
   cursor: pointer;
   text-decoration: none;
   border-bottom: 1px dashed;
@@ -152,6 +146,9 @@ body .parts span {
   /*width: 600px;*/
 
   height: 300px;
+}
+.login-block {
+  float: right !important;
 }
 /*small.author{
     padding-left: 20px;

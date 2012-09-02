@@ -2,7 +2,7 @@
 //- div(ng-bind-html="content")
 //- .body-container
 div.control-panel.clearfix(ng-show='showOpts')
-  .hide-button.pull-left
+  .hide-button.pull-left.opts-link
     a(href='#', ng-click='showOpts=false') Hide Options
   .opts.well.well-small
     i.icon-minus-sign(ng-click='font_decrease();save_settings()')
@@ -30,10 +30,15 @@ div.control-panel.clearfix(ng-show='showOpts')
  
 .actions.clearfix
   div.pull-left
-    .show-button
+    .show-button.opts-link
       a(href='#', ng-hide='showOpts', ng-click='showOpts=true') Show Options
   div.pull-right
-    span#time
+    span(ng-show='showStats')
+      span#time
+      span.opts-link
+        a(href='#', ng-click='showStats=false') Hide Time
+    span.opts-link(ng-hide='showStats')
+      a(href='#', ng-click='showStats=true') Show Time
     a.btn.btn-large.btn-my(href='#', ng-click='pause()', id='btn-pause')
       i.icon-pause
     a.btn.btn-large.btn-primary.btn-my(href='#', ng-click='play()', id='btn-play', rel="tooltip", data-placement="bottom", title='Start when you are ready')

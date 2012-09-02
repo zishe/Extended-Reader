@@ -9,7 +9,10 @@
     "jade": "*",
     "connect-assets": ">= 2.2.0",
     "less-middleware": "*",
-    "markdown": "*"
+    "markdown": "*",
+    "everyauth": "*",
+    "passport": "*",
+    "passport-google-oauth": "*"
   },
   "scripts": {
     "start": "coffee app.coffee",

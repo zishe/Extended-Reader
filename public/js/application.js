@@ -17,6 +17,8 @@ Mousetrap.bind('left', function() {
   $('#btn-prev').click();
 });
 
+$('.dropdown-toggle').dropdown();
+
 function endsWith(str, suffix) {
     return str.indexOf(suffix, str.length - suffix.length) !== -1;
 }

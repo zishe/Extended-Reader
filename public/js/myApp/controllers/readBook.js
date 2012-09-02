@@ -14,6 +14,7 @@ angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $rout
 
   $scope.playing = false;
   $scope.showOpts = false;
+  $scope.showStats = false;
   
   $http.get("/api/readBook/" + $routeParams.id).success(function(data) {
     $scope.book = data.book;
