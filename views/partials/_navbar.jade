@@ -5,7 +5,6 @@ div.navbar
       ul.nav
         li
           a(href='/addBook') Add Book
-        li {{user.id}}
       ul.nav.pull-right
         li.dropdown.pull-right
           a#drop2.dropdown-toggle(href='#', ng-hide='user.id', role='button', data-toggle='dropdown') Login
@@ -18,4 +17,4 @@ div.navbar
                 a(href='#', ng-click='vk_login()') Vk
                   //- img(src='/img/google.png')
                   //- span Login with Google
-          span {{user.displayName}}
+          a(href='#') {{user.displayName}}
