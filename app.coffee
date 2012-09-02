@@ -64,6 +64,8 @@ passport.use new GitHubStrategy(
   #   githubId: profile.id
   # , (err, user) ->
   #   done err, user
+  process.nextTick ->
+    done null, profile
 
 )
 
@@ -76,6 +78,8 @@ passport.use new TwitterStrategy(
   #   twitterId: profile.id
   # , (err, user) ->
   #   done err, user
+  process.nextTick ->
+    done null, profile
 
 )
 
