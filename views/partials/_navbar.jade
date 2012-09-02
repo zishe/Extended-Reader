@@ -17,4 +17,8 @@ div.navbar
                 a(href='#', ng-click='vk_login()') Vk
                   //- img(src='/img/google.png')
                   //- span Login with Google
-          a(href='#') {{user.displayName}}
+          a#drop1.dropdown-toggle(href='#', ng-show='user.id', role='button', data-toggle='dropdown') {{user.displayName}}
+              b.caret
+            ul.dropdown-menu(role='menu', aria-labelledby='drop1')
+              li
+                a(href='#', ng-click='logout()') Logout
