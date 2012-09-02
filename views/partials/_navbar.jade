@@ -9,7 +9,7 @@ div.navbar
         li.dropdown.pull-right
           a#drop2.dropdown-toggle(href='#', ng-hide='user.id', role='button', data-toggle='dropdown') Login
               b.caret
-            ul.dropdown-menu(role='menu', aria-labelledby='drop2')
+            ul.dropdown-menu(role='menu', aria-labelledby='drop2', ng-hide='user.id')
               li
                 a(href='#', ng-click='google_login()') Google
                 a(href='#', ng-click='twitter_login()') Twitter
@@ -19,6 +19,6 @@ div.navbar
                   //- span Login with Google
           a#drop1.dropdown-toggle(href='#', ng-show='user.id', role='button', data-toggle='dropdown') {{user.displayName}}
               b.caret
-            ul.dropdown-menu(role='menu', aria-labelledby='drop1')
+            ul.dropdown-menu(role='menu', aria-labelledby='drop1', ng-show='user.id')
               li
                 a(href='#', ng-click='logout()') Logout
