@@ -10,7 +10,6 @@
     "connect-assets": ">= 2.2.0",
     "less-middleware": "*",
     "markdown": "*",
-    "everyauth": "*",
     "passport": "*",
     "passport-facebook": "*",
     "passport-github": "*",

@@ -4,9 +4,10 @@ div(ng-hide='user.id')
   a.btn(href='#', ng-click='twitter_login()') Login with Twitter
 div(ng-show='user.id')
   a.btn(href='#', ng-click='logout()') Logout
-  p {{user.id}}
-  p {{user.displayName}}
-  p {{user.username}}
+  p Id: {{user.id}}
+  p Name: {{user.displayName}}
+  p Username: {{user.username}}
+  p Email: {{user.emails[0].value}}
 h2 Books
 table.table.table-hover
   thead
