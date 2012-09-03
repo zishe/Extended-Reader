@@ -11,6 +11,7 @@
     "less-middleware": "*",
     "markdown": "*",
     "passport": "*",
+    "passport-passport-openid": "*",
     "passport-facebook": "*",
     "passport-github": "*",
     "passport-twitter": "*",

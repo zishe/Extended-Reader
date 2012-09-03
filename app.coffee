@@ -19,6 +19,7 @@ GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 GitHubStrategy = require('passport-github').Strategy
 TwitterStrategy = require('passport-twitter').Strategy
 VKontakteStrategy = require('passport-vkontakte').Strategy
+FacebookStrategy = require('passport-facebook').Strategy
 
 
 # Google
@@ -36,6 +37,15 @@ TWITTER_CONSUMER_SECRET = "GbQfsouBoLillhhVYiYLJfQUDNMnhyKQu55zvk7hg"
 # Vk
 VKONTAKTE_APP_ID = "3108473"
 VKONTAKTE_APP_SECRET = "OJm81O8ieCMV2E5KCgYH"
+
+# Fb
+FACEBOOK_APP_ID = ""
+FACEBOOK_APP_SECRET = ""
+
+
+
+
+
 
 
 # Serializers
@@ -98,6 +108,23 @@ passport.use new VKontakteStrategy(
   process.nextTick ->
     done null, profile
 )
+
+passport.use new FacebookStrategy(
+  clientID: FACEBOOK_APP_ID
+  clientSecret: FACEBOOK_APP_SECRET
+  callbackURL: "http://localhost:3000/auth/facebook/callback"
+, (accessToken, refreshToken, profile, done) ->
+  # User.findOrCreate
+  #   facebookId: profile.id
+  # , (err, user) ->
+  #   done err, user
+  process.nextTick ->
+    done null, profile
+)
+
+
+
+
 
 
 db = null
@@ -177,6 +204,8 @@ app.post '/api/settings/:id', api.saveSettings
 
 
 
+
+
 # Google Auth
 
 app.get "/auth/google", passport.authenticate("google",
@@ -198,14 +227,16 @@ app.get "/auth/github/callback", passport.authenticate("github",
 ), (req, res) ->
   res.redirect "/"
 
+
 # twitter Auth
 
 app.get "/auth/twitter", passport.authenticate("twitter"), (req, res) ->
-  
+
 app.get "/auth/twitter/callback", passport.authenticate("twitter",
   failureRedirect: "/login"
 ), (req, res) ->
   res.redirect "/"
+
 
 # vkontakte Auth
 
@@ -217,6 +248,28 @@ app.get "/auth/vkontakte/callback", passport.authenticate("vkontakte",
   
   # Successful authentication, redirect home.
   res.redirect "/"
+
+
+# facebook auth
+
+app.get "/auth/facebook", passport.authenticate("facebook"), (req, res) ->
+
+app.get "/auth/facebook/callback", passport.authenticate("facebook",
+  failureRedirect: "/login"
+), (req, res) ->
+  
+  # Successful authentication, redirect home.
+  res.redirect "/"
+
+
+
+
+
+
+
+
+
+
 
 
 
