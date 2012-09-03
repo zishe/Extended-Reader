@@ -161,22 +161,13 @@ body .parts span {
   float: left;
   clear: none;
 }
-.soc-login a,
-.soc-login a:visited,
-.soc-login a:link,
+.soc-login a:focus,
 .soc-login a:hover,
 .soc-login a:active {
-  color: white !important;
-  text-decoration: none;
-  background-color: white !important;
+  background: #b5d8ff no-repeat !important;
 }
-.soc-login a img,
-.soc-login a:visited img,
-.soc-login a:link img,
+.soc-login a:focus img,
 .soc-login a:hover img,
 .soc-login a:active img {
-  background-color: white;
+  background: #b5d8ff no-repeat !important;
 }
-/*small.author{
-    padding-left: 20px;
-}*/
