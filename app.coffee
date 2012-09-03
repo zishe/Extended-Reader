@@ -19,7 +19,7 @@ GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 GitHubStrategy = require('passport-github').Strategy
 TwitterStrategy = require('passport-twitter').Strategy
 VKontakteStrategy = require('passport-vkontakte').Strategy
-FacebookStrategy = require('passport-facebook').Strategy
+# FacebookStrategy = require('passport-facebook').Strategy
 
 
 # Google
@@ -39,8 +39,8 @@ VKONTAKTE_APP_ID = "3108473"
 VKONTAKTE_APP_SECRET = "OJm81O8ieCMV2E5KCgYH"
 
 # Fb
-FACEBOOK_APP_ID = ""
-FACEBOOK_APP_SECRET = ""
+# FACEBOOK_APP_ID = ""
+# FACEBOOK_APP_SECRET = ""
 
 
 
@@ -109,18 +109,18 @@ passport.use new VKontakteStrategy(
     done null, profile
 )
 
-passport.use new FacebookStrategy(
-  clientID: FACEBOOK_APP_ID
-  clientSecret: FACEBOOK_APP_SECRET
-  callbackURL: "http://localhost:3000/auth/facebook/callback"
-, (accessToken, refreshToken, profile, done) ->
-  # User.findOrCreate
-  #   facebookId: profile.id
-  # , (err, user) ->
-  #   done err, user
-  process.nextTick ->
-    done null, profile
-)
+# passport.use new FacebookStrategy(
+#   clientID: FACEBOOK_APP_ID
+#   clientSecret: FACEBOOK_APP_SECRET
+#   callbackURL: "http://localhost:3000/auth/facebook/callback"
+# , (accessToken, refreshToken, profile, done) ->
+#   # User.findOrCreate
+#   #   facebookId: profile.id
+#   # , (err, user) ->
+#   #   done err, user
+#   process.nextTick ->
+#     done null, profile
+# )
 
 
 
@@ -252,14 +252,14 @@ app.get "/auth/vkontakte/callback", passport.authenticate("vkontakte",
 
 # facebook auth
 
-app.get "/auth/facebook", passport.authenticate("facebook"), (req, res) ->
+# app.get "/auth/facebook", passport.authenticate("facebook"), (req, res) ->
 
-app.get "/auth/facebook/callback", passport.authenticate("facebook",
-  failureRedirect: "/login"
-), (req, res) ->
+# app.get "/auth/facebook/callback", passport.authenticate("facebook",
+#   failureRedirect: "/login"
+# ), (req, res) ->
   
-  # Successful authentication, redirect home.
-  res.redirect "/"
+#   # Successful authentication, redirect home.
+#   res.redirect "/"
 
 
 
