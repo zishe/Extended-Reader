@@ -1,14 +1,14 @@
 include _navbar
 div.container
-  div(ng-hide='user.id')
-    a.btn(href='#', ng-click='google_login()') Login with Google
-    a.btn(href='#', ng-click='github_login()') Login with GitHub
-    a.btn(href='#', ng-click='twitter_login()') Login with Twitter
-  div(ng-show='user.id')
-    a.btn(href='#', ng-click='logout()') Logout
-    p Id: {{user.id}}
-    p Name: {{user.displayName}}
-    p Username: {{user.username}}
+  //- div(ng-hide='user.id')
+  //-   a.btn(href='#', ng-click='google_login()') Login with Google
+  //-   a.btn(href='#', ng-click='github_login()') Login with GitHub
+  //-   a.btn(href='#', ng-click='twitter_login()') Login with Twitter
+  //- div(ng-show='user.id')
+  //-   a.btn(href='#', ng-click='logout()') Logout
+  //-   p Id: {{user.id}}
+  //-   p Name: {{user.displayName}}
+  //-   p Username: {{user.username}}
   h2 Books
   table.table.table-hover
     thead
