@@ -168,7 +168,14 @@ body .parts span {
 .soc-login a:active {
   color: white !important;
   text-decoration: none;
-  background-color: transparent !important;
+  background-color: white !important;
+}
+.soc-login a img,
+.soc-login a:visited img,
+.soc-login a:link img,
+.soc-login a:hover img,
+.soc-login a:active img {
+  background-color: white;
 }
 /*small.author{
     padding-left: 20px;
