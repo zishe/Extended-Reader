@@ -9,18 +9,18 @@ div.navbar
         li.dropdown.pull-right
           a#drop2.dropdown-toggle(href='#', ng-hide='user.id', role='button', data-toggle='dropdown') Login
               b.caret
-            ul.dropdown-menu.soc-login(role='menu', aria-labelledby='drop2', ng-hide='user.id')
+            ul.dropdown-menu.soc-login(role='menu', ng-hide='user.id', aria-labelledby='drop2')
               li
-                a(href='#', ng-click='google_login()')
-                  img(src='/img/gg.png')
-                a(href='#', ng-click='twitter_login()')
-                  img(src='/img/twitter.png')
-                a(href='#', ng-click='github_login()')
-                  img(src='/img/gh.png')
                 a(href='#', ng-click='vk_login()')
                   img(src='/img/vk.png')
+                a(href='#', ng-click='google_login()')
+                  img(src='/img/gg2.png')
+                a(href='#', ng-click='github_login()')
+                  img(src='/img/gh.png')
+                a(href='#', ng-click='twitter_login()')
+                  img(src='/img/twitter.png')
           a#drop1.dropdown-toggle(href='#', ng-show='user.id', role='button', data-toggle='dropdown') {{user.displayName}}
               b.caret
-            ul.dropdown-menu(role='menu', aria-labelledby='drop1', ng-show='user.id')
+            ul.dropdown-menu(role='menu', ng-show='user.id', aria-labelledby='drop1')
               li
                 a(href='#', ng-click='logout()') Logout

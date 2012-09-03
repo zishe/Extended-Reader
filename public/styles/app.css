@@ -161,9 +161,14 @@ body .parts span {
   float: left;
   clear: none;
 }
+.soc-login a,
+.soc-login a:visited,
+.soc-login a:link,
 .soc-login a:hover,
 .soc-login a:active {
-  background-color: white;
+  color: white !important;
+  text-decoration: none;
+  background-color: transparent !important;
 }
 /*small.author{
     padding-left: 20px;
