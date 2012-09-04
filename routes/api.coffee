@@ -126,7 +126,7 @@ exports.addBook = (req, res) ->
       book.lastPosParsed = 0
       book.currPartNum = 0
 
-      book.timing = false
+      # book.timing = false
       book.finished = false
       book.parsed = false
       console.log 'set start params'
@@ -134,7 +134,7 @@ exports.addBook = (req, res) ->
       #make parts
       for i in [0..9]
         if !book.parsed
-          savePart(b.text, book, i, 1000) 
+          savePart(b.text, book, i, 700) 
       
       #set current part
       Part.findOne {book: book._id, num: book.currPartNum}, (err3, cpart) ->
@@ -193,7 +193,7 @@ exports.saveBook = (req, res) ->
               
               for i in [0..9]
                 if !book.parsed
-                  savePart(data.toString(), book, i + partsCount, 1000)
+                  savePart(data.toString(), book, i + partsCount, 700)
               
               console.log 'saving book'
               book.save (err3) ->
@@ -213,6 +213,7 @@ exports.saveBook = (req, res) ->
             console.log 'return next part'
             res.json part: part
 
+
 # Put Book, set finished
 exports.finishBook = (req, res) ->
   Book.findById req.params.id, (err, book) ->
@@ -221,6 +222,30 @@ exports.finishBook = (req, res) ->
     book.save (err1) ->
       console.log err1 if err1
       console.log 'saved book'
+
+# Put Book, reset read data
+exports.resetBook = (req, res) ->
+  Book.findById req.params.id, (err, book) ->
+    book.finished = false
+    book.complete = 0
+    book.currPartNum = 0
+    book.readingTime = 0
+    book.readCount.words = 0
+    book.readCount.chars = 0
+    book.readCount.charsWithoutSpaces = 0
+
+    book.save (err1) ->
+      console.log err1 if err1
+      console.log 'saved book'
+
+  Part.find(book: req.params.id).where('readingTime').gt(0).exec (err, parts) ->
+    console.log err if err
+    console.log 'get all parts, in count ' + parts.length
+
+    for part in parts
+      part.readingTime = null
+      part.save()
+
 
 
 

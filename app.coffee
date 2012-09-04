@@ -163,12 +163,8 @@ app.configure "development", ->
     dumpExceptions: true
     showStack: true
   )
-  db = mongoose.connect 'mongodb://user:user@ds037007.mongolab.com:37007/speed-reading'
-  # db = mongoose.connect 'mongodb://localhost/speed-reading'
-
-app.configure "production", ->
-  app.use express.errorHandler()
-  db = mongoose.connect 'mongodb://user:user@ds037007.mongolab.com:37007/speed-reading'
+  # db = mongoose.connect 'mongodb://user:user@ds037007.mongolab.com:37007/speed-reading'
+  db = mongoose.connect 'mongodb://localhost/speed-reading'
 
 
  # Routes
@@ -187,6 +183,7 @@ app.get '/api/readByLines/:id', api.readByLines
 
 app.put '/api/save_book/:id', api.saveBook
 app.put '/api/book_finished/:id', api.finishBook
+app.put '/api/reset_book/:id', api.resetBook
 
 # app.put '/api/addparts/:id', api.addParts
 app.get '/api/book_with_text/:id', api.bookWithText
@@ -280,7 +277,7 @@ app.get "/auth/vkontakte/callback", passport.authenticate("vkontakte",
 
 app.get "/logout", (req, res) ->
   req.logout()
-  res.redirect "/"
+  # res.redirect "/"
 
 # redirect all others to the index (HTML5 history)
 app.get '*',  (req, res) ->

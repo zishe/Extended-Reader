@@ -13,6 +13,7 @@ angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $rout
   $scope.readWords = 0;
 
   $scope.playing = false;
+  $scope.showNum = false;
   $scope.showOpts = false;
   $scope.showStats = false;
   
@@ -123,10 +124,14 @@ angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $rout
     $scope.readingTime += $scope.nowTime - $scope.prevTime;
     $scope.prevTime = $scope.nowTime;
 
-    console.log($scope.readingTime);
+    // console.log($scope.readingTime);
     $('#time').text(TimeToString($scope.readingTime / 1000));
   }
 
+
+  // $scope.book_home = function() {
+    
+  // };
 
 
   $scope.font_increase = function() {
@@ -242,8 +247,8 @@ function setCssProp(name, val) {
 
 
 function TimeToString(time, brief) {
-  var sec = Math.round(time % 60);
-  var min = Math.round(((time - (time % 60))/ 60));
+  var sec  = time % 60;
+  var min  = Math.round(((time - sec) / 60) % 60);
   var hour = Math.round(((time - (time % 3600))/ 3600));
   var text = '';
   

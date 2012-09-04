@@ -5,13 +5,13 @@ div.container
     small.author {{book.author}}
 
   .row.view-book-page
-    .span9
+    .span7
       dl.dl-horizontal
         dt Name
         dd {{book.title}}
         dt Author
         dd {{book.author}}
-        //- dt Current Part
+        //- dt Current Page
         //- dd {{book.partNum}}
         //- dt Curr
         //- dd {{book.parts[book.partNum].startPos}}
@@ -25,14 +25,22 @@ div.container
         dd {{book.count.words}}
         dt Read Words
         dd {{book.readCount.words}}
+        dt Averange Speed
+        dd {{book.readingSpeed}}
         dt Reading Time
         dd {{book.readTime}}
         dt Created
         dd {{book.createdDate}}
 
         
-    .span3.read-actions
-      a.btn.btn-primary.btn-large.pull-left(href='/readBook/{{book._id}}') Per Page Read
+    .span5.read-actions
+      .row.reading-act
+        a.btn.btn-primary.btn-large(href='/readBook/{{book._id}}') Paginal reading
+      .row.input-append
+        input.span2(type="text", placeholder="Type page number...", ng-model='page_num')
+        a.btn.btn-warning(href="#", ng-click='remove_page_info(page_num)') Remove Time
+      .row
+        a.btn.btn-danger(href="#", ng-click='reset_data()') Reset all data
 
   .row.graph-block
-    #graph
+    //- #graph

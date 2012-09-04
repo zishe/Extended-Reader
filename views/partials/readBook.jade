@@ -34,16 +34,31 @@ div.container
     div.pull-left
       .show-button.opts-link
         a(href='#', ng-hide='showOpts', ng-click='showOpts=true') Show Options
+        span.complete {{book.complete}}
+        span.percent %
     div.pull-right
+
+
       span(ng-show='showStats')
         span#time
         span.opts-link
           a(href='#', ng-click='showStats=false') Hide Time
       span.opts-link(ng-hide='showStats')
         a(href='#', ng-click='showStats=true') Show Time
-      a.btn.btn-large.btn-my(href='#', ng-click='pause()', id='btn-pause')
-        i.icon-pause
-      a.btn.btn-large.btn-primary.btn-my(href='#', ng-click='play()', id='btn-play', rel="tooltip", data-placement="bottom", title='Start when you are ready')
+
+      //- span(ng-show='showNum')
+      //-   span {{book.complete}}
+      //-   span.opts-link
+      //-     a(href='#', ng-click='showNum=false') Hide Num
+      //- span.opts-link(ng-hide='showNum')
+      //-   a(href='#', ng-click='showNum=true') Show Num
+
+      //-ng-click='book_home()'
+      a.btn.btn-home(href='/book/{{book._id}}')
+        i.icon-home
+      a.btn.btn-large.btn-primary.btn-my(href='#', ng-show='playing', ng-click='pause()', id='btn-pause')
+        i.icon-pause.icon-white
+      a.btn.btn-large.btn-primary.btn-my(href='#', ng-hide='playing', ng-click='play()', id='btn-play', rel="tooltip", data-placement="bottom", title='Start when you are ready')
         i.icon-play.icon-white
 
       //- a.btn.btn-large.btn-my(href='#', ng-click='prev()', id='btn-prev')

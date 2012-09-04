@@ -38,7 +38,7 @@ BookSchema = new Schema(
     ref: "Part"
   ]
 
-  timing: Boolean
+  # timing: Boolean
   finished: Boolean
   parsed: Boolean
 
