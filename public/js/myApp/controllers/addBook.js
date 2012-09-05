@@ -5,7 +5,8 @@ angular.module('myApp').controller('AddBookCtrl', function($scope, $http, $locat
   $scope.book = {};
   $scope.save = function() {
     return $http.post("/api/book", $scope.book).success(function(data) {
-      return $location.path("/");
+      console.log(data.book);
+      return $location.path("/book/" + data.book._id);
     });
   };
 

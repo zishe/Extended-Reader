@@ -9,6 +9,7 @@ angular.module('myApp').controller('ViewBookCtrl', function($scope, $http, $rout
     $scope.book = data.book;
     
     $scope.book.createdDate = $.format.date($scope.book.created, "dd MMMM yyyy");
+    $scope.book.lastUse = $.format.date($scope.book.lastUse, "dd MMMM yyyy");
     $scope.book.readTime = TimeToString($scope.book.readingTime);
     if ($scope.book.readingTime > 0)
       $scope.book.readingSpeed = Math.round($scope.book.readCount.words/($scope.book.readingTime/60)) + ' words per minute';
@@ -71,7 +72,7 @@ angular.module('myApp').controller('ViewBookCtrl', function($scope, $http, $rout
     var decimal_data = [];
     while ($scope.parts.length > num){
       var part = $scope.parts[num];
-        if (part.readingTime != null){
+        if (part.readingTime > 0){
         decimal_data.push({
           x: num,
           y: Math.round(part.count.words / part.readingTime * 60)

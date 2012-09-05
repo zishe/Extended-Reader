@@ -247,7 +247,7 @@ function setCssProp(name, val) {
 
 
 function TimeToString(time, brief) {
-  var sec  = time % 60;
+  var sec  = Math.round(time % 60);
   var min  = Math.round(((time - sec) / 60) % 60);
   var hour = Math.round(((time - (time % 3600))/ 3600));
   var text = '';

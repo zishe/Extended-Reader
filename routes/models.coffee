@@ -2,7 +2,17 @@ mongoose = require 'mongoose'
 Schema = mongoose.Schema
 ObjectId = Schema.Types.ObjectId
 
-CountSchema = { words: Number, chars: Number, charsWithoutSpaces: Number}
+Count = {
+  words:
+    type: Number
+    default: 0
+, chars:
+    type: Number
+    default: 0
+, charsWithoutSpaces:
+    type: Number
+    default: 0
+}
 
 PartSchema = new Schema(
   book:
@@ -11,42 +21,55 @@ PartSchema = new Schema(
 
   startPos: Number
   endPos: Number
-  count: CountSchema
+  count: Count
 
   num: Number
   text: String
   readingTime: Number
+  finished: Date
 )
 
 BookSchema = new Schema(
-  title: String
+  title:
+    type: String
+    required: true
+  
   author: String
   text: String
   
-  count: CountSchema
+  count: Count
   
-  lastPosParsed: Number
-  complete: Number
-  readingTime: Number
-  readCount: CountSchema
-
-  currPartNum: Number
-  # currPart: PartSchema
+  lastPosParsed: { type: Number, default: 0 }
+  complete: { type: Number, default: 0 }
+  readingTime: { type: Number, default: 0 }
+  readCount: Count
+  
+  currPartNum: { type: Number, default: 0 }
   
   parts: [
     type: ObjectId
     ref: "Part"
   ]
 
-  # timing: Boolean
-  finished: Boolean
-  parsed: Boolean
+  finished:
+    type: Boolean
+    default: false
+  parsed:
+    type: Boolean
+    default: false
 
   path: String
+
+  lastUse: Date
   created:
     type: Date
     default: Date.now
 )
+
+BookSchema.pre 'save', (next) ->
+  this['lastUse'] = new Date
+  next()
+
 
 SettingsSchema = new Schema(
   font_size:
@@ -55,12 +78,12 @@ SettingsSchema = new Schema(
   line_height:
     type: Number
     default: 33
-  width: Number
+  width:
     type: Number
     default: 820
   part_length:
     type: Number
-    default: 800
+    default: 1000
   words_font_size:
     type: Number
     default: 31
@@ -69,9 +92,6 @@ SettingsSchema = new Schema(
     default: 3
 )
 
-
-# Count = mongoose.model "Count", CountSchema
-# exports.Count = Count
 
 Part = mongoose.model "Part", PartSchema
 exports.Part = Part
