@@ -55,11 +55,12 @@ angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $rout
     $scope.book.readCount.words += $scope.part.count.words;
     $scope.book.readCount.chars += $scope.part.count.chars;
     $scope.book.readCount.charsWithoutSpaces += $scope.part.count.charsWithoutSpaces;
-    $scope.book.complete = Math.round( $scope.book.readCount.chars * 100 / $scope.book.count.chars );
+    $scope.book.complete = ( $scope.book.readCount.chars * 100 / $scope.book.count.chars ).toFixed(2);
 
     $scope.book.currPartNum++;
 
     $http.put('/api/save_book/' + $routeParams.id, $scope.book).success(function(data) {
+      console.log('book saved');
       console.log('next');
       console.log(data.part);
       if (data.part == null){
@@ -77,24 +78,40 @@ angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $rout
       }
       else{
         $scope.part = data.part;
-        console.log($scope.part);
         $('#text').html('<p>' + $scope.part.text.replace(/\n/g, '</p><p>') + '</p>');
         setAll($scope);
       }
     });
   };
 
-  // $scope.prev = function() {
-  //   if ($scope.part.num > 0) {
-  //     $scope.book.currPartNum--;
+  $scope.prev = function() {
+    if ($scope.book.currPartNum > 0) {
+      $scope.book.currPartNum--;
         
-  //     $http.get("/api/book_part/" + $routeParams.id + '/' + $scope.book.currPartNum).success(function(data) {
-  //       console.log('get previous part');
-  //       $scope.part = data;
-  //     });
-  //     setAll($scope);
-  //   }
-  // };
+      $http.get("/api/part/" + $routeParams.id + '/' + $scope.book.currPartNum).success(function(data) {
+        console.log('get previous part');
+        console.log(data);
+        $scope.part = data.part;
+        if ($scope.part.readingTime != null)
+          $scope.book.readingTime -= $scope.part.readingTime;
+
+        $scope.book.readCount.words -= $scope.part.count.words;
+        $scope.book.readCount.chars -= $scope.part.count.chars;
+        $scope.book.readCount.charsWithoutSpaces -= $scope.part.count.charsWithoutSpaces;
+        $scope.book.complete = Math.round( $scope.book.readCount.chars * 100 / $scope.book.count.chars );
+
+        $http.put('/api/save_book/' + $routeParams.id, $scope.book).success(function(data) {
+          console.log('book saved');
+        });
+
+        $('#text').html('<p>' + $scope.part.text.replace(/\n/g, '</p><p>') + '</p>');
+        setAll($scope);
+      });
+    }
+    if ($scope.book.currPartNum == 0){
+      
+    }
+  };
 
 
   $scope.play = function() {
@@ -202,7 +219,7 @@ function ResetParts($scope, $http) {
 
 
 function setAll($scope) {
-  setBgColor($scope);
+  // setBgColor($scope);
   setFont($scope);
   setLineHeight($scope);
   setWidth($scope);
@@ -213,9 +230,9 @@ function setAll($scope) {
 };
 
 
-function setBgColor($scope) {
-  $('body').css("background-color", '#E5E8D3');
-};
+// function setBgColor($scope) {
+//   $('body').css("background-color", '#E5E8D3');
+// };
 
 function setWidth($scope) {
   // console.log('set width : ' + $scope.settings.width + 'px');

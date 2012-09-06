@@ -1,8 +1,5 @@
 include _navbar
 div.container
-  //- div(ng-bind-html="html") {{content | html}}
-  //- div(ng-bind-html="content")
-  //- .body-container
   div.control-panel.clearfix(ng-show='showOpts')
     .hide-button.pull-left.opts-link
       a(href='#', ng-click='showOpts=false') Hide Options
@@ -22,23 +19,15 @@ div.container
       i.icon-minus-sign(ng-click='part_decrease();save_settings()')
       span.prop part size
       i.icon-plus-sign(ng-click='part_increase();save_settings()')
-    //- .bcolor-opts.well.well-small
-      //- span(ng-bind='book.parts[book.partNum].startTime')
-      
-      //-  ng-bind='var d = new Date();d - book.parts[book.partNum].startTime'
-    .parts
-      //- span {{book.parts.length}}
-      //- span {{book.currPartNum}}
-   
+    
   .actions.clearfix
     div.pull-left
       .show-button.opts-link
         a(href='#', ng-hide='showOpts', ng-click='showOpts=true') Show Options
         span.complete {{book.complete}}
         span.percent %
+    
     div.pull-right
-
-
       span(ng-show='showStats')
         span#time
         span.opts-link
@@ -46,14 +35,6 @@ div.container
       span.opts-link(ng-hide='showStats')
         a(href='#', ng-click='showStats=true') Show Time
 
-      //- span(ng-show='showNum')
-      //-   span {{book.complete}}
-      //-   span.opts-link
-      //-     a(href='#', ng-click='showNum=false') Hide Num
-      //- span.opts-link(ng-hide='showNum')
-      //-   a(href='#', ng-click='showNum=true') Show Num
-
-      //-ng-click='book_home()'
       a.btn.btn-home(href='/book/{{book._id}}')
         i.icon-home
       a.btn.btn-large.btn-primary.btn-my(href='#', ng-show='playing', ng-click='pause()', id='btn-pause')
@@ -61,8 +42,8 @@ div.container
       a.btn.btn-large.btn-primary.btn-my(href='#', ng-hide='playing', ng-click='play()', id='btn-play', rel="tooltip", data-placement="bottom", title='Start when you are ready')
         i.icon-play.icon-white
 
-      //- a.btn.btn-large.btn-my(href='#', ng-click='prev()', id='btn-prev')
-      //-   i.icon-arrow-left
+      a.btn.btn-home(href='#', ng-click='prev()', id='btn-prev')
+        i.icon-arrow-left
       a.btn.btn-large.btn-primary.btn-my(href='#', ng-click='next()', id='btn-next', rel="tooltip", data-placement="bottom", title='Press Right or N for next part')
         i.icon-arrow-right.icon-white
 

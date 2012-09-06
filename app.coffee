@@ -19,7 +19,7 @@ GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 GitHubStrategy = require('passport-github').Strategy
 TwitterStrategy = require('passport-twitter').Strategy
 VKontakteStrategy = require('passport-vkontakte').Strategy
-# FacebookStrategy = require('passport-facebook').Strategy
+FacebookStrategy = require('passport-facebook').Strategy
 
 
 # Google
@@ -39,8 +39,8 @@ VKONTAKTE_APP_ID = "3108473"
 VKONTAKTE_APP_SECRET = "OJm81O8ieCMV2E5KCgYH"
 
 # Fb
-# FACEBOOK_APP_ID = ""
-# FACEBOOK_APP_SECRET = ""
+FACEBOOK_APP_ID = "380589482013093"
+FACEBOOK_APP_SECRET = "c95206a965a3fb1775ff16f4337e0dc0"
 
 
 
@@ -62,7 +62,7 @@ passport.deserializeUser (obj, done) ->
 passport.use new GoogleStrategy(
   clientID: GOOGLE_CLIENT_ID
   clientSecret: GOOGLE_CLIENT_SECRET
-  callbackURL: "http://speed-reading.herokuapp.com/oauth2callback" # localhost:3000
+  callbackURL: "http://extended-reader.herokuapp.com/oauth2callback" # localhost:3000
 , (accessToken, refreshToken, profile, done) ->
   
   # asynchronous verification, for effect...
@@ -73,7 +73,7 @@ passport.use new GoogleStrategy(
 passport.use new GitHubStrategy(
   clientID: GITHUB_CLIENT_ID
   clientSecret: GITHUB_CLIENT_SECRET
-  callbackURL: "http://speed-reading.herokuapp.com/auth/github/callback"
+  callbackURL: "http://extended-reader.herokuapp.com/auth/github/callback"
 , (accessToken, refreshToken, profile, done) ->
   # User.findOrCreate
   #   githubId: profile.id
@@ -86,7 +86,7 @@ passport.use new GitHubStrategy(
 passport.use new TwitterStrategy(
   consumerKey: TWITTER_CONSUMER_KEY
   consumerSecret: TWITTER_CONSUMER_SECRET
-  callbackURL: "http://speed-reading.herokuapp.com/auth/twitter/callback"
+  callbackURL: "http://extended-reader.herokuapp.com/auth/twitter/callback"
 , (token, tokenSecret, profile, done) ->
   # User.findOrCreate
   #   twitterId: profile.id
@@ -99,7 +99,7 @@ passport.use new TwitterStrategy(
 passport.use new VKontakteStrategy(
   clientID: VKONTAKTE_APP_ID
   clientSecret: VKONTAKTE_APP_SECRET
-  callbackURL: "http://speed-reading.herokuapp.com/auth/vkontakte/callback"
+  callbackURL: "http://extended-reader.herokuapp.com/auth/vkontakte/callback"
 , (accessToken, refreshToken, profile, done) ->
   # User.findOrCreate
   #   vkontakteId: profile.id
@@ -109,18 +109,18 @@ passport.use new VKontakteStrategy(
     done null, profile
 )
 
-# passport.use new FacebookStrategy(
-#   clientID: FACEBOOK_APP_ID
-#   clientSecret: FACEBOOK_APP_SECRET
-#   callbackURL: "http://localhost:3000/auth/facebook/callback"
-# , (accessToken, refreshToken, profile, done) ->
-#   # User.findOrCreate
-#   #   facebookId: profile.id
-#   # , (err, user) ->
-#   #   done err, user
-#   process.nextTick ->
-#     done null, profile
-# )
+passport.use new FacebookStrategy(
+  clientID: FACEBOOK_APP_ID
+  clientSecret: FACEBOOK_APP_SECRET
+  callbackURL: "http://extended-reader.herokuapp.com/auth/facebook/callback"
+, (accessToken, refreshToken, profile, done) ->
+  # User.findOrCreate
+  #   facebookId: profile.id
+  # , (err, user) ->
+  #   done err, user
+  process.nextTick ->
+    done null, profile
+)
 
 
 
@@ -163,8 +163,8 @@ app.configure "development", ->
     dumpExceptions: true
     showStack: true
   )
-  db = mongoose.connect 'mongodb://user:user@ds037007.mongolab.com:37007/speed-reading'
-  # db = mongoose.connect 'mongodb://localhost/speed-reading'
+  # db = mongoose.connect 'mongodb://user:user@ds037007.mongolab.com:37007/speed-reading'
+  db = mongoose.connect 'mongodb://localhost/speed-reading'
 
 
  # Routes
@@ -190,8 +190,8 @@ app.get '/api/book_with_text/:id', api.bookWithText
 app.put '/api/reset_parts/:id/:plen', api.resetParts
 
 
-app.get '/api/book_parts/:id', api.bookParts
-app.get '/api/book_part/:id/:num', api.getBookPart
+app.get '/api/parts/:id', api.bookParts
+app.get '/api/part/:book_id/:num', api.getBookPart
 app.put '/api/part/:id', api.savePartTime
 
 
@@ -247,16 +247,16 @@ app.get "/auth/vkontakte/callback", passport.authenticate("vkontakte",
   res.redirect "/"
 
 
-# facebook auth
+# facebook Auth
 
-# app.get "/auth/facebook", passport.authenticate("facebook"), (req, res) ->
+app.get "/auth/facebook", passport.authenticate("facebook"), (req, res) ->
 
-# app.get "/auth/facebook/callback", passport.authenticate("facebook",
-#   failureRedirect: "/login"
-# ), (req, res) ->
+app.get "/auth/facebook/callback", passport.authenticate("facebook",
+  failureRedirect: "/login"
+), (req, res) ->
   
-#   # Successful authentication, redirect home.
-#   res.redirect "/"
+  # Successful authentication, redirect home.
+  res.redirect "/"
 
 
 

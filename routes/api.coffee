@@ -237,7 +237,7 @@ savePart = (text, book, i, min_length) ->
 
 # Get all Books for viewing list and select one
 exports.books = (req, res) ->
-  Book.find().sort('-created').exec (err, books) ->
+  Book.find().sort('-lastUse').exec (err, books) ->
     res.json {books: books, user: req.user}
 
 
@@ -359,6 +359,7 @@ exports.saveBook = (req, res) ->
 
 
 
+
 # Put Book, set finished
 exports.finishBook = (req, res) ->
   LoadBook req.params.id, (book) ->
@@ -400,8 +401,8 @@ LoadPart = (book_id, num, cb) ->
 
 # Get Part
 exports.getBookPart = (req, res) ->
-  LoadPart req.params.id, req.params.num, (part) ->
-    res.json part
+  LoadPart req.params.book_id, req.params.num, (part) ->
+    res.json part:part
 
 # Get Parts for statistics collect
 exports.bookParts = (req, res) ->

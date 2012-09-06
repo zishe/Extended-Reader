@@ -19,9 +19,8 @@ div.navbar
                   img(src='/img/gh.png')
                 a(href='/auth/twitter')
                   img(src='/img/twitter.png')
-                //- a(href='#')
-                //-   img(src='/img/fb.png')
-                //- /auth/facebook
+                a(href='/auth/facebook')
+                  img(src='/img/fb.png')
           a#drop1.dropdown-toggle(href='#', ng-show='user.id', role='button', data-toggle='dropdown') {{user.displayName}}
               b.caret
             ul.dropdown-menu(role='menu', ng-show='user.id', aria-labelledby='drop1')

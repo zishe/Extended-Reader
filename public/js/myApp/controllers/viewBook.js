@@ -8,8 +8,8 @@ angular.module('myApp').controller('ViewBookCtrl', function($scope, $http, $rout
   $http.get("/api/book/" + $routeParams.id).success(function(data) {
     $scope.book = data.book;
     
-    $scope.book.createdDate = $.format.date($scope.book.created, "hh:mm  d MMMM yyyy");
-    $scope.book.lastUse = $.format.date($scope.book.lastUse, "hh:mm  d MMMM yyyy");
+    $scope.book.createdDate = $.format.date($scope.book.created, "hh:mm d MMMM yyyy");
+    $scope.book.lastUse = $.format.date($scope.book.lastUse, 'hh:mm d MMMM yyyy');
     $scope.book.readTime = TimeToString($scope.book.readingTime);
     if ($scope.book.readingTime > 0)
       $scope.book.readingSpeed = Math.round($scope.book.readCount.words/($scope.book.readingTime/60)) + ' words per minute';
@@ -19,7 +19,7 @@ angular.module('myApp').controller('ViewBookCtrl', function($scope, $http, $rout
 
     $scope.book = data.book;
 
-    $http.get('/api/book_parts/' + $routeParams.id).success(function(data) {
+    $http.get('/api/parts/' + $routeParams.id).success(function(data) {
       $scope.parts = data.parts
       drawGraph();
       $scope.book;
