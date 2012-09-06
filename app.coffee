@@ -175,7 +175,7 @@ app.get '/partials/:name', routes.partials
 app.get '/api/books', api.books
 app.get '/api/book/:id', api.book
 app.post '/api/book', api.addBook
-app.put '/api/book/:id', api.editBook
+app.put '/api/book/:id', api.saveBookChanges
 app.delete '/api/book/:id', api.deleteBook
 
 app.get '/api/readBook/:id', api.readBook
