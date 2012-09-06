@@ -18,12 +18,15 @@ angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $rout
   $scope.showStats = false;
   
   $http.get("/api/readBook/" + $routeParams.id).success(function(data) {
+    
     console.log(data);
     $scope.book = data.book;
     $scope.settings = data.settings;
     $scope.part = data.part;
     
     if (data.part == null || $scope.book.finished){
+      $('#btn-next').hide();
+      $('#btn-play').hide();
       $('#text').html("<p>The end</p>");
       setAll($scope);
       console.log('end of text');
@@ -45,23 +48,9 @@ angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $rout
       $scope.readingTime = 0;
       $scope.prevTime = (new Date()).getTime();
     }
-    // $scope.book.complete = Math.round($scope.book.parts[$scope.book.partNum].startPos * 100 / $scope.book.count.chars);
 
-    // angular.forEach($scope.book.parts, function(part, num){
-    //   if (part.allTime != null)
-    //     $scope.allTime += part.allTime;
-    // });
     if ($scope.part.readingTime != null)
       $scope.book.readingTime += $scope.part.readingTime;
-
-    // var i = 0;
-    // angular.forEach($scope.book.parts, function(part, num){
-    //   if (i < $scope.book.partNum) {
-    //       $scope.readWords += part.countWords;
-    //       i++;
-    //     }
-    // });
-    // $scope.book.readWords = $scope.readWords;
 
     $scope.book.readCount.words += $scope.part.count.words;
     $scope.book.readCount.chars += $scope.part.count.chars;
@@ -78,12 +67,17 @@ angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $rout
         $http.put('/api/book_finished/' + $routeParams.id).success(function(data) {
           console.log('save finishing book');
         });
+        $scope.pause();
+        $('#time').text();
         $('#text').html("<p>The end</p>");
+        $('#btn-next').hide();
+        $('#btn-play').hide();
         setAll($scope);
         console.log('end of text');
       }
       else{
         $scope.part = data.part;
+        console.log($scope.part);
         $('#text').html('<p>' + $scope.part.text.replace(/\n/g, '</p><p>') + '</p>');
         setAll($scope);
       }

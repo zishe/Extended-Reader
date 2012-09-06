@@ -163,8 +163,8 @@ app.configure "development", ->
     dumpExceptions: true
     showStack: true
   )
-  # db = mongoose.connect 'mongodb://user:user@ds037007.mongolab.com:37007/speed-reading'
-  db = mongoose.connect 'mongodb://localhost/speed-reading'
+  db = mongoose.connect 'mongodb://user:user@ds037007.mongolab.com:37007/speed-reading'
+  # db = mongoose.connect 'mongodb://localhost/speed-reading'
 
 
  # Routes

@@ -25,6 +25,8 @@ div.container
         dd {{book.count.words}}
         dt Read Words
         dd {{book.readCount.words}}
+        dt Read Chars
+        dd {{book.readCount.chars}}
         dt Averange Speed
         dd {{book.readingSpeed}}
         dt Reading Time
@@ -34,7 +36,6 @@ div.container
         dt Created
         dd {{book.createdDate}}
 
-        
     .span5.read-actions
       .row.reading-act
         a.btn.btn-primary.btn-large(href='/readBook/{{book._id}}') Paginal reading
@@ -45,4 +46,3 @@ div.container
         a.btn.btn-danger(href="#", ng-click='reset_data()') Reset all data
 
   .row.graph-block
-    //- #graph

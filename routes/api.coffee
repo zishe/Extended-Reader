@@ -330,11 +330,7 @@ exports.saveBook = (req, res) ->
         console.log 'open ' + parts.length + ' parts'
         console.log 'current number is ' + book.currPartNum
         
-        if parts.length < book.currPartNum + 5
-          if book.parsed
-            console.log 'book parsed'
-          else
-            # load settings
+        if (parts.length < book.currPartNum + 5) and not book.parsed
             LoadSettings (settings) ->
 
               console.log 'generate new parts'
