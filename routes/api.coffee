@@ -16,24 +16,15 @@ Settings = models.Settings
 
 
 # Load Book
-# ops: 0 - no text, 1 - book with text field, 2 - {book, text} obj
-LoadBook = (id, ops, cb) ->
+LoadBook = (id, cb) ->
   console.log 'loading book...'
   Book.findById id, (err, book) ->
     if err
       console.log err
       throw err
     console.log 'loaded book: ' + book.title
-    
-    if ops == 0
-      cb book
-    else
-      LoadText book, (data) ->
-        if ops == 1
-          book.text = data
-          cb book
-        else
-          cb book, data
+    cb book
+
 
 # Save Book
 SaveBook = (book, cb) ->
@@ -43,7 +34,7 @@ SaveBook = (book, cb) ->
       console.log err
       throw err
     console.log 'saved book: ' + book.title
-    cb?
+    cb()
 
 
 # Delete Book
@@ -66,7 +57,7 @@ LoadText = (book, cb) ->
       console.log err
       throw err
     console.log 'file loaded'
-    cb data.toString
+    cb data.toString()
 
 
 # Save book text in file
@@ -127,11 +118,11 @@ SaveSettings = (settings, cb) ->
 
 # remove all book parts
 DeleteBookParts = (id) ->
-    # delete all book parts
-    console.log 'deleting book parts...'
-    Part.where('book').equals(id).remove (err) ->
-      console.log err if err
-      console.log 'done'
+  # delete all book parts
+  console.log 'deleting book parts...'
+  Part.where('book').equals(id).remove (err) ->
+    console.log err if err
+    console.log 'done'
 
 
 # Count words and chars
@@ -252,26 +243,37 @@ exports.books = (req, res) ->
 
 # Get Book for statistics and select exercise
 exports.book = (req, res) ->
-  LoadBook req.params.id, 0, (book) ->
+  LoadBook req.params.id, (book) ->
     res.json book: book
 
 
 # Get Book with Settings for reading
 exports.readBook = (req, res) ->
-  LoadBook req.params.id, 2, (book) ->
-    LoadSettings (settings) ->
-      res.json {book, settings}
+  LoadBook req.params.id, (book) ->
+    LoadPart book._id, book.currPartNum, (part) ->
+      LoadSettings (settings) ->
+        res.json {book, part, settings}
 
 
 # Get Book with text for editing
 exports.bookWithText = (req, res) ->
-  LoadBook req.params.id, 1, (book) ->
-    res.json book: book
+  LoadBook req.params.id, (book) ->
+    LoadText book, (text) ->
+      book.text = text
+      #   cb book
+      # else
+      #   pieceSize = 100000 # symbols
+      #   console.log 'text length: ' + text.length
+      #   if (text.length > pieceSize)
+      #     console.log 'cutting'
+      #     text = text.substr 0, pieceSize
+      #   cb book, text
+      res.json book: book
 
 
 # Put Book for saving title, author and text, after editing them
 exports.saveBookChanges = (req, res) ->
-  LoadBook req.params.id, 0, (book) ->
+  LoadBook req.params.id, (book) ->
     
     book.title = req.body.title
     book.author = req.body.author
@@ -285,7 +287,7 @@ exports.saveBookChanges = (req, res) ->
 # Delete Book
 exports.deleteBook = (req, res) ->
   id = req.params.id
-  LoadBook id, 0, (book) ->
+  LoadBook id, (book) ->
 
     DeleteText book
     DeleteBook id, (deleted) ->
@@ -311,7 +313,7 @@ exports.addBook = (req, res) ->
 
 # Put Book, save changed info and generate parts if need
 exports.saveBook = (req, res) ->
-  LoadBook (book) ->
+  LoadBook req.params.id, (book) ->
     
     console.log 'set count and time params for book ' + book.title
     book.readCount = req.body.readCount
@@ -333,24 +335,17 @@ exports.saveBook = (req, res) ->
             console.log 'book parsed'
           else
             # load settings
-            Settings.findOne (err6, settings) ->
-              console.log err6 if err6
-              console.log 'settings loaded'
+            LoadSettings (settings) ->
 
               console.log 'generate new parts'
-              fs.readFile book.path, (err2, data) ->
-                console.log err2 if err2
-                console.log 'read file'
+              LoadText book, (text) ->
                 partsCount = parts.length
                 
                 for i in [0..9]
                   if !book.parsed
-                    savePart(data.toString(), book, i + partsCount, settings.part_length)
+                    savePart(text, book, i + partsCount, settings.part_length)
                 
-                console.log 'saving book'
-                book.save (err3) ->
-                  console.log err3 if err3
-                  console.log 'saved book for position change'
+                SaveBook book, () ->
                   
                   console.log 'now getting current part'
                   Part.findOne {book: book._id, num: book.currPartNum}, (err4, part) ->
@@ -395,34 +390,45 @@ exports.resetBook = (req, res) ->
 
 
 
+
+LoadPart = (book_id, num, cb) ->
+  console.log 'load book part num ' + num
+  Part.findOne {book: book_id, num: num}, (err, part) ->
+    console.log err if err
+    console.log 'loaded book part'
+    cb part
+
+
+
 # Part
 
 # Get Part
 exports.getBookPart = (req, res) ->
-  Part.findOne {book: req.params.id, num: req.params.num}, (err, part) ->
-    console.log err if err
-    console.log 'get part number ' + req.params.num
+  LoadPart req.params.id, req.params.num, (part) ->
     res.json part
 
 # Get Parts for statistics collect
 exports.bookParts = (req, res) ->
+  console.log 'loading book parts...'
   Part.find {book: req.params.id}, (err, parts) ->
     console.log err if err
-    console.log 'get all parts, in count ' + parts.length
+    console.log 'get all parts: ' + parts.length
     res.json parts:parts
 
 # Put Part, save reading time (only can change)
 exports.savePartTime = (req, res) ->
+  console.log 'saving part reading time...'
   Part.findByIdAndUpdate req.params.id, { readingTime: req.body.readingTime }, (err, part) ->
     console.log err if err
     console.log 'set reading time for part ' + part.num
     res.json true
 
+
+
 # Update Parts
 exports.resetParts = (req, res) ->
   part_length = parseInt(req.params.plen)
-  console.log 'load book'
-  Book.findById req.params.id, (err, book) ->
+  LoadBook req.params.id, (book) ->
     last = book.lastPosParsed
     curr = book.currPartNum
 
@@ -434,7 +440,7 @@ exports.resetParts = (req, res) ->
       console.log err1 if err1
       console.log 'futher parts deleted'
 
-    book.save () ->
+    SaveBook () ->
       console.log 'set num ' + num
       res.json true
 

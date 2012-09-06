@@ -18,10 +18,10 @@ angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $rout
   $scope.showStats = false;
   
   $http.get("/api/readBook/" + $routeParams.id).success(function(data) {
+    console.log(data);
     $scope.book = data.book;
     $scope.settings = data.settings;
     $scope.part = data.part;
-    console.log($scope.part);
     
     if (data.part == null || $scope.book.finished){
       $('#text').html("<p>The end</p>");

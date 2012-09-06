@@ -108,3 +108,6 @@ Part.on 'error', (err) ->
 
 Book.on 'error', (err) ->
   console.log "Got an error", err
+
+Settings.on 'error', (err) ->
+  console.log "Got an error", err
