@@ -66,6 +66,9 @@ body .control-panel .opts .prop {
 body .control-panel span {
   cursor: default;
 }
+body .control-panel .parts {
+  padding: 7px;
+}
 body .reading-block {
   width: 640px;
   margin: 0 auto;
@@ -135,6 +138,8 @@ body .parts span {
   width: 200px;
   font-size: 15px;
   line-height: 26px;
+  font-weight: normal;
+  color: #666;
 }
 .view-book-page .dl-horizontal dd {
   margin-left: 220px;

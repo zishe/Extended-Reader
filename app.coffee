@@ -184,6 +184,7 @@ app.get '/api/readByLines/:id', api.readByLines
 app.put '/api/save_book/:id', api.saveBook
 app.put '/api/book_finished/:id', api.finishBook
 app.put '/api/reset_book/:id', api.resetBook
+app.put '/api/save_stats/:id', api.saveBookStats
 
 # app.put '/api/addparts/:id', api.addParts
 app.get '/api/book_with_text/:id', api.bookWithText
@@ -196,7 +197,8 @@ app.put '/api/part/:id', api.savePartTime
 
 
 app.get '/api/settings', api.settings
-app.post '/api/settings/:id', api.saveSettings
+app.put '/api/settings/:id', api.saveSettings
+
 
 
 

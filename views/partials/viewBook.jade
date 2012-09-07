@@ -17,16 +17,18 @@ div.container
         //- dd {{book.parts[book.partNum].startPos}}
         dt Complete
         dd {{book.complete}} %
-        dt Chars
-        dd {{book.count.chars}}
-        dt Chars without spaces
-        dd {{book.count.charsWithoutSpaces}}
         dt Words
         dd {{book.count.words}}
+        dt Chars without spaces
+        dd {{book.count.charsWithoutSpaces}}
+        dt Chars
+        dd {{book.count.chars}}
         dt Read Words
         dd {{book.readCount.words}}
-        dt Read Chars
-        dd {{book.readCount.chars}}
+        //- dt Read Chars
+        //- dd {{book.readCount.chars}}
+        //- dt Read Chars without spaces
+        //- dd {{book.readCount.charsWithoutSpaces}}
         dt Averange Speed
         dd {{book.readingSpeed}}
         dt Reading Time
@@ -44,5 +46,36 @@ div.container
         a.btn.btn-warning(href="#", ng-click='remove_page_info(page_num)') Remove Time
       .row
         a.btn.btn-danger(href="#", ng-click='reset_data()') Reset all data
+  //- .row
+  //-   .span2
+  //-   .span10
+  //-     form.form-inline
+  //-       textarea(ng-model='textToCheck')
+  //-       a.btn.btn-primary(href="#", ng-click='checkCount()') Check
+  //-       //- span {{currCount.words}}
+  //-       span#count
+
 
   .row.graph-block
+
+  //- .row.detailed
+  //-   table.table.table-condensed
+  //-     thead
+  //-     tr
+  //-       th Num
+  //-       th Words
+  //-       th Chars
+  //-       th Chars without spaces
+  //-       th Reding time, second
+  //-       th
+  //-       //- th
+  //-       //- th
+  //-     tbody
+  //-       tr(ng-repeat='part in parts | orderBy:num:true')
+  //-         td {{part.num}}
+  //-         td {{part.count.words}}
+  //-         td {{part.count.chars}}
+  //-         td {{part.count.charsWithoutSpaces}}
+  //-         td {{part.readingTime}}
+  //-         td {{part.text}}
+

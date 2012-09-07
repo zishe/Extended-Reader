@@ -4,13 +4,18 @@
 angular.module('myApp').controller('ViewBookCtrl', function($scope, $http, $routeParams) {
   $scope.book = {};
   $scope.gnum = 0;
+  $scope.currCount = {};
   
   $http.get("/api/book/" + $routeParams.id).success(function(data) {
+    updateData(data);
+  });
+
+  var updateData = function(data) {
     $scope.book = data.book;
-    
     $scope.book.createdDate = $.format.date($scope.book.created, "hh:mm d MMMM yyyy");
     $scope.book.lastUse = $.format.date($scope.book.lastUse, 'hh:mm d MMMM yyyy');
     $scope.book.readTime = TimeToString($scope.book.readingTime);
+    
     if ($scope.book.readingTime > 0)
       $scope.book.readingSpeed = Math.round($scope.book.readCount.words/($scope.book.readingTime/60)) + ' words per minute';
     else
@@ -24,7 +29,8 @@ angular.module('myApp').controller('ViewBookCtrl', function($scope, $http, $rout
       drawGraph();
       $scope.book;
     });
-  });
+
+  };
 
   $scope.remove_page_info = function(page_num) {
     console.log(page_num);
@@ -44,9 +50,16 @@ angular.module('myApp').controller('ViewBookCtrl', function($scope, $http, $rout
 
   $scope.reset_data = function() {
     $http.put("/api/reset_book/" + $scope.book._id).success(function(data) {
-      $scope.book = data.book;
       console.log('reseted');
+      updateData(data);
     });
+  };
+
+  $scope.checkCount = function() {
+    $scope.currCount = getWordsCount($scope.textToCheck);
+    console.log($scope.textToCheck);
+    console.log($scope.count);
+    $('#count').text($scope.currCount.words);
   };
 
   // function format(str) {

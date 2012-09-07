@@ -39,13 +39,31 @@ BookSchema = new Schema(
   
   count: Count
   
-  lastPosParsed: { type: Number, default: 0 }
-  complete: { type: Number, default: 0 }
-  readingTime: { type: Number, default: 0 }
+  lastPosParsed:
+    type: Number
+    default: 0
+  
+  complete:
+    type: Number
+    default: 0
+  readingTime:
+    type: Number
+    default: 0
+  
   readCount: Count
   
-  currPartNum: { type: Number, default: 0 }
+  currPartNum:
+    type: Number
+    default: 0
   
+  lastWordPos:
+    type: Number
+    default: 0
+
+  RegenParts:
+    type: Boolean
+    default: false
+
   parts: [
     type: ObjectId
     ref: "Part"
@@ -90,6 +108,9 @@ SettingsSchema = new Schema(
   words_count:
     type: Number
     default: 3
+  show_delay:
+    type: Number
+    default: 300
 )
 
 

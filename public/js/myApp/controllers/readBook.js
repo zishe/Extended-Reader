@@ -55,7 +55,7 @@ angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $rout
     $scope.book.readCount.words += $scope.part.count.words;
     $scope.book.readCount.chars += $scope.part.count.chars;
     $scope.book.readCount.charsWithoutSpaces += $scope.part.count.charsWithoutSpaces;
-    $scope.book.complete = ( $scope.book.readCount.chars * 100 / $scope.book.count.chars ).toFixed(2);
+    $scope.book.complete = Math.round( $scope.book.readCount.chars * 10000 / $scope.book.count.chars ) / 100;
 
     $scope.book.currPartNum++;
 
@@ -109,7 +109,7 @@ angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $rout
       });
     }
     if ($scope.book.currPartNum == 0){
-      
+
     }
   };
 
@@ -203,7 +203,7 @@ angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $rout
 
 function saveSettings($scope, $http) {
   console.log($scope.settings);
-  $http.post("/api/settings/" + $scope.settings._id, $scope.settings).success(function(data) {
+  $http.put("/api/settings/" + $scope.settings._id, $scope.settings).success(function(data) {
     console.log(data);
     console.log('settings saved');
   });

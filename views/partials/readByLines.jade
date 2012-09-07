@@ -1,8 +1,9 @@
 include _navbar
 div.container
-  .control-panel.clearfix(ng-show='showOpts')
-    .hide-button.pull-left
-      a(href='#', ng-click='showOpts=false') Hide Options
+  .control-panel.pull-left(ng-show='showOpts')
+    .pull-left
+      .hide-button.opts-link
+        a(href='#', ng-click='showOpts=false') Hide Options
     .opts.well.well-small
       i.icon-minus-sign(ng-click='font_decrease();save_settings()')
       span.prop font size
@@ -11,20 +12,27 @@ div.container
       i.icon-minus-sign(ng-click='words_decrease();save_settings()')
       span.prop words
       i.icon-plus-sign(ng-click='words_increase();save_settings()')
-    .parts
+    .parts.pull-left
       span {{num}} from
       span {{parts.length}}
+      span read words: {{readText.length}}
 
-  .line-actions.clearfix
-    .pull-left
-      .show-button
-        a(href='#', ng-hide='showOpts', ng-click='showOpts=true') Show Options
-    .pull-right
+  //- .line-actions.clearfix
+  .pull-left
+    .show-button.opts-link
+      a(href='#', ng-hide='showOpts', ng-click='showOpts=true') Show Options
+  .pull-right
+    span(ng-show='showStats')
       span#time
-      a.btn.btn-large.btn-my(href='#', ng-click='pause()', id='btn-pause')
-        i.icon-pause
-      a.btn.btn-large.btn-primary.btn-my(href='#', ng-click='play()', id='btn-play', rel="tooltip", data-placement="bottom", title='Start when you are ready')
-        i.icon-play.icon-white
+      span.opts-link
+        a(href='#', ng-click='showStats=false') Hide Time
+    span.opts-link(ng-hide='showStats')
+      a(href='#', ng-click='showStats=true') Show Time
+    a.btn.btn-large.btn-my(href='#', ng-show='playing', ng-click='pause()', id='btn-pause')
+      i.icon-pause
+    a.btn.btn-large.btn-primary.btn-my(href='#', ng-hide='playing', ng-click='play()', id='btn-play', rel="tooltip", data-placement="bottom", title='Start when you are ready')
+      i.icon-play.icon-white
+    
 
   .reading-block
     .text-area

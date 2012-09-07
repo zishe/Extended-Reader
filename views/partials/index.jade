@@ -13,7 +13,7 @@ div.container
       th
       th
     tbody
-      tr(ng-repeat='book in books | orderBy:created')
+      tr(ng-repeat='book in books | orderBy:lastUse')
         td
           a.pull-left(href='/book/{{book._id}}')
             h3.book-index-title {{book.title}}

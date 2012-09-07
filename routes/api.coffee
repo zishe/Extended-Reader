@@ -55,16 +55,19 @@ LoadText = (book, cb) ->
   fs.readFile book.path, (err, data) ->
     if err
       console.log err
-      throw err
+      # throw err
     console.log 'file loaded'
-    cb data.toString()
+    if data
+      cb data.toString()
+    else
+      cb null
 
 
 # Save book text in file
 SaveText = (book, text) ->
   console.log 'saving text...'
   book.path = __dirname + '/../public/files/' + book._id.toString()
-  fs.writeFile book.path, text, (err) ->
+  fs.writeFile book.path, text.trim(), (err) ->
     console.log err if err
     console.log "done"
 
@@ -132,7 +135,7 @@ getWordsCount = (text) ->
   count = {}
   count.chars = text.length
   count.charsWithoutSpaces = text.replace(/\s+/g, '').length
-  count.words = text.replace(/[\,\.\:\?\-\—\;\(\)\«\»\…]/g, '').replace(/\s+/gi,' ').split(' ').length
+  count.words = text.replace(/[\,\.\:\?\-\—\;\(\)\«\»\…\!\[\]]/g, '').replace(/\s+/gi,' ').trim().split(' ').length
   
   console.log 'chars: ' + count.chars
   console.log 'chars wothout spaces: ' + count.charsWithoutSpaces
@@ -145,6 +148,7 @@ getWordsCount = (text) ->
 AllocateParts = (book, text, settings, callback) ->
   #words and chars count
   book.count = getWordsCount(text)
+  book.count.chars++
   console.log settings
 
   #make parts
@@ -357,6 +361,21 @@ exports.saveBook = (req, res) ->
             res.json part: part
 
 
+# Save stats
+exports.saveBookStats = (req, res) ->
+  LoadBook req.params.id, (book) ->
+    
+    console.log 'set count and time params for book ' + book.title
+    book.readCount = req.body.readCount
+    book.complete = req.body.complete
+    book.currPartNum = req.body.currPartNum
+    book.readingTime = req.body.readingTime
+    book.lastWordPos = req.body.lastWordPos
+
+    SaveBook book, () ->
+      res.json book
+
+
 
 
 
@@ -371,8 +390,20 @@ exports.finishBook = (req, res) ->
 # Put Book, reset read data
 exports.resetBook = (req, res) ->
   LoadBook req.params.id, (book) ->
-    setDefaults()
-    SaveBook book
+    book.readCount = {}
+    book.readCount.words = 0
+    book.readCount.chars = 0
+    book.readCount.charsWithoutSpaces = 0
+
+    book.complete = 0
+    book.readingTime = 0
+    book.currPartNum = 0
+    book.lastWordPos = 0
+
+    book.finished = false
+
+    SaveBook book, () ->
+      res.json book:book
 
   Part.find(book: req.params.id).where('readingTime').gt(0).exec (err, parts) ->
     console.log err if err
@@ -407,7 +438,7 @@ exports.getBookPart = (req, res) ->
 # Get Parts for statistics collect
 exports.bookParts = (req, res) ->
   console.log 'loading book parts...'
-  Part.find {book: req.params.id}, (err, parts) ->
+  Part.find().where('book').equals(req.params.id).sort('num').exec (err, parts) ->
     console.log err if err
     console.log 'get all parts: ' + parts.length
     res.json parts:parts
@@ -452,7 +483,8 @@ exports.settings = (req, res) ->
 # Put Settings and save all it params
 exports.saveSettings = (req, res) ->
   LoadSettings (settings) ->
-    
+    console.log settings
+    console.log 'copy fields'
     settings.font_size = req.body.font_size
     settings.line_height = req.body.line_height
     settings.width = req.body.width
@@ -460,5 +492,5 @@ exports.saveSettings = (req, res) ->
     settings.words_font_size = req.body.words_font_size
     settings.words_count = req.body.words_count
     
-    SaveSettings (succ) ->
+    SaveSettings settings, (succ) ->
       res.json succ
