@@ -277,7 +277,7 @@ app.get "/auth/facebook/callback", passport.authenticate("facebook",
 
 app.get "/logout", (req, res) ->
   req.logout()
-  # res.redirect "/"
+  res.redirect "/"
 
 # redirect all others to the index (HTML5 history)
 app.get '*',  (req, res) ->
