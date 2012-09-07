@@ -7,6 +7,9 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives'])
       templateUrl: '/partials/index',
       controller: 'IndexCtrl'
     })
+    .when('/#_=_', {
+      redirectTo: '/'
+    })
     .when('/book/:id', {
       templateUrl: '/partials/viewBook',
       controller: 'ViewBookCtrl'
