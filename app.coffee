@@ -259,7 +259,8 @@ app.get "/auth/facebook/callback", passport.authenticate("facebook",
   res.redirect "/"
 
 
-
+app.get '/#_=_', (req, res) ->
+  res.redirect '/'
 
 
 
