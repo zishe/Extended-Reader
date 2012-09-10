@@ -2,6 +2,8 @@ mongoose = require 'mongoose'
 Schema = mongoose.Schema
 ObjectId = Schema.Types.ObjectId
 
+mongoose.set 'debug', true
+
 Count = {
   words:
     type: Number

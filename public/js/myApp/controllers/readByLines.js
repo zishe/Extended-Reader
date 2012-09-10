@@ -69,7 +69,7 @@ angular.module('myApp').controller('ReadByLinesCtrl', function($scope, $http, $r
 
       var count = getWordsCount($scope.readText);
 
-      $scope.book.readingTime += Math.round($scope.readingTime);
+      $scope.book.readingTime += Math.round($scope.readingTime / 1000);
 
       $scope.book.readCount.words += count.words;
       $scope.book.readCount.chars += count.chars;

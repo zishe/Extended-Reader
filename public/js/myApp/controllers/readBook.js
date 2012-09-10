@@ -57,6 +57,8 @@ angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $rout
     $scope.book.readCount.charsWithoutSpaces += $scope.part.count.charsWithoutSpaces;
     $scope.book.complete = Math.round( $scope.book.readCount.chars * 10000 / $scope.book.count.chars ) / 100;
 
+    $scope.book.lastWordPos = $scope.book.readCount.chars;
+
     $scope.book.currPartNum++;
 
     $http.put('/api/save_book/' + $routeParams.id, $scope.book).success(function(data) {

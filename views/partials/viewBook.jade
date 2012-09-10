@@ -41,6 +41,8 @@ div.container
     .span5.read-actions
       .row.reading-act
         a.btn.btn-primary.btn-large(href='/readBook/{{book._id}}') Paginal reading
+      .row.reading-act
+        a.btn.btn-primary.btn-large(href='/readByLines/{{book._id}}') Read by phrase
       .row.input-append
         input.span2(type="text", placeholder="Type page number...", ng-model='page_num')
         a.btn.btn-warning(href="#", ng-click='remove_page_info(page_num)') Remove Time
