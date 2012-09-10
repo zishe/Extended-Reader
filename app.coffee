@@ -135,7 +135,7 @@ app = express()
 #   appName: 'Node.js Application'
 
 
-require('look').start();
+# require('look').start();
 
 app.use assets()
 
