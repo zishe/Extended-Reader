@@ -33,8 +33,7 @@ angular.module('myApp').controller('ReadByLinesCtrl', function($scope, $http, $r
 
     $http.get("/api/settings").success(function(data) {
       $scope.settings = data.settings;
-      console.log(data.settings);
-      // setBgColor($scope);
+      console.log(data.settings);      
       setWordsFont($scope);
       
       var changed = false;
@@ -44,6 +43,10 @@ angular.module('myApp').controller('ReadByLinesCtrl', function($scope, $http, $r
       }
       if ($scope.settings.words_count == null){
         $scope.settings.words_count = 3;
+        changed = true;
+      }
+      if ($scope.settings.show_delay < 100){
+        $scope.settings.show_delay = 300;
         changed = true;
       }
       if (changed) saveSettings($scope, $http);
@@ -103,7 +106,10 @@ angular.module('myApp').controller('ReadByLinesCtrl', function($scope, $http, $r
 
     $('#time').text(TimeToString($scope.readingTime / 1000));
 
-    timeout = $timeout(tick, 300);
+    var extra_lngth = $scope.currText.length - $scope.settings.words_count * 7
+    var extra_time = extra_lngth > 0 ? Math.round(extra_lngth/5) : 0;
+    console.log(extra_time);
+    timeout = $timeout(tick, $scope.settings.show_delay + extra_time);
   };
 
 
@@ -133,6 +139,16 @@ angular.module('myApp').controller('ReadByLinesCtrl', function($scope, $http, $r
     if ($scope.settings.words_count > 1) {
       $scope.settings.words_count--;
       reset_parts($scope)
+    }
+  };
+
+  $scope.dalay_increase = function() {
+    $scope.settings.show_delay += 100;
+  };
+
+  $scope.dalay_decrease = function() {
+    if ($scope.settings.words_count > 100) {
+      $scope.settings.show_delay -= 100;
     }
   };
 
