@@ -1,0 +1,14 @@
+include _navbar
+div.container.mauto(ng-init="init()")
+  .opts.clearfix
+    .btn.btn-primary(ng-click="start()") Start
+    #time 0.0
+    .btn.sizes(ng-click="set_size(5)") 5
+  .play-field
+    .currNum 1
+    .cicle
+    .cicle-inner
+    .field.clearfix
+      .one-block(ng-repeat="elem in arr")
+        .unit(ng-click="turn(elem)")
+          .num(id="{{elem}}") {{elem}}

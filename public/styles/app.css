@@ -212,3 +212,118 @@ span.complete {
   font-size: 12px;
   color: #726F74;
 }
+.play-field {
+  position: relative;
+  width: 520px;
+  margin: 0 auto;
+}
+.play-field .cicle {
+  position: absolute;
+  z-index: 1000;
+  top: 245px;
+  left: 245px;
+  width: 30px;
+  height: 30px;
+  background-color: red;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+}
+.play-field .cicle-inner {
+  position: absolute;
+  z-index: 1001;
+  top: 250px;
+  left: 250px;
+  width: 20px;
+  height: 20px;
+  background-color: blue;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+}
+.play-field .currNum {
+  position: absolute;
+  z-index: 1000;
+  top: 240px;
+  left: -100px;
+  font-size: 50px;
+}
+.play-field .field .one-block .unit {
+  float: left;
+  height: 120px;
+  width: 120px;
+  margin: 5px 5px;
+  background-color: #444;
+  cursor: pointer;
+}
+.play-field .field .one-block .unit .num {
+  text-align: center;
+  color: #FFF;
+  padding-top: 48px;
+  font-size: 60px;
+}
+.play-field-5 {
+  position: relative;
+  width: 600px;
+  margin: 0 auto;
+}
+.play-field-5 .cicle {
+  position: absolute;
+  z-index: 1000;
+  top: 285px;
+  left: 285px;
+  width: 30px;
+  height: 30px;
+  background-color: red;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+}
+.play-field-5 .cicle-inner {
+  position: absolute;
+  z-index: 1001;
+  top: 290px;
+  left: 290px;
+  width: 20px;
+  height: 20px;
+  background-color: blue;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+}
+.play-field-5 .currNum {
+  position: absolute;
+  z-index: 1000;
+  top: 280px;
+  left: -100px;
+  font-size: 50px;
+}
+.play-field-5 .field .one-block .unit {
+  float: left;
+  height: 110px;
+  width: 110px;
+  margin: 5px 5px;
+  background-color: #444;
+  cursor: pointer;
+}
+.play-field-5 .field .one-block .unit .num {
+  text-align: center;
+  color: #FFF;
+  padding-top: 46px;
+  font-size: 50px;
+}
+.mauto .opts {
+  margin: 0 auto;
+}
+.mauto .opts .btn {
+  float: left;
+}
+.mauto .opts .sizes {
+  float: right;
+  margin-right: 50px;
+}
+.mauto .opts #time {
+  float: left;
+  margin: 4px 0 0 20px;
+  font-size: 30px;
+}

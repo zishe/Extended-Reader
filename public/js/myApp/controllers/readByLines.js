@@ -147,7 +147,7 @@ angular.module('myApp').controller('ReadByLinesCtrl', function($scope, $http, $r
   };
 
   $scope.dalay_decrease = function() {
-    if ($scope.settings.words_count > 100) {
+    if ($scope.settings.show_delay > 100) {
       $scope.settings.show_delay -= 100;
     }
   };

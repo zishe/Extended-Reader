@@ -30,6 +30,10 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives'])
       templateUrl: '/partials/editBook',
       controller: 'EditBookCtrl'
     })
+    .when('/schulte', {
+      templateUrl: '/partials/schulte',
+      controller: 'SchulteCtrl'
+    })
     .otherwise({
       redirectTo: '/'
     });
