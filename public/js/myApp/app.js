@@ -34,6 +34,10 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives'])
       templateUrl: '/partials/schulte',
       controller: 'SchulteCtrl'
     })
+    .when('/greenDot', {
+      templateUrl: '/partials/greenDot',
+      controller: 'greenDotCtrl'
+    })
     .otherwise({
       redirectTo: '/'
     });

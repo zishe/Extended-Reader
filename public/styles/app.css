@@ -327,3 +327,51 @@ span.complete {
   margin: 4px 0 0 20px;
   font-size: 30px;
 }
+.green {
+  margin: 0 auto;
+  position: relative;
+}
+.green .pa {
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+}
+.green .pa .reading-block {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+.green .pa .reading-block .reading-area p {
+  text-align: justify;
+  font-family: Tahoma;
+  font-size: 22px;
+  line-height: 33px;
+}
+.green .pa .center {
+  width: 20px;
+  margin: 0 auto;
+}
+.green .pa .center .dot {
+  width: 20px;
+  height: 20px;
+  margin-top: 263px;
+  background-color: green;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  z-index: 1001;
+}
+.green .pa .center .inline-dot {
+  margin-top: -50px;
+  width: 16px;
+  height: 16px;
+  background-color: green;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  z-index: 1001;
+}
+.text-area.by-lines {
+  margin-top: 200px;
+}

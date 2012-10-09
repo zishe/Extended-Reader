@@ -372,3 +372,53 @@ span.complete{
     }
   }
 }
+
+.green{
+  margin: 0 auto;
+  position: relative;
+  .pa{
+    position: absolute;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+
+    .reading-block{
+      width: 90%;
+      margin: 0 auto;
+      margin-top: 40px;
+      .reading-area{
+        p {
+          text-align: justify;
+          font-family: Tahoma;
+          font-size: 22px;
+          line-height: 33px;
+        }
+      }
+    }
+    .center{
+      width: 20px;
+      margin: 0 auto;
+      .dot{
+        width: 20px;
+        height: 20px;
+        margin-top: 263px;
+        background-color: green;
+        .rounded-corners(10px);
+        z-index: 1001;
+      }
+      .inline-dot{
+        margin-top: -50px;
+        width: 16px;
+        height: 16px;
+        background-color: green;
+        .rounded-corners(8px);
+        z-index: 1001;
+      }
+    }
+  }
+}
+
+
+.text-area.by-lines{
+  margin-top: 200px;
+}
