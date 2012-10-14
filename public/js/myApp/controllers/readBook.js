@@ -16,6 +16,8 @@ angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $rout
   $scope.showNum = false;
   $scope.showOpts = false;
   $scope.showStats = false;
+
+  var timer_message_shown = 0;
   
   $http.get("/api/readBook/" + $routeParams.id).success(function(data) {
     
@@ -39,6 +41,13 @@ angular.module('myApp').controller('ReadBookCtrl', function($scope, $http, $rout
 
   
   $scope.next = function() {
+    if (timer_message_shown < 2){
+      $(".alert").alert();
+      $(".alert").removeClass('hidden');
+      $('.alert').delay(3000).hide(0);
+      timer_message_shown++;
+    }
+
     if ($scope.readingTime != 0) {
       console.log('save time');
       $scope.part.readingTime = Math.round($scope.readingTime / 1000);

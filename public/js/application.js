@@ -1,6 +1,4 @@
-$(this).tooltip({
-  selector: "a[rel=tooltip]"
-});
+$("a[rel=tooltip]").tooltip();
 
 Mousetrap.bind('space', function() {
   console.log('space');

@@ -8,25 +8,12 @@ angular.module('myApp').controller('SchulteCtrl', function($scope, $http, $locat
   $scope.num = 1;
 
   $scope.playing = false;
-  $scope.start = null;
+  // $scope.start = null;
   var timeout;
   var odd = false;
 
   $scope.init = function() {
     init_arr($scope);
-    // var arr = [];
-    // var count = Math.pow($scope.size, 2);
-    // console.log(count);
-    // if ($scope.size % 2 == 1) {
-    //   odd = true;
-    //   count--;
-    //   console.log("even " + count);
-    // }
-    // for (var i = count; i > 0; i--) {
-    //   arr.push(i);
-    // };
-    // arr.shuffle();
-    // $scope.arr = arr;
   };
 
   var init_arr = function($scope) {

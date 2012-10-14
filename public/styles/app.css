@@ -375,3 +375,6 @@ span.complete {
 .text-area.by-lines {
   margin-top: 200px;
 }
+.hidden {
+  display: none;
+}
