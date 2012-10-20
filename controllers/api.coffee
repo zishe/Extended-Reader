@@ -1,6 +1,6 @@
 fs = require 'fs'
 path = require 'path'
-models = require './models'
+models = require '../models/models'
 
 # Count = models.Count
 Book = models.Book
@@ -10,9 +10,7 @@ Settings = models.Settings
 
 
 
-
 # Overloaded mongo methods
-
 
 
 # Load Book
