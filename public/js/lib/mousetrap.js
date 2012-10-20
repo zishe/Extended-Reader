@@ -16,7 +16,7 @@
  * Mousetrap is a simple keyboard shortcut library for Javascript with
  * no external dependencies
  *
- * @version 1.1.3
+ * @version 1.2
  * @url craig.is/killing/mice
  */
 (function() {
@@ -205,7 +205,8 @@
      */
     function _addEvent(object, type, callback) {
         if (object.addEventListener) {
-            return object.addEventListener(type, callback, false);
+            object.addEventListener(type, callback, false);
+            return;
         }
 
         object.attachEvent('on' + type, callback);
@@ -235,25 +236,6 @@
 
         // if it is not in the special map
         return String.fromCharCode(e.which).toLowerCase();
-    }
-
-    /**
-     * should we stop this event before firing off callbacks
-     *
-     * @param {Event} e
-     * @return {boolean}
-     */
-    function _stop(e) {
-        var element = e.target || e.srcElement,
-            tag_name = element.tagName;
-
-        // if the element has the class "mousetrap" then no need to stop
-        if ((' ' + element.className + ' ').indexOf(' mousetrap ') > -1) {
-            return false;
-        }
-
-        // stop for input, select, and textarea
-        return tag_name == 'INPUT' || tag_name == 'SELECT' || tag_name == 'TEXTAREA' || (element.contentEditable && element.contentEditable == 'true');
     }
 
     /**
@@ -396,8 +378,14 @@
      * @param {Event} e
      * @returns void
      */
-    function _fireCallback(callback, e) {
-        if (callback(e) === false) {
+    function _fireCallback(callback, e, combo) {
+
+        // if this event should not happen stop here
+        if (Mousetrap.stopCallback(e, e.target || e.srcElement, combo)) {
+            return;
+        }
+
+        if (callback(e, combo) === false) {
             if (e.preventDefault) {
                 e.preventDefault();
             }
@@ -419,12 +407,6 @@
      * @returns void
      */
     function _handleCharacter(character, e) {
-
-        // if this event should not happen stop here
-        if (_stop(e)) {
-            return;
-        }
-
         var callbacks = _getMatches(character, _eventModifiers(e), e),
             i,
             do_not_reset = {},
@@ -443,14 +425,14 @@
 
                 // keep a list of which sequences were matches for later
                 do_not_reset[callbacks[i].seq] = 1;
-                _fireCallback(callbacks[i].callback, e);
+                _fireCallback(callbacks[i].callback, e, callbacks[i].combo);
                 continue;
             }
 
             // if there were no sequence matches but we are still here
             // that means this is a regular match so we should fire that
             if (!processed_sequence_callback && !_inside_sequence) {
-                _fireCallback(callbacks[i].callback, e);
+                _fireCallback(callbacks[i].callback, e, callbacks[i].combo);
             }
         }
 
@@ -472,7 +454,9 @@
 
         // normalize e.which for key events
         // @see http://stackoverflow.com/questions/4285627/javascript-keycode-vs-charcode-utter-confusion
-        e.which = typeof e.which == "number" ? e.which : e.keyCode;
+        if (typeof e.which !== 'number') {
+            e.which = e.keyCode;
+        }
 
         var character = _characterFromEvent(e);
 
@@ -603,7 +587,7 @@
              * @returns void
              */
             _callbackAndReset = function(e) {
-                _fireCallback(callback, e);
+                _fireCallback(callback, e, combo);
 
                 // we should ignore the next key up if the action is key down
                 // or keypress.  this is so if you finish a sequence and
@@ -650,7 +634,8 @@
         // if this pattern is a sequence of keys then run through this method
         // to reprocess each pattern one key at a time
         if (sequence.length > 1) {
-            return _bindSequence(combination, sequence, callback, action);
+            _bindSequence(combination, sequence, callback, action);
+            return;
         }
 
         // take the keys from this pattern and figure out what the actual
@@ -727,7 +712,7 @@
     _addEvent(document, 'keydown', _handleKey);
     _addEvent(document, 'keyup', _handleKey);
 
-    var mousetrap = {
+    var Mousetrap = {
 
         /**
          * binds an event to mousetrap
@@ -797,14 +782,32 @@
             _callbacks = {};
             _direct_map = {};
             return this;
+        },
+
+       /**
+        * should we stop this event before firing off callbacks
+        *
+        * @param {Event} e
+        * @param {Element} element
+        * @return {boolean}
+        */
+        stopCallback: function(e, element, combo) {
+
+            // if the element has the class "mousetrap" then no need to stop
+            if ((' ' + element.className + ' ').indexOf(' mousetrap ') > -1) {
+                return false;
+            }
+
+            // stop for input, select, and textarea
+            return element.tagName == 'INPUT' || element.tagName == 'SELECT' || element.tagName == 'TEXTAREA' || (element.contentEditable && element.contentEditable == 'true');
         }
     };
 
     // expose mousetrap to the global object
-    window.Mousetrap = mousetrap;
+    window.Mousetrap = Mousetrap;
 
     // expose mousetrap as an AMD module
-    if (typeof define == 'function' && define.amd) {
-        define('mousetrap', function() { return mousetrap; });
+    if (typeof define === 'function' && define.amd) {
+        define('mousetrap', function() { return Mousetrap; });
     }
 }) ();
