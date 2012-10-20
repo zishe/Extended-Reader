@@ -1,0 +1,1 @@
+window.location.hash = ""  if window.location.hash isnt ""

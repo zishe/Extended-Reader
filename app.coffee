@@ -25,7 +25,7 @@ app = express()
 
 # require('look').start();
 
-app.use assets()
+# app.use assets()
 
 app.configure ->
   app.set 'port', process.env.PORT or 4000
@@ -35,7 +35,7 @@ app.configure ->
   app.use express.logger('dev')
   app.use express.bodyParser(
       keepExtensions: true
-      uploadDir: __dirname + '/public/files'
+      uploadDir: __dirname + '/upload/files'
     )
   app.use express.limit('5mb')
   app.use express.methodOverride()
@@ -44,8 +44,8 @@ app.configure ->
   app.use passport.initialize()
   app.use passport.session()
   # app.use require('stylus').middleware(__dirname + '/public')
-  app.use require('less-middleware')(src: __dirname + '/public')
-  app.use express.static(path.join(__dirname, 'public'))
+  # app.use require('less-middleware')(src: __dirname + '/public')
+  app.use express.static(path.join(__dirname, 'dist'))
   app.use app.router
 
 app.configure "development", ->

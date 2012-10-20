@@ -1,11 +1,12 @@
 {
   "name": "Speed-Reading-Apps",
   "version": "0.0.3",
+  "main": "./app.coffee",
   "private": true,
   "dependencies": {
     "coffee-script": ">= 1.3.3",
-    "express": ">= 3.0.0rc2",
-    "mongoose": ">= 3.0.0",
+    "express": ">= 3.0.0",
+    "mongoose": "*",
     "jade": "*",
     "connect-assets": "*",
     "less-middleware": "*",
@@ -15,21 +16,23 @@
     "passport-github": "*",
     "passport-twitter": "*",
     "passport-vkontakte": "*",
-    "passport-google-oauth": "*"
+    "passport-google-oauth": "*",
+    "grunt-hustler": "*"
   },
   "scripts": {
     "start": "coffee app.coffee",
     "test": "mocha --require should --compilers coffee:coffee-script --colors"
   },
   "devDependencies": {
-    "mocha": ">= 1.3.2",
-    "should": ">= 1.1.0",
-    "zombie": ">= 1.2.0",
+    "mocha": "*",
+    "should": "*",
+    "zombie": "*",
     "request": ">= 2.10.0",
-    "supervisor": ">= 0.4.1"
+    "supervisor": ">= 0.4.1",
+    "grunt": "*"
   },
   "engines": {
-    "node": "= 0.6.20"
+    "node": ">= 0.6.20"
   },
   "subdomain": "speed-reading-apps"
 }
