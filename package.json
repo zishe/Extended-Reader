@@ -16,7 +16,7 @@
     "passport-github": "*",
     "passport-twitter": "*",
     "passport-vkontakte": "*",
-    "passport-google-oauth": "*",
+    "passport-google-oauth": "*"
   },
   "scripts": {
     "start": "coffee app.coffee",
@@ -29,7 +29,7 @@
     "request": ">= 2.10.0",
     "supervisor": ">= 0.4.1",
     "grunt-hustler": "*",
-    "grunt": "*",
+    "grunt": "*"
   },
   "engines": {
     "node": "= 0.6.20"
