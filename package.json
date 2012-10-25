@@ -17,7 +17,6 @@
     "passport-twitter": "*",
     "passport-vkontakte": "*",
     "passport-google-oauth": "*",
-    "grunt-hustler": "*"
   },
   "scripts": {
     "start": "coffee app.coffee",
@@ -29,7 +28,8 @@
     "zombie": "*",
     "request": ">= 2.10.0",
     "supervisor": ">= 0.4.1",
-    "grunt": "*"
+    "grunt-hustler": "*",
+    "grunt": "*",
   },
   "engines": {
     "node": "= 0.6.20"
