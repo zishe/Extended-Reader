@@ -45,7 +45,7 @@ app.configure ->
   app.use passport.session()
   # app.use require('stylus').middleware(__dirname + '/public')
   # app.use require('less-middleware')(src: __dirname + '/public')
-  app.use express.static(path.join(__dirname, 'dist'))
+  app.use express.static(path.join(__dirname, 'staging'))
   app.use app.router
 
 app.configure "development", ->

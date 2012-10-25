@@ -4,10 +4,8 @@ endsWith = (str, suffix) ->
 endsWithArr = (str, suffix) ->
   i = suffix.length - 1
   while i >= 0
-    return true  if str.indexOf(suffix[i], str.length - suffix[i].length) isnt -1
+    return true if str.indexOf(suffix[i], str.length - suffix[i].length) isnt -1
     i--
-
-$("a[rel=tooltip]").tooltip()
 
 Mousetrap.bind "space", ->
   console.log "space"
@@ -21,4 +19,5 @@ Mousetrap.bind "left", ->
   console.log "left"
   $("#btn-prev").click()
 
+$("a[rel=tooltip]").tooltip()
 $(".dropdown-toggle").dropdown()

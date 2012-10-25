@@ -2,82 +2,82 @@
 
 # Add Book
 angular.module("myApp").controller "SchulteCtrl", ($scope, $http, $location, $timeout) ->
-  $scope.size = 4
-  $scope.all = 16
+  $scope.size = 5
+  $scope.all = 25
   $scope.arr = []
   $scope.num = 1
   $scope.playing = false
-  
-  # $scope.start = null;
   timeout = undefined
   odd = false
+
   $scope.init = ->
     init_arr $scope
 
   init_arr = ($scope) ->
     arr = []
     count = Math.pow($scope.size, 2)
-    if $scope.size % 2 is 1
-      odd = true
-      count--
-      console.log "even " + count
-    pre_arr = []
+    odd = $scope.size % 2 is 1
+    count-- if odd
+
     i = count
-
     while i > 0
-      pre_arr.push i
+      arr.push i
       i--
-    pre_arr.shuffle()
-    console.log pre_arr
-    i = count - 1
-
-    while i >= 0
-      unless odd
-        arr.push pre_arr[i]
-      else
-        if count / 2 is i
-          arr.push pre_arr[i]
-          arr.push ""
-        else
-          console.log "even"
-          arr.push pre_arr[i]
-      i--
-    $scope.all = count
-    $scope.arr = arr
+    arr.shuffle()
     console.log arr
 
-  $scope.set_size = ->
-    $scope.size = 5
-    $(".play-field").removeClass("play-field").addClass "play-field-5"
+    arr.insert count / 2, "" if odd
+
+    $scope.all = count
+    $scope.arr = arr
+
+  $scope.set_size = (n) ->
+    $scope.size = n
+    $(".play-field").removeClass("play-field-4").removeClass("play-field-5").removeClass("play-field-6")
+    if n == 4
+      $(".play-field").addClass "play-field-4"
+    if n == 5
+      $(".play-field").addClass "play-field-5"
+    if n == 6
+      $(".play-field").addClass "play-field-6"
     $scope.init()
 
   $scope.start = ->
     init_arr $scope
+    $('.start').text('Restart')
     $scope.play()
 
+  $scope.cancel = ->
+    $scope.refresh()
+    $('.start').text('Start')
+
   $scope.turn = (n) ->
-    console.log "turn"
     p = $("#" + n).text()
-    console.log p
-    if p is $scope.num
-      if $scope.num is $scope.all
-        $(".cicle").css "background-color", "green"
-        $scope.num = 1
-        $scope.playing = false
-        $timeout.cancel timeout
+    if (p - $scope.num == 0)
+      console.log 'right num!'
+      if $scope.num == $scope.all
+        $scope.refresh()
       else
         $scope.num++
+        console.log $scope.num
         $(".currNum").text $scope.num
 
   $scope.play = ->
+    console.log($scope.playing);
     unless $scope.playing
-      $scope.start = (new Date()).getTime()
+      $scope.startTime = (new Date()).getTime()
       $scope.playing = true
       console.log "playing"
       tick()
 
+  $scope.refresh = () ->
+    $(".cicle").css "background-color", "green"
+    $scope.num = 1
+    $scope.playing = false
+    $timeout.cancel timeout
+
   tick = ->
-    $scope.time = (new Date()).getTime() - $scope.start
+    $scope.time = (new Date()).getTime() - $scope.startTime
     $("#time").text ($scope.time / 1000).toFixed(1)
     timeout = $timeout(tick, 100)
 
@@ -91,3 +91,6 @@ Array::shuffle = (b) ->
     this[i] = this[j]
     this[j] = t
   this
+
+Array::insert = (index, item) ->
+  @splice index, 0, item

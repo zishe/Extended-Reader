@@ -1,10 +1,13 @@
 include _navbar
 div.container.mauto(ng-init="init()")
   .opts.clearfix
-    .btn.btn-primary(ng-click="start()") Start
+    .btn.btn-primary.start(ng-click="start()") Start
+    .btn.cancel(ng-click="cancel()") Cancel
     #time 0.0
+    .btn.sizes(ng-click="set_size(4)") 4
     .btn.sizes(ng-click="set_size(5)") 5
-  .play-field
+    .btn.sizes(ng-click="set_size(6)") 6
+  .play-field.play-field-5
     .currNum 1
     .cicle
     .cicle-inner

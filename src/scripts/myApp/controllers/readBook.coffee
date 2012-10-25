@@ -101,6 +101,8 @@ angular.module("myApp").controller "ReadBookCtrl", ($scope, $http, $routeParams)
     else
       $("#text").html "<p>" + $scope.part.text.replace(/\n/g, "</p><p>") + "</p>"
       setAll $scope
+    $("a[rel=tooltip]").tooltip()
+
 
   $scope.next = ->
     if timer_message_shown < 2

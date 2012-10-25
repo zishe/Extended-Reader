@@ -64,7 +64,8 @@ LoadText = (book, cb) ->
 # Save book text in file
 SaveText = (book, text) ->
   console.log 'saving text...'
-  book.path = __dirname + '/../public/files/' + book._id.toString()
+  book.path = __dirname + '/../upload/files/' + book._id.toString()
+  console.log(book.path);
   fs.writeFile book.path, text.trim(), (err) ->
     console.log err if err
     console.log "done"
