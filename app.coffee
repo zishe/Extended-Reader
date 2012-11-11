@@ -1,10 +1,8 @@
 express = require 'express'
 http = require 'http'
 path = require 'path'
-assets = require 'connect-assets'
 mongoose = require 'mongoose'
 passport = require 'passport'
-util = require 'util'
 
 routes = require './controllers'
 api = require './controllers/api'
@@ -25,8 +23,6 @@ app = express()
 
 # require('look').start();
 
-# app.use assets()
-
 app.configure ->
   app.set 'port', process.env.PORT or 4000
   app.set 'views', __dirname + '/views'
@@ -43,8 +39,6 @@ app.configure ->
   app.use express.session()
   app.use passport.initialize()
   app.use passport.session()
-  # app.use require('stylus').middleware(__dirname + '/public')
-  # app.use require('less-middleware')(src: __dirname + '/public')
   app.use express.static(path.join(__dirname, 'staging'))
   app.use app.router
 
@@ -53,8 +47,8 @@ app.configure "development", ->
     dumpExceptions: true
     showStack: true
   )
-  db = mongoose.connect 'mongodb://user:user@ds037007.mongolab.com:37007/speed-reading'
-  # db = mongoose.connect 'mongodb://localhost/speed-reading'
+  # db = mongoose.connect 'mongodb://user:user@ds037007.mongolab.com:37007/speed-reading'
+  db = mongoose.connect 'mongodb://localhost/speed-reading'
 
 # Routes
 app.get '/', routes.index

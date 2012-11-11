@@ -63,7 +63,7 @@ angular.module("myApp").controller "SchulteCtrl", ($scope, $http, $location, $ti
         $(".currNum").text $scope.num
 
   $scope.play = ->
-    console.log($scope.playing);
+    console.log $scope.playing
     unless $scope.playing
       $scope.startTime = (new Date()).getTime()
       $scope.playing = true

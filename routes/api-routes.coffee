@@ -5,6 +5,8 @@ module.exports = (app, api) ->
   app.get '/api/books', api.books
   app.get '/api/book/:id', api.book
   app.post '/api/book', api.addBook
+  app.post '/api/uploadfile', api.uploadFile
+
   app.put '/api/book/:id', api.saveBookChanges
   app.delete '/api/book/:id', api.deleteBook
 

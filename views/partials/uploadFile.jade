@@ -1,0 +1,19 @@
+include _navbar
+div.container
+  label(for='fileToUpload') Select a File to Upload
+  input#fileToUpload(type='file', ng-model-instant='ng-model-instant', multiple='multiple', onchange='angular.element(this).scope().setFiles(this)')
+  //- #dropbox.dropbox(ng-class='dropClass')
+  //-   span {{dropText}}
+  div(ng-show='files.length')
+    div(ng-repeat='file in files.slice(0)')
+      span {{file.webkitRelativePath || file.name}}
+      | (
+      span(ng-switch='ng-switch', file.size='file.size')
+        //- | 1024*1024"
+        span(ng-switch-when='true') {{file.size / 1024 / 1024 | number:2}} MB
+        span(ng-switch-default='ng-switch-default') {{file.size / 1024 | number:2}} kB
+      | )
+    input(type='button', ng-click='uploadFile()', value='Upload')
+    div.progress-wrap(ng-show='progressVisible')
+      .progress.progress-striped
+        .bar(ng-style='{\'width\': progress+\'%\'}')

@@ -5,6 +5,7 @@
 @import "bootstrap/responsive.less";
 @import "theme.less";
 @import "bootswatch.less";
+@import "fileuploader.less";
 
 
 body {
@@ -212,6 +213,9 @@ body {
   background-color: #033C73;
   width: 265px;
   padding-left: 5px;
+  li{
+    float: left;
+  }
   a{
     padding: 5px 5px;
     display: inline;
@@ -227,6 +231,11 @@ body {
       background: #B5D8FF no-repeat !important;
     }
   }
+}
+
+.dropdown-menu li > a{
+  clear: none;
+  padding: 5px;
 }
 
 // .background-image(@direction: top, @color1: white, @color2: #98929B) {
@@ -492,4 +501,8 @@ span.complete{
 
 .hidden{
   display: none;
+}
+
+.progress-wrap{
+  width: 300px;
 }

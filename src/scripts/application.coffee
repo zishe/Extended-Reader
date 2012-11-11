@@ -21,3 +21,24 @@ Mousetrap.bind "left", ->
 
 $("a[rel=tooltip]").tooltip()
 $(".dropdown-toggle").dropdown()
+
+$('#fine-uploader').ready ->
+  # restricteduploader = new qq.FileUploader(
+  #   # If we're using jQuery, there's another way of selecting the DOM node
+  #   element: $("#restricted-fine-uploader")[0]
+  #   action: "do-nothing.htm"
+  #   debug: true
+  #   multiple: false
+  #   allowedExtensions: ["jpeg", "jpg", "txt"]
+  #   sizeLimit: 51200 # 50 kB = 50 * 1024 bytes
+  #   uploadButtonText: "Click or Drop"
+  #   showMessage: (message) ->
+      
+  #     # Using Bootstrap's classes and jQuery selector and DOM manipulation
+  #     $("#restricted-fine-uploader").append "<div class=\"alert alert-error\">" + message + "</div>"
+  # )
+  
+  # uploader = new qq.FileUploader(
+  #   element: $("#fine-uploader")
+  #   action: "do-nothing.htm"
+  # )

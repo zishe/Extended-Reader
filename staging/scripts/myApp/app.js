@@ -19,6 +19,9 @@ angular.module("myApp", ["myApp.filters", "myApp.services", "myApp.directives"])
     }).when("/addBook", {
       templateUrl: "/partials/addBook",
       controller: "AddBookCtrl"
+    }).when("/addFile", {
+      templateUrl: "/partials/uploadFile",
+      controller: "FileUploadCtrl"
     }).when("/editBook/:id", {
       templateUrl: "/partials/editBook",
       controller: "EditBookCtrl"

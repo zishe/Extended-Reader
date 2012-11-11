@@ -314,6 +314,82 @@ exports.addBook = (req, res) ->
     SaveText book, b.text
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fiber = require('fibers')
+libxmljs = require("libxmljs")
+xslt = require('node_xslt')
+
+
+sleep = (ms) ->
+  fiber = Fiber.current
+  setTimeout (->
+    fiber.run()
+  ), ms
+  Fiber.yield()
+
+
+# Post Book, save all info and generate first 10 Parts
+exports.uploadFile = (req, res) ->
+  console.log 'uploading file...'
+  # console.log req.files.uploadedFile
+  Fiber(->
+    u = req.files.uploadedFile
+    sleep 1000
+    
+    if u instanceof Array
+      console.log "array"
+      saveFile file for file in u
+    else
+      saveFile u 
+  ).run()
+
+
+saveFile = (file) ->
+  console.log file.path
+  console.log file.name
+  newPath = __dirname + "/upload/" + file.name
+  console.log newPath
+  if /.fb2$/.test(file.name)
+    console.log("fb2 file")
+    
+    fs.readFile file.path, 'utf8', (err, data) ->
+      if err
+        console.log err
+      # console.log data
+      xmlDoc = libxmljs.parseXml(data)
+      # console.log xmlDoc.toString()
+      gchild = xmlDoc.get('//description')
+      console.log gchild.text()
+      # console.log xmlDoc.root().text()
+      
+
+      # stylesheet = fs.readFileSync('/home/alder/Node/Speed-reading-apps/src/scripts/libs/FB2_2_txt.xsl', 'utf8')
+      # # console.log stylesheet
+      
+      # transformedString = xslt.transform stylesheet, xmlDoc, []
+      # console.log transformedString
+      
+      # .replace(/(<([^>]+)>)/ig,"");
+      # xpath queries
+      # children = xmlDoc.root().childNodes()
+      # child = children[0]
+      # console.log child.attr("foo").value()
+      # $('#text').xslt(body, 'FB2_2_xhtml.xsl')
+
+
+
 # Put Book, save changed info and generate parts if need
 exports.saveBook = (req, res) ->
   LoadBook req.params.id, (book) ->

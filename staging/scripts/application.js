@@ -33,3 +33,5 @@ Mousetrap.bind("left", function() {
 $("a[rel=tooltip]").tooltip();
 
 $(".dropdown-toggle").dropdown();
+
+$('#fine-uploader').ready(function() {});
