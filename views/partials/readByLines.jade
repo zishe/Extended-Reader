@@ -32,11 +32,13 @@ div.container
         a(href='#', ng-click='showStats=false') Hide Time
     span.opts-link(ng-hide='showStats')
       a(href='#', ng-click='showStats=true') Show Time
+    a.btn.btn-home(href='/book/{{book._id}}')
+      i.icon-home
     a.btn.btn-large.btn-my(href='#', ng-show='playing', ng-click='pause()', id='btn-pause')
       i.icon-pause
     a.btn.btn-large.btn-primary.btn-my(href='#', ng-hide='playing', ng-click='play()', id='btn-play', rel="tooltip", data-placement="bottom", title='Start when you are ready')
       i.icon-play.icon-white
-    
+
 
   .reading-block
     .text-area.by-lines

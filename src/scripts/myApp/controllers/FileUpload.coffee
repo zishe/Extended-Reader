@@ -45,7 +45,7 @@ angular.module("myApp").controller "FileUploadCtrl", ($scope, $http, $location) 
 
   # ), false
 
- 
+
   #============== DRAG & DROP =============
 
   $scope.setFiles = (element) ->
@@ -64,13 +64,13 @@ angular.module("myApp").controller "FileUploadCtrl", ($scope, $http, $location) 
     fd = new FormData()
     for i of $scope.files
       fd.append "uploadedFile", $scope.files[i]
-    
+
     xhr = new XMLHttpRequest()
     xhr.upload.addEventListener "progress", uploadProgress, false
     # xhr.addEventListener "load", uploadComplete, false
     # xhr.addEventListener "error", uploadFailed, false
     # xhr.addEventListener "abort", uploadCanceled, false
-    
+
     xhr.open "POST", "/api/uploadfile"
     $scope.progressVisible = true
     xhr.send fd
@@ -85,10 +85,10 @@ angular.module("myApp").controller "FileUploadCtrl", ($scope, $http, $location) 
   uploadComplete = (evt) ->
     # This event is raised when the server send back a response
     alert evt.target.responseText
-  
+
   uploadFailed = (evt) ->
     alert "There was an error attempting to upload the file."
-  
+
   uploadCanceled = (evt) ->
     $scope.$apply ->
       $scope.progressVisible = false

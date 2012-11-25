@@ -1,4 +1,6 @@
 mongoose = require 'mongoose'
+mongoose_timestamps = require 'mongoose-timestamps'
+
 Schema = mongoose.Schema
 ObjectId = Schema.Types.ObjectId
 
@@ -35,29 +37,29 @@ BookSchema = new Schema(
   title:
     type: String
     required: true
-  
+
   author: String
   text: String
-  
+
   count: Count
-  
+
   lastPosParsed:
     type: Number
     default: 0
-  
+
   complete:
     type: Number
     default: 0
   readingTime:
     type: Number
     default: 0
-  
+
   readCount: Count
-  
+
   currPartNum:
     type: Number
     default: 0
-  
+
   lastWordPos:
     type: Number
     default: 0
@@ -80,16 +82,18 @@ BookSchema = new Schema(
 
   path: String
 
-  lastUse: Date
-  created:
-    type: Date
-    default: Date.now
+  updated: Date
+  created: Date
 )
 
-BookSchema.pre 'save', (next) ->
-  this['lastUse'] = new Date
+BookSchema.pre "save", (next) ->
+  if @isNew
+    @created = @updated = new Date()
+  else
+    @updated = new Date()
   next()
 
+# BookSchema.plugin mongoose_timestamps
 
 SettingsSchema = new Schema(
   font_size:

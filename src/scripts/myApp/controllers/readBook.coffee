@@ -1,6 +1,6 @@
 saveSettings = ($scope, $http) ->
   console.log $scope.settings
-  
+
   $http.put("/api/settings/" + $scope.settings._id, $scope.settings).success (data) ->
     console.log data
     console.log "settings saved"
@@ -9,7 +9,7 @@ ResetParts = ($scope, $http) ->
   $http.post("/api/reset_parts/" + $scope.book._id + "/" + $scope.settings.part_length).success (data) ->
 
 setAll = ($scope) ->
-  
+
   # setBgColor($scope);
   setFont $scope
   setLineHeight $scope
@@ -41,7 +41,7 @@ TimeToString = (time, brief) ->
   sec = Math.round(time % 60)
   min = Math.round(((time - sec) / 60) % 60)
   hour = Math.round(((time - (time % 3600)) / 3600))
-  
+
   text = ""
   return "-"  if sec is 0 and min is 0 and hour is 0
   text += hour + " hour "  if hour is 1
@@ -74,19 +74,19 @@ angular.module("myApp").controller "ReadBookCtrl", ($scope, $http, $routeParams)
   $scope.book = {}
   $scope.settings = {}
   $scope.part = {}
-  
+
   $scope.prevTime = null
   $scope.nowTime = null
   $scope.readingTime = 0
   $scope.allTime = 0
-  
+
   $scope.readWords = 0
   $scope.playing = false
   $scope.showNum = false
   $scope.showOpts = false
   $scope.showStats = false
   timer_message_shown = 0
-  
+
   $http.get("/api/readBook/" + $routeParams.id).success (data) ->
     console.log data
     $scope.book = data.book
@@ -118,13 +118,17 @@ angular.module("myApp").controller "ReadBookCtrl", ($scope, $http, $routeParams)
 
       $scope.readingTime = 0
       $scope.prevTime = (new Date()).getTime()
-    $scope.book.readingTime += $scope.part.readingTime  if $scope.part.readingTime?
+
+    $scope.book.readingTime += $scope.part.readingTime if $scope.part.readingTime?
+
     $scope.book.readCount.words += $scope.part.count.words
     $scope.book.readCount.chars += $scope.part.count.chars
     $scope.book.readCount.charsWithoutSpaces += $scope.part.count.charsWithoutSpaces
     $scope.book.complete = Math.round($scope.book.readCount.chars * 10000 / $scope.book.count.chars) / 100
+
     $scope.book.lastWordPos = $scope.book.readCount.chars
     $scope.book.currPartNum++
+
     $http.put("/api/save_book/" + $routeParams.id, $scope.book).success (data) ->
       console.log "book saved"
       console.log "next"

@@ -87,7 +87,7 @@ LoadSettings = (cb) ->
   console.log 'loading settings...'
   Settings.findOne (err, settings) ->
     console.log err if err
-    
+
     if not settings?
       CreateSettings (settings) ->
         cb settings
@@ -100,7 +100,7 @@ LoadSettings = (cb) ->
 CreateSettings = (cb) ->
   console.log "creating settings..."
   settings = Settings()
-  
+
   settings.save (err) ->
     console.log err if err
     console.log "settings saved"
@@ -130,12 +130,12 @@ DeleteBookParts = (id) ->
 # Count words and chars
 getWordsCount = (text) ->
   console.log 'Define words and chars count'
-  
+
   count = {}
   count.chars = text.length
   count.charsWithoutSpaces = text.replace(/\s+/g, '').length
   count.words = text.replace(/[\,\.\:\?\-\—\;\(\)\«\»\…\!\[\]]/g, '').replace(/\s+/gi,' ').trim().split(' ').length
-  
+
   console.log 'chars: ' + count.chars
   console.log 'chars wothout spaces: ' + count.charsWithoutSpaces
   console.log 'words count: ' + count.words
@@ -154,7 +154,7 @@ AllocateParts = (book, text, settings, callback) ->
   for i in [0..9]
     if !book.parsed
       savePart(text, book, i, settings.part_length)
-  
+
   console.log 'saving book...'
   book.save (err0) ->
     if err0
@@ -169,7 +169,7 @@ savePart = (text, book, i, min_length) ->
 
   #remove used text
   text = text.substr book.lastPosParsed, text.length - 1
-  
+
   if (text.length < 10)
     console.log "end of file"
     book.parsed = true
@@ -240,7 +240,7 @@ savePart = (text, book, i, min_length) ->
 
 # Get all Books for viewing list and select one
 exports.books = (req, res) ->
-  Book.find().sort('-lastUse').exec (err, books) ->
+  Book.find().sort('-updated').exec (err, books) ->
     res.json {books: books, user: req.user}
 
 
@@ -277,11 +277,11 @@ exports.bookWithText = (req, res) ->
 # Put Book for saving title, author and text, after editing them
 exports.saveBookChanges = (req, res) ->
   LoadBook req.params.id, (book) ->
-    
+
     book.title = req.body.title
     book.author = req.body.author
     book.text = null
-    
+
     SaveText book, req.body.text, () ->
       SaveBook book, () ->
         res.json book: book
@@ -305,7 +305,7 @@ exports.addBook = (req, res) ->
   b = req.body
   book.title = b.title
   book.author = b.author
-  
+
   SaveBook book, () ->
     LoadSettings (settings) ->
       AllocateParts book, b.text, settings, (book) ->
@@ -347,12 +347,12 @@ exports.uploadFile = (req, res) ->
   Fiber(->
     u = req.files.uploadedFile
     sleep 1000
-    
+
     if u instanceof Array
       console.log "array"
       saveFile file for file in u
     else
-      saveFile u 
+      saveFile u
   ).run()
 
 
@@ -363,7 +363,7 @@ saveFile = (file) ->
   console.log newPath
   if /.fb2$/.test(file.name)
     console.log("fb2 file")
-    
+
     fs.readFile file.path, 'utf8', (err, data) ->
       if err
         console.log err
@@ -373,14 +373,14 @@ saveFile = (file) ->
       gchild = xmlDoc.get('//description')
       console.log gchild.text()
       # console.log xmlDoc.root().text()
-      
+
 
       # stylesheet = fs.readFileSync('/home/alder/Node/Speed-reading-apps/src/scripts/libs/FB2_2_txt.xsl', 'utf8')
       # # console.log stylesheet
-      
+
       # transformedString = xslt.transform stylesheet, xmlDoc, []
       # console.log transformedString
-      
+
       # .replace(/(<([^>]+)>)/ig,"");
       # xpath queries
       # children = xmlDoc.root().childNodes()
@@ -393,7 +393,7 @@ saveFile = (file) ->
 # Put Book, save changed info and generate parts if need
 exports.saveBook = (req, res) ->
   LoadBook req.params.id, (book) ->
-    
+
     console.log 'set count and time params for book ' + book.title
     book.readCount = req.body.readCount
     book.complete = req.body.complete
@@ -405,33 +405,33 @@ exports.saveBook = (req, res) ->
       console.log 'getting next part...'
       Part.find {book: book._id}, (err1, parts) ->
         console.log err1 if err1
-        
+
         console.log 'open ' + parts.length + ' parts'
         console.log 'current number is ' + book.currPartNum
-        
+
         if (parts.length < book.currPartNum + 5) and not book.parsed
             LoadSettings (settings) ->
 
               console.log 'generate new parts'
               LoadText book, (text) ->
                 partsCount = parts.length
-                
+
                 for i in [0..9]
                   if !book.parsed
                     savePart(text, book, i + partsCount, settings.part_length)
-                
+
                 SaveBook book, () ->
-                  
+
                   console.log 'now getting current part'
                   Part.findOne {book: book._id, num: book.currPartNum}, (err4, part) ->
                     console.log err4 if err4
-                    
+
                     console.log 'return next part'
                     res.json part: part
         else
           Part.findOne {book: book._id, num: book.currPartNum}, (err4, part) ->
             console.log err4 if err4
-            
+
             console.log 'return next part'
             res.json part: part
 
@@ -439,7 +439,7 @@ exports.saveBook = (req, res) ->
 # Save stats
 exports.saveBookStats = (req, res) ->
   LoadBook req.params.id, (book) ->
-    
+
     console.log 'set count and time params for book ' + book.title
     book.readCount = req.body.readCount
     book.complete = req.body.complete
@@ -559,6 +559,7 @@ exports.settings = (req, res) ->
 exports.saveSettings = (req, res) ->
   LoadSettings (settings) ->
     console.log settings
+    console.log req.body
     console.log 'copy fields'
     settings.font_size = req.body.font_size
     settings.line_height = req.body.line_height
@@ -566,6 +567,9 @@ exports.saveSettings = (req, res) ->
     settings.part_length = req.body.part_length
     settings.words_font_size = req.body.words_font_size
     settings.words_count = req.body.words_count
-    
+    settings.show_delay = req.body.show_delay
+    console.log settings
+    console.log 'saved'
+
     SaveSettings settings, (succ) ->
       res.json succ

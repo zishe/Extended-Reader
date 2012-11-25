@@ -40,7 +40,7 @@ angular.module("myApp").controller "ReadByLinesCtrl", ($scope, $http, $routePara
       collect_parts $scope
 
 
-  
+
   #$('#text').text("Pull play to start");
   $scope.play = ->
     unless $scope.playing
@@ -48,7 +48,7 @@ angular.module("myApp").controller "ReadByLinesCtrl", ($scope, $http, $routePara
       $scope.playing = true
       tick()
 
-  
+
   # $scope.intervalId = setInterval($scope.change_text, 300) // использовать функцию
   $scope.pause = ->
     if $scope.playing
@@ -60,7 +60,7 @@ angular.module("myApp").controller "ReadByLinesCtrl", ($scope, $http, $routePara
       $scope.book.readCount.chars += count.chars
       $scope.book.readCount.charsWithoutSpaces += count.charsWithoutSpaces
       $scope.book.complete = Math.round($scope.book.readCount.chars * 100 / $scope.book.count.chars)
-      
+
       # if ($scope.text.match())
       $scope.book.lastWordPos = 0  unless $scope.book.lastWordPos?
       $scope.book.lastWordPos += $scope.readText.length
@@ -72,7 +72,7 @@ angular.module("myApp").controller "ReadByLinesCtrl", ($scope, $http, $routePara
 
   tick = ->
     $scope.readText += $scope.currText + " "  if $scope.num > 0
-    
+
     # $scope
     $scope.currText = $scope.parts[$scope.num]
     $scope.num++
@@ -108,10 +108,10 @@ angular.module("myApp").controller "ReadByLinesCtrl", ($scope, $http, $routePara
       reset_parts $scope
 
   $scope.dalay_increase = ->
-    $scope.settings.show_delay += 100
+    $scope.settings.show_delay += 30
 
   $scope.dalay_decrease = ->
-    $scope.settings.show_delay -= 100  if $scope.settings.show_delay > 100
+    $scope.settings.show_delay -= 30  if $scope.settings.show_delay > 50
 
   $scope.save_settings = ->
     saveSettings $scope, $http

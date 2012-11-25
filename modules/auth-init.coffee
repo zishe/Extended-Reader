@@ -46,7 +46,7 @@ module.exports = (passport) ->
     clientSecret: GOOGLE_CLIENT_SECRET
     callbackURL: "http://extended-reader.herokuapp.com/oauth2callback" # localhost:3000
   , (accessToken, refreshToken, profile, done) ->
-    
+
     # asynchronous verification, for effect...
     process.nextTick ->
       done null, profile

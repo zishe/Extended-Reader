@@ -33,11 +33,11 @@ $('#fine-uploader').ready ->
   #   sizeLimit: 51200 # 50 kB = 50 * 1024 bytes
   #   uploadButtonText: "Click or Drop"
   #   showMessage: (message) ->
-      
+
   #     # Using Bootstrap's classes and jQuery selector and DOM manipulation
   #     $("#restricted-fine-uploader").append "<div class=\"alert alert-error\">" + message + "</div>"
   # )
-  
+
   # uploader = new qq.FileUploader(
   #   element: $("#fine-uploader")
   #   action: "do-nothing.htm"

@@ -39,7 +39,7 @@ module.exports = (app, passport) ->
   app.get "/auth/vkontakte/callback", passport.authenticate("vkontakte",
     failureRedirect: "/login"
   ), (req, res) ->
-    
+
     # Successful authentication, redirect home.
     res.redirect "/"
 
@@ -51,7 +51,7 @@ module.exports = (app, passport) ->
   app.get "/auth/facebook/callback", passport.authenticate("facebook",
     failureRedirect: "/login"
   ), (req, res) ->
-    
+
     # Successful authentication, redirect home.
     res.redirect "/"
 

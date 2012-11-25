@@ -19,14 +19,14 @@ div.container
       i.icon-minus-sign(ng-click='part_decrease();save_settings()')
       span.prop part size
       i.icon-plus-sign(ng-click='part_increase();save_settings()')
-    
+
   .actions.clearfix
     div.pull-left
       .show-button.opts-link
         a(href='#', ng-hide='showOpts', ng-click='showOpts=true') Show Options
         span.complete {{book.complete}}
         span.percent %
-    
+
     div.pull-right
       span(ng-show='showStats')
         span#time
@@ -51,7 +51,7 @@ div.container
   .reading-block
     .alert.fade.in.hidden
       button.close(type='button', data-dismiss='alert') ×
-      strong Timer Don't started! 
+      strong Timer Don't started!
       |   Press Play if you are going to mesure you speed and time spend
     div.reading-area
       div#text

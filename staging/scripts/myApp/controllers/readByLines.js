@@ -124,11 +124,11 @@ angular.module("myApp").controller("ReadByLinesCtrl", function($scope, $http, $r
     }
   };
   $scope.dalay_increase = function() {
-    return $scope.settings.show_delay += 100;
+    return $scope.settings.show_delay += 30;
   };
   $scope.dalay_decrease = function() {
-    if ($scope.settings.show_delay > 100) {
-      return $scope.settings.show_delay -= 100;
+    if ($scope.settings.show_delay > 50) {
+      return $scope.settings.show_delay -= 30;
     }
   };
   $scope.save_settings = function() {

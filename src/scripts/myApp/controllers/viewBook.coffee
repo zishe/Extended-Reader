@@ -2,7 +2,7 @@
 
 # View Book
 angular.module("myApp").controller "ViewBookCtrl", ($scope, $http, $routeParams) ->
-  
+
   # function format(str) {
   #   var s = '';
   #   for (var i = 0; i <= str.length - 1; i++) {
@@ -39,28 +39,28 @@ angular.module("myApp").controller "ViewBookCtrl", ($scope, $http, $routeParams)
       hideHover: true
     )
     $scope.gnum++
-  
+
   $scope.book = {}
   $scope.gnum = 0
   $scope.currCount = {}
-  
+
   $http.get("/api/book/" + $routeParams.id).success (data) ->
     updateData data
 
   updateData = (data) ->
     $scope.book = data.book
     $scope.book.createdDate = $.format.date($scope.book.created, "hh:mm d MMMM yyyy")
-    $scope.book.lastUse = $.format.date($scope.book.lastUse, "hh:mm d MMMM yyyy")
+    $scope.book.updated = $.format.date($scope.book.updated, "hh:mm d MMMM yyyy")
     $scope.book.readTime = TimeToString($scope.book.readingTime)
-    
+
     if $scope.book.readingTime > 0
       $scope.book.readingSpeed = Math.round($scope.book.readCount.words / ($scope.book.readingTime / 60)) + " words per minute"
     else
       $scope.book.readingSpeed = "undefined"
-    
+
     $scope.book.count.chars = $scope.book.count.chars
     $scope.book = data.book
-    
+
     $http.get("/api/parts/" + $routeParams.id).success (data) ->
       $scope.parts = data.parts
       drawGraph()
@@ -69,14 +69,14 @@ angular.module("myApp").controller "ViewBookCtrl", ($scope, $http, $routeParams)
 
   $scope.remove_page_info = (page_num) ->
     console.log page_num
-    
+
     if angular.isNumber(parseInt(page_num))
       part = $scope.parts[page_num]
       console.log part.readingTime
       part.readingTime = null
-      
+
       drawGraph()
-      
+
       $http.put("/api/part/" + part._id, part).success (data) ->
         console.log "save null time"
 
@@ -90,7 +90,7 @@ angular.module("myApp").controller "ViewBookCtrl", ($scope, $http, $routeParams)
 
   $scope.checkCount = ->
     $scope.currCount = getWordsCount($scope.textToCheck)
-    
+
     console.log $scope.textToCheck
     console.log $scope.count
     $("#count").text $scope.currCount.words

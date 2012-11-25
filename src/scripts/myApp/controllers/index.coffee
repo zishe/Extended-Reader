@@ -3,7 +3,7 @@
 #  Index
 angular.module("myApp").controller "IndexCtrl", ($scope, $http, $location) ->
   $scope.user = {}
-  
+
   $http.get("/api/books").success (data) ->
     $scope.books = data.books
     $scope.user = data.user
