@@ -14,6 +14,9 @@ angular.module("myApp", ["myApp.filters", "myApp.services", "myApp.directives"])
   ).when("/readByLines/:id",
     templateUrl: "/partials/readByLines"
     controller: "ReadByLinesCtrl"
+  ).when("/memorize/:id",
+    templateUrl: "/partials/memorize"
+    controller: "MemorizeCtrl"
   ).when("/addBook",
     templateUrl: "/partials/addBook"
     controller: "AddBookCtrl"

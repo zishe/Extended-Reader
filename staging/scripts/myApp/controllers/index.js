@@ -6,7 +6,8 @@ angular.module("myApp").controller("IndexCtrl", function($scope, $http, $locatio
   $http.get("/api/books").success(function(data) {
     $scope.books = data.books;
     $scope.user = data.user;
-    return formatBook();
+    formatBook();
+    return $("a[rel=tooltip]").tooltip();
   });
   $scope.google_login = function() {
     return window.location = "/auth/google";
@@ -41,7 +42,7 @@ angular.module("myApp").controller("IndexCtrl", function($scope, $http, $locatio
   };
   return formatBook = function() {
     return angular.forEach($scope.books, function(book, i) {
-      book.time = TimeToString(book.readingTime, true);
+      book.time = TimeToString(book.reading_time, true);
       if (book.title.length > 25) {
         return book.title = book.title.substr(0, 25) + "…";
       }

@@ -12,6 +12,7 @@ module.exports = (app, api) ->
 
   app.get '/api/readBook/:id', api.readBook
   app.get '/api/readByLines/:id', api.readByLines
+  app.get '/api/memorize/:id', api.memorize
 
   app.put '/api/save_book/:id', api.saveBook
   app.put '/api/book_finished/:id', api.finishBook

@@ -4,6 +4,7 @@ models = require '../models/models'
 
 # Count = models.Count
 Book = models.Book
+Reading = models.Reading
 Part = models.Part
 Settings = models.Settings
 
@@ -133,11 +134,11 @@ getWordsCount = (text) ->
 
   count = {}
   count.chars = text.length
-  count.charsWithoutSpaces = text.replace(/\s+/g, '').length
+  count.chars_without_spaces = text.replace(/\s+/g, '').length
   count.words = text.replace(/[\,\.\:\?\-\—\;\(\)\«\»\…\!\[\]]/g, '').replace(/\s+/gi,' ').trim().split(' ').length
 
   console.log 'chars: ' + count.chars
-  console.log 'chars wothout spaces: ' + count.charsWithoutSpaces
+  console.log 'chars wothout spaces: ' + count.chars_without_spaces
   console.log 'words count: ' + count.words
 
   return count
@@ -168,7 +169,7 @@ savePart = (text, book, i, min_length) ->
   console.log 'select parts from text'
 
   #remove used text
-  text = text.substr book.lastPosParsed, text.length - 1
+  text = text.substr book.last_pos_parsed, text.length - 1
 
   if (text.length < 10)
     console.log "end of file"
@@ -176,8 +177,8 @@ savePart = (text, book, i, min_length) ->
   else
     # create Part
     part = new Part()
-    console.log 'start from ' + book.lastPosParsed + ' position'
-    part.startPos = book.lastPosParsed
+    console.log 'start from ' + book.last_pos_parsed + ' position'
+    part.start_pos = book.last_pos_parsed
 
     #select paragraphs
     paragraph = text.split '\n'
@@ -219,8 +220,8 @@ savePart = (text, book, i, min_length) ->
     part.text = partText
     part.count = getWordsCount(part.text.replace('→', ''))
     plen = if cutting then partText.length - 1 else partText.length
-    book.lastPosParsed += plen
-    part.endPos = book.lastPosParsed
+    book.last_pos_parsed += plen
+    part.end_pos = book.last_pos_parsed
     part.num = i
 
     part.book = book._id
@@ -253,7 +254,7 @@ exports.book = (req, res) ->
 # Get Book with Settings for reading
 exports.readBook = (req, res) ->
   LoadBook req.params.id, (book) ->
-    LoadPart book._id, book.currPartNum, (part) ->
+    LoadPart book._id, book.current_part_num, (part) ->
       LoadSettings (settings) ->
         res.json {book, part, settings}
 
@@ -395,10 +396,10 @@ exports.saveBook = (req, res) ->
   LoadBook req.params.id, (book) ->
 
     console.log 'set count and time params for book ' + book.title
-    book.readCount = req.body.readCount
+    book.read_count = req.body.read_count
     book.complete = req.body.complete
-    book.currPartNum = req.body.currPartNum
-    book.readingTime = req.body.readingTime
+    book.current_part_num = req.body.current_part_num
+    book.reading_time = req.body.reading_time
 
     SaveBook book, () ->
 
@@ -407,9 +408,9 @@ exports.saveBook = (req, res) ->
         console.log err1 if err1
 
         console.log 'open ' + parts.length + ' parts'
-        console.log 'current number is ' + book.currPartNum
+        console.log 'current number is ' + book.current_part_num
 
-        if (parts.length < book.currPartNum + 5) and not book.parsed
+        if (parts.length < book.current_part_num + 5) and not book.parsed
             LoadSettings (settings) ->
 
               console.log 'generate new parts'
@@ -423,13 +424,13 @@ exports.saveBook = (req, res) ->
                 SaveBook book, () ->
 
                   console.log 'now getting current part'
-                  Part.findOne {book: book._id, num: book.currPartNum}, (err4, part) ->
+                  Part.findOne {book: book._id, num: book.current_part_num}, (err4, part) ->
                     console.log err4 if err4
 
                     console.log 'return next part'
                     res.json part: part
         else
-          Part.findOne {book: book._id, num: book.currPartNum}, (err4, part) ->
+          Part.findOne {book: book._id, num: book.current_part_num}, (err4, part) ->
             console.log err4 if err4
 
             console.log 'return next part'
@@ -441,11 +442,11 @@ exports.saveBookStats = (req, res) ->
   LoadBook req.params.id, (book) ->
 
     console.log 'set count and time params for book ' + book.title
-    book.readCount = req.body.readCount
+    book.read_count = req.body.read_count
     book.complete = req.body.complete
-    book.currPartNum = req.body.currPartNum
-    book.readingTime = req.body.readingTime
-    book.lastWordPos = req.body.lastWordPos
+    book.current_part_num = req.body.current_part_num
+    book.reading_time = req.body.reading_time
+    book.last_word_pos = req.body.last_word_pos
 
     SaveBook book, () ->
       res.json book
@@ -465,27 +466,27 @@ exports.finishBook = (req, res) ->
 # Put Book, reset read data
 exports.resetBook = (req, res) ->
   LoadBook req.params.id, (book) ->
-    book.readCount = {}
-    book.readCount.words = 0
-    book.readCount.chars = 0
-    book.readCount.charsWithoutSpaces = 0
+    book.read_count = {}
+    book.read_count.words = 0
+    book.read_count.chars = 0
+    book.read_count.chars_without_spaces = 0
 
     book.complete = 0
-    book.readingTime = 0
-    book.currPartNum = 0
-    book.lastWordPos = 0
+    book.reading_time = 0
+    book.current_part_num = 0
+    book.last_word_pos = 0
 
     book.finished = false
 
     SaveBook book, () ->
       res.json book:book
 
-  Part.find(book: req.params.id).where('readingTime').gt(0).exec (err, parts) ->
+  Part.find(book: req.params.id).where('reading_time').gt(0).exec (err, parts) ->
     console.log err if err
     console.log 'get all parts, in count ' + parts.length
 
     for part in parts
-      part.readingTime = null
+      part.reading_time = null
       part.save (err1) ->
         console.log err1 if err1
 
@@ -521,7 +522,7 @@ exports.bookParts = (req, res) ->
 # Put Part, save reading time (only can change)
 exports.savePartTime = (req, res) ->
   console.log 'saving part reading time...'
-  Part.findByIdAndUpdate req.params.id, { readingTime: req.body.readingTime }, (err, part) ->
+  Part.findByIdAndUpdate req.params.id, { reading_time: req.body.reading_time }, (err, part) ->
     console.log err if err
     console.log 'set reading time for part ' + part.num
     res.json true
@@ -532,8 +533,8 @@ exports.savePartTime = (req, res) ->
 exports.resetParts = (req, res) ->
   part_length = parseInt(req.params.plen)
   LoadBook req.params.id, (book) ->
-    last = book.lastPosParsed
-    curr = book.currPartNum
+    last = book.last_pos_parsed
+    curr = book.current_part_num
 
     console.log 'load current part to check last pos'
     Part.findOne {book: book._id, num: curr}, (err1, part) ->
@@ -561,15 +562,12 @@ exports.saveSettings = (req, res) ->
     console.log settings
     console.log req.body
     console.log 'copy fields'
-    settings.font_size = req.body.font_size
-    settings.line_height = req.body.line_height
-    settings.width = req.body.width
-    settings.part_length = req.body.part_length
-    settings.words_font_size = req.body.words_font_size
-    settings.words_count = req.body.words_count
-    settings.show_delay = req.body.show_delay
-    console.log settings
-    console.log 'saved'
+
+    props = ['font_size', 'line_height', 'width', 'part_length', 'words_font_size', 'words_count', 'words_delay', 'words_speed', 'words_length']
+    for prop in props
+      do (prop) ->
+        settings[prop] = req.body[prop]
 
     SaveSettings settings, (succ) ->
+      console.log 'saved'
       res.json succ

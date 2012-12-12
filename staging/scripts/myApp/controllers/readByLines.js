@@ -15,16 +15,16 @@ angular.module("myApp").controller("ReadByLinesCtrl", function($scope, $http, $r
   $scope.readText = "";
   $scope.prevTime = null;
   $scope.nowTime = null;
-  $scope.readingTime = 0;
+  $scope.reading_time = 0;
   timeout = void 0;
   $http.get("/api/book_with_text/" + $routeParams.id).success(function(data) {
     $scope.book = data.book;
-    $scope.text = $scope.book.text;
-    if ($scope.book.lastWordPos > 0) {
-      $scope.text = $scope.book.text.substr($scope.book.lastWordPos, $scope.book.text.length - 1);
+    $scope.text = data.book.text;
+    if ($scope.book.last_word_pos > 0) {
+      $scope.text = $scope.book.text.substr($scope.book.last_word_pos, $scope.book.text.length - 1);
     } else {
-      if ($scope.book.lastWordPos !== 0) {
-        $scope.book.lastWordPos = 0;
+      if ($scope.book.last_word_pos !== 0) {
+        $scope.book.last_word_pos = 0;
       }
     }
     $scope.book.text = null;
@@ -44,8 +44,8 @@ angular.module("myApp").controller("ReadByLinesCtrl", function($scope, $http, $r
         $scope.settings.words_count = 3;
         changed = true;
       }
-      if ($scope.settings.show_delay < 100) {
-        $scope.settings.show_delay = 300;
+      if ($scope.settings.words_delay < 100) {
+        $scope.settings.words_delay = 300;
         changed = true;
       }
       if (changed) {
@@ -67,37 +67,35 @@ angular.module("myApp").controller("ReadByLinesCtrl", function($scope, $http, $r
       $scope.playing = false;
       $timeout.cancel(timeout);
       count = getWordsCount($scope.readText);
-      $scope.book.readingTime += Math.round($scope.readingTime / 1000);
-      $scope.book.readCount.words += count.words;
-      $scope.book.readCount.chars += count.chars;
-      $scope.book.readCount.charsWithoutSpaces += count.charsWithoutSpaces;
-      $scope.book.complete = Math.round($scope.book.readCount.chars * 100 / $scope.book.count.chars);
-      if ($scope.book.lastWordPos == null) {
-        $scope.book.lastWordPos = 0;
+      $scope.book.reading_time += Math.round($scope.reading_time / 1000);
+      $scope.book.read_count.words += count.words;
+      $scope.book.read_count.chars += count.chars;
+      $scope.book.read_count.chars_without_spaces += count.chars_without_spaces;
+      $scope.book.complete = Math.round($scope.book.read_count.chars * 100 / $scope.book.count.chars);
+      if ($scope.book.last_word_pos == null) {
+        $scope.book.last_word_pos = 0;
       }
-      $scope.book.lastWordPos += $scope.readText.length;
+      $scope.book.last_word_pos += $scope.readText.length;
       $http.put("/api/save_stats/" + $routeParams.id, $scope.book).success(function(data) {
         return console.log("stats saved");
       });
       $scope.readText = "";
-      return $scope.readingTime = 0;
+      return $scope.reading_time = 0;
     }
   };
   tick = function() {
-    var extra_lngth, extra_time;
+    var showing_time;
     if ($scope.num > 0) {
       $scope.readText += $scope.currText + " ";
     }
     $scope.currText = $scope.parts[$scope.num];
     $scope.num++;
     $scope.nowTime = (new Date()).getTime();
-    $scope.readingTime += $scope.nowTime - $scope.prevTime;
+    $scope.reading_time += $scope.nowTime - $scope.prevTime;
     $scope.prevTime = $scope.nowTime;
-    $("#time").text(TimeToString($scope.readingTime / 1000));
-    extra_lngth = $scope.currText.length - $scope.settings.words_count * 7;
-    extra_time = (extra_lngth > 0 ? Math.round(extra_lngth / 5) : 0);
-    console.log(extra_time);
-    return timeout = $timeout(tick, $scope.settings.show_delay + extra_time);
+    $("#time").text(TimeToString($scope.reading_time / 1000));
+    showing_time = ($scope.currText.length / ($scope.settings.words_speed * 7 / 60)) * 1000;
+    return timeout = $timeout(tick, showing_time);
   };
   $scope.change_text = function() {
     $("#text").text($scope.parts[$scope.num]);
@@ -123,12 +121,30 @@ angular.module("myApp").controller("ReadByLinesCtrl", function($scope, $http, $r
       return reset_parts($scope);
     }
   };
+  $scope.length_increase = function() {
+    $scope.settings.words_length++;
+    return reset_parts($scope);
+  };
+  $scope.length_decrease = function() {
+    if ($scope.settings.words_length > 1) {
+      $scope.settings.words_length--;
+      return reset_parts($scope);
+    }
+  };
   $scope.dalay_increase = function() {
-    return $scope.settings.show_delay += 30;
+    return $scope.settings.words_delay += 30;
   };
   $scope.dalay_decrease = function() {
-    if ($scope.settings.show_delay > 50) {
-      return $scope.settings.show_delay -= 30;
+    if ($scope.settings.words_delay > 50) {
+      return $scope.settings.words_delay -= 30;
+    }
+  };
+  $scope.speed_increase = function() {
+    return $scope.settings.words_speed += 5;
+  };
+  $scope.speed_decrease = function() {
+    if ($scope.settings.words_speed > 50) {
+      return $scope.settings.words_speed -= 5;
     }
   };
   $scope.save_settings = function() {
@@ -144,10 +160,8 @@ angular.module("myApp").controller("ReadByLinesCtrl", function($scope, $http, $r
   };
   return collect_parts = function() {
     return angular.forEach($scope.text.replace(/[\s\n\t\r]+/g, " ").split(" "), function(word, num) {
-      var m;
       $scope.curr += " " + word;
-      m = $scope.curr.match(/\S+/g);
-      if (m && (m.length >= $scope.settings.words_count || endsWithArr($scope.curr, [".", ";"]))) {
+      if ($scope.curr.length >= $scope.settings.words_length || endsWithArr($scope.curr, [".", ";", "...", "...", "?", "!"])) {
         $scope.parts.push($scope.curr.trim());
         return $scope.curr = "";
       }
@@ -160,10 +174,10 @@ getWordsCount = function(text) {
   console.log("Define words and chars count");
   count = {};
   count.chars = text.length;
-  count.charsWithoutSpaces = text.replace(/\s+/g, "").length;
+  count.chars_without_spaces = text.replace(/\s+/g, "").length;
   count.words = text.replace(/[\,\.\:\?\-\—\;\(\)\«\»\…]/g, "").replace(/\s+/g, " ").trim().split(" ").length;
   console.log("chars: " + count.chars);
-  console.log("chars wothout spaces: " + count.charsWithoutSpaces);
+  console.log("chars wothout spaces: " + count.chars_without_spaces);
   console.log("words count: " + count.words);
   return count;
 };

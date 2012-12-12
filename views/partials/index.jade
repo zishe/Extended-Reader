@@ -12,6 +12,7 @@ div.container
       th
       th
       th
+      th
     tbody
       tr(ng-repeat='book in books | orderBy:updated')
         td
@@ -21,11 +22,14 @@ div.container
         td {{book.complete}}
         td {{book.time}}
         td
-          a(href='/readByLines/{{book._id}}')
-            i.icon-road
+          a(href='/readByLines/{{book._id}}', rel="tooltip", data-placement="bottom", title='Reading by Pieces')
+            i.icon-fast-forward
         td
-          a(href='/readBook/{{book._id}}')
-            i.icon-book
+          a(href='/readBook/{{book._id}}', rel="tooltip", data-placement="bottom", title='Reading with Time tracking')
+            i.icon-time
+        td
+          a(href='/memorize/{{book._id}}', rel="tooltip", data-placement="bottom", title='Reading with Memorization')
+            i.icon-hdd
         td
           a(href='/editBook/{{book._id}}')
             i.icon-pencil

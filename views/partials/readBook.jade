@@ -19,6 +19,8 @@ div.container
       i.icon-minus-sign(ng-click='part_decrease();save_settings()')
       span.prop part size
       i.icon-plus-sign(ng-click='part_increase();save_settings()')
+    .opts.well.well-small
+      span.prop {{speed}}
 
   .actions.clearfix
     div.pull-left
@@ -26,6 +28,8 @@ div.container
         a(href='#', ng-hide='showOpts', ng-click='showOpts=true') Show Options
         span.complete {{book.complete}}
         span.percent %
+        span.speed {{speed}}
+        span.percent words/min
 
     div.pull-right
       span(ng-show='showStats')
