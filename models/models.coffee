@@ -48,7 +48,7 @@ BookSchema = new Schema(
     default: 0
 
   complete:
-    type: Number
+    type: String
     default: 0
   readingTime:
     type: Number
