@@ -8,41 +8,33 @@ mongoose.set 'debug', true
 
 
 Count = {
-  words:    { type: Number, default: 0 }
-  chars:    { type: Number, default: 0 }
-  symbols:  { type: Number, default: 0 }
+  words:            { type: Number, default: 0 }
+  chars:            { type: Number, default: 0 }
+  symbols:          { type: Number, default: 0 }
 }
 
 
 PartSchema = new Schema(
-  book: { type: ObjectId, ref: 'Reading' }
 
-  start_pos: Number
-  end_pos: Number
-  count: Count
+  book:             { type: ObjectId, ref: 'Book' }
 
-  num: Number
-  text: String
-  reading_time: Number
-  finished: Date
+  start_pos:        Number
+  end_pos:          Number
+  count:            Count
+
+  num:              Number
+  text:             String
+  reading_time:     Number
+  finished:         Date
 )
 
 
 BookSchema = new Schema(
-  title: { type: String, required: true }
-  path: String
-  author: String
-  text: String
-  count: Count
 
-  # updated: Date
-  # created: Date
-).plugin(timestamps())
-
-
-
-ReadingBookSchema = new Schema(
-  book:             { type: ObjectId, ref: 'Book' }
+  title:            { type: String, required: true }
+  path:             String
+  author:           String
+  text:             String
   count:            Count
 
   complete:         { type: Number, default: 0 }
@@ -59,37 +51,11 @@ ReadingBookSchema = new Schema(
 
   last_word_pos:    { type: Number, default: 0 }
 
-  # updated: Date
-  # created: Date
-
 ).plugin(timestamps())
 
 
-# SpeedReadingSchema = new Schema(
-#   book:             { type: ObjectId, ref: 'Book' }
-#   count:            Count
-
-#   complete:         { type: Number, default: 0 }
-#   reading_time:     { type: Number, default: 0 }
-#   read_count:       Count
-#   finished:         { type: Boolean, default: false }
-
-#   last_word_pos:    { type: Number, default: 0 }
-
-#   # updated: Date
-#   # created: Date
-
-# ).plugin(timestamps())
-
-# BookSchema.pre "save", (next) ->
-#   if @isNew
-#     @created = @updated = new Date()
-#   else
-#     @updated = new Date()
-#   next()
-
-
 SettingsSchema = new Schema(
+
   font_size:        { type: Number, default: 22 }
   line_height:      { type: Number, default: 33 }
   width:            { type: Number, default: 820 }
@@ -112,12 +78,6 @@ exports.Part = Part
 Book = mongoose.model "Book", BookSchema
 exports.Book = Book
 
-ReadingBook = mongoose.model "ReadingBook", ReadingBookSchema
-exports.ReadingBook = ReadingBook
-
-# SpeedReading = mongoose.model "SpeedReading", SpeedReadingSchema
-# exports.SpeedReading = SpeedReading
-
 Settings = mongoose.model "Settings", SettingsSchema
 exports.Settings = Settings
 
@@ -127,12 +87,6 @@ Part.on 'error', (err) ->
 
 Book.on 'error', (err) ->
   console.log "Got an error", err
-
-ReadingBook.on 'error', (err) ->
-  console.log "Got an error", err
-
-# SpeedReading.on 'error', (err) ->
-#   console.log "Got an error", err
 
 Settings.on 'error', (err) ->
   console.log "Got an error", err

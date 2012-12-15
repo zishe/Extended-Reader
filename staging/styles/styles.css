@@ -1,4 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Telex);
 /*color scheme  3 points http://colorschemedesigner.com/#1T31T1Xt7w0w0*/
 /*              2        http://colorschemedesigner.com/#1T21T1Xt7w0w0*/
 /*!
@@ -7610,6 +7609,12 @@ a.badge:hover {
     height: auto !important;
     overflow: visible !important;
   }
+}
+@font-face {
+  font-family: 'Telex';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Telex-Regular'), url(/styles/telex-regular.woff) format('woff');
 }
 .navbar .brand {
   padding: 14px 20px 16px;

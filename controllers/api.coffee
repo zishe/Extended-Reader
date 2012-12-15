@@ -4,7 +4,6 @@ models = require '../models/models'
 
 # Count = models.Count
 Book = models.Book
-Reading = models.Reading
 Part = models.Part
 Settings = models.Settings
 
@@ -34,49 +33,13 @@ SaveBook = (book, cb) ->
       console.log err
       throw err
     console.log 'saved book: ' + book.title
-    cb
+    cb()
 
 
 # Delete Book
 DeleteBook = (id, cb) ->
   console.log 'deleting book...'
   Book.remove {_id: id}, (err) ->
-    unless err
-      console.log 'done'
-      cb true
-    else
-      console.log err
-      cb false
-
-
-
-
-# Load Reading
-LoadReading = (id, cb) ->
-  console.log 'loading reading...'
-  Reading.findById id, (err, reading) ->
-    if err
-      console.log err
-      throw err
-    console.log 'loaded reading: ' + reading._id
-    cb reading
-
-
-# Save Reading
-SaveReading = (reading, cb) ->
-  console.log 'saving reading...'
-  reading.save (err) ->
-    if err
-      console.log err
-      throw err
-    console.log 'saved reading: ' + reading._id
-    cb()
-
-
-# Delete Reading
-DeleteReading = (id, cb) ->
-  console.log 'deleting reading...'
-  Reading.remove {_id: id}, (err) ->
     unless err
       console.log 'done'
       cb true
@@ -102,14 +65,14 @@ LoadText = (book, cb) ->
 
 
 # Save book text in file
-SaveText = (book, text) ->
+SaveText = (book, text, cb) ->
   console.log 'saving text...'
   book.path = __dirname + '/../upload/files/' + book._id.toString()
   console.log(book.path);
-
   fs.writeFile book.path, text.trim(), (err) ->
     console.log err if err
     console.log "done"
+    cb()
 
 
 # Delete Text
@@ -191,42 +154,42 @@ getCount = (text) ->
 
 
 # Calculate Parts
-CalculateParts = (reading, text, settings, callback) ->
+CalculateParts = (book, text, settings, callback) ->
   console.log settings
 
   #make parts
   for i in [0..9]
-    unless reading.parsed
-      part = getNextPart(text, reading, i, settings.part_length)
+    unless book.parsed
+      part = getNextPart(text, book, i, settings.part_length)
       part.save()
 
-  console.log 'saving reading...'
-  reading.save (err) ->
+  console.log 'saving book...'
+  book.save (err) ->
     if err
       console.log err
     console.log 'saved'
-    callback reading
+    callback book
 
 
 # Select one part
-getNextPart = (text, reading, i, min_length) ->
+getNextPart = (text, book, i, min_length) ->
   console.log 'select parts from text'
 
   #remove used text
-  text = text.substr reading.last_pos_parsed, text.length - 1
+  text = text.substr book.last_pos_parsed, text.length - 1
 
   #parsed
   if (text.length < 10)
     console.log "end of file"
-    reading.parsed = true
+    book.parsed = true
 
   else
     # create Part
     part = new Part()
 
     # set start position
-    console.log 'start from ' + reading.last_pos_parsed + ' position'
-    part.start_pos = reading.last_pos_parsed
+    console.log 'start from ' + book.last_pos_parsed + ' position'
+    part.start_pos = book.last_pos_parsed
 
     #select paragraphs
     paragraph = text.split '\n'
@@ -266,11 +229,11 @@ getNextPart = (text, reading, i, min_length) ->
     console.log "length: " + part_text.length
     part.text = part_text
     part.count = getCount(part.text.replace('→', ''))
-    reading.last_pos_parsed += part.count.chars
-    part.end_pos = reading.last_pos_parsed
+    book.last_pos_parsed += part.count.chars
+    part.end_pos = book.last_pos_parsed
     part.num = i
 
-    part.reading = reading._id
+    part.book = book._id
     return part
 
 
@@ -291,7 +254,7 @@ exports.books = (req, res) ->
     res.json {books: books, user: req.user}
 
 
-# Get Book for statistics
+# Get Book for statistics and select exercise
 exports.book = (req, res) ->
   LoadBook req.params.id, (book) ->
     res.json book: book
@@ -314,14 +277,17 @@ exports.bookWithText = (req, res) ->
 
 
 # Put Book for saving title, author and text, after editing them
-exports.saveBookChanges = (req, res) ->
+exports.updateBook = (req, res) ->
   LoadBook req.params.id, (book) ->
 
-    book.title = req.body.title
-    book.author = req.body.author
+    console.log "updating params"
+    b = req.body
+    book.title = b.title
+    book.author = b.author
     book.text = null
+    JSON.stringify book
 
-    SaveText book, req.body.text, () ->
+    SaveText book, b.text, () ->
       SaveBook book, () ->
         res.json book: book
 
@@ -347,18 +313,12 @@ exports.addBook = (req, res) ->
   book.author = b.author
 
   book.count = getCount(b.text)
-  book.count.chars++
-  console.log JSON.stringify(book)
 
   SaveBook book, () ->
-    # LoadSettings (settings) ->
-    #   #words and chars count
-    #   reading.count = getCount(text)
-    #   reading.count.chars++
+    LoadSettings (settings) ->
+      CalculateParts book, b.text, settings, (book) ->
+        res.json book:book
 
-    #   CalculateParts book, b.text, settings, (book) ->
-    #     res.json book:book
-    res.json book:book
     SaveText book, b.text
 
 

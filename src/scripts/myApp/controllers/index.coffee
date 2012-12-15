@@ -4,6 +4,11 @@
 angular.module("myApp").controller "IndexCtrl", ($scope, $http, $location) ->
   $scope.user = {}
 
+  # $scope.books = Book.query()
+  # console.log $scope.books
+  # formatBook()
+  # $("a[rel=tooltip]").tooltip()
+
   $http.get("/api/books").success (data) ->
     $scope.books = data.books
     $scope.user = data.user
