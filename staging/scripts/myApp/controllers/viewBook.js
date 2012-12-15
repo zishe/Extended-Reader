@@ -41,8 +41,8 @@ angular.module("myApp").controller("ViewBookCtrl", function($scope, $http, $rout
   });
   updateData = function(data) {
     $scope.book = data.book;
-    $scope.book.createdDate = $.format.date($scope.book.created, "hh:mm d MMMM yyyy");
-    $scope.book.updated = $.format.date($scope.book.updated, "hh:mm d MMMM yyyy");
+    $scope.book.created = $.format.date($scope.book.created_at, "hh:mm d MMMM yyyy");
+    $scope.book.updated = $.format.date($scope.book.updated_at, "hh:mm d MMMM yyyy");
     $scope.book.readTime = TimeToString($scope.book.reading_time);
     if ($scope.book.reading_time > 0) {
       $scope.book.readingSpeed = Math.round($scope.book.read_count.words / ($scope.book.reading_time / 60)) + " words per minute";

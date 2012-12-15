@@ -125,7 +125,7 @@ angular.module("myApp").controller "ReadBookCtrl", ($scope, $http, $routeParams)
 
     $scope.book.read_count.words += $scope.part.count.words
     $scope.book.read_count.chars += $scope.part.count.chars
-    $scope.book.read_count.chars_without_spaces += $scope.part.count.chars_without_spaces
+    $scope.book.read_count.symbols += $scope.part.count.symbols
     $scope.book.complete = Math.round($scope.book.read_count.chars * 10000 / $scope.book.count.chars) / 100
 
     $scope.speed = Math.round($scope.part.count.words / $scope.part.reading_time *60)
@@ -164,8 +164,8 @@ angular.module("myApp").controller "ReadBookCtrl", ($scope, $http, $routeParams)
         $scope.book.reading_time -= $scope.part.reading_time  if $scope.part.reading_time?
         $scope.book.read_count.words -= $scope.part.count.words
         $scope.book.read_count.chars -= $scope.part.count.chars
-        $scope.book.read_count.chars_without_spaces -= $scope.part.count.chars_without_spaces
-        $scope.book.complete = Math.round($scope.book.read_count.chars * 100 / $scope.book.count.chars)
+        $scope.book.read_count.symbols -= $scope.part.count.symbols
+        $scope.book.complete = Math.round($scope.book.read_count.chars * 10000 / $scope.book.count.chars) / 100
         $http.put("/api/save_book/" + $routeParams.id, $scope.book).success (data) ->
           console.log "book saved"
 

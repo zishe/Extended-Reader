@@ -59,7 +59,7 @@ angular.module("myApp").controller "MemorizeCtrl", ($scope, $http, $routeParams)
       $scope.book.reading_time += Math.round($scope.reading_time / 1000)
       $scope.book.read_count.words += count.words
       $scope.book.read_count.chars += count.chars
-      $scope.book.read_count.chars_without_spaces += count.chars_without_spaces
+      $scope.book.read_count.symbols += count.symbols
       $scope.book.complete = Math.round($scope.book.read_count.chars * 100 / $scope.book.count.chars)
 
       $scope.book.last_word_pos = 0  unless $scope.book.last_word_pos?

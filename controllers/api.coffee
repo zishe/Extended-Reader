@@ -14,6 +14,7 @@ Settings = models.Settings
 # Overloaded mongo methods
 
 
+
 # Load Book
 LoadBook = (id, cb) ->
   console.log 'loading book...'
@@ -33,7 +34,7 @@ SaveBook = (book, cb) ->
       console.log err
       throw err
     console.log 'saved book: ' + book.title
-    cb()
+    cb
 
 
 # Delete Book
@@ -46,6 +47,44 @@ DeleteBook = (id, cb) ->
     else
       console.log err
       cb false
+
+
+
+
+# Load Reading
+LoadReading = (id, cb) ->
+  console.log 'loading reading...'
+  Reading.findById id, (err, reading) ->
+    if err
+      console.log err
+      throw err
+    console.log 'loaded reading: ' + reading._id
+    cb reading
+
+
+# Save Reading
+SaveReading = (reading, cb) ->
+  console.log 'saving reading...'
+  reading.save (err) ->
+    if err
+      console.log err
+      throw err
+    console.log 'saved reading: ' + reading._id
+    cb()
+
+
+# Delete Reading
+DeleteReading = (id, cb) ->
+  console.log 'deleting reading...'
+  Reading.remove {_id: id}, (err) ->
+    unless err
+      console.log 'done'
+      cb true
+    else
+      console.log err
+      cb false
+
+
 
 
 # Load Book text
@@ -67,6 +106,7 @@ SaveText = (book, text) ->
   console.log 'saving text...'
   book.path = __dirname + '/../upload/files/' + book._id.toString()
   console.log(book.path);
+
   fs.writeFile book.path, text.trim(), (err) ->
     console.log err if err
     console.log "done"
@@ -119,6 +159,8 @@ SaveSettings = (settings, cb) ->
       cb false
 
 
+
+
 # remove all book parts
 DeleteBookParts = (id) ->
   # delete all book parts
@@ -129,103 +171,107 @@ DeleteBookParts = (id) ->
 
 
 # Count words and chars
-getWordsCount = (text) ->
+getCount = (text) ->
   console.log 'Define words and chars count'
 
   count = {}
   count.chars = text.length
-  count.chars_without_spaces = text.replace(/\s+/g, '').length
+  count.symbols = text.replace(/\s+/g, '').length
   count.words = text.replace(/[\,\.\:\?\-\—\;\(\)\«\»\…\!\[\]]/g, '').replace(/\s+/gi,' ').trim().split(' ').length
 
   console.log 'chars: ' + count.chars
-  console.log 'chars wothout spaces: ' + count.chars_without_spaces
+  console.log 'chars wothout spaces: ' + count.symbols
   console.log 'words count: ' + count.words
 
   return count
 
 
+
+
+
+
 # Calculate Parts
-AllocateParts = (book, text, settings, callback) ->
-  #words and chars count
-  book.count = getWordsCount(text)
-  book.count.chars++
+CalculateParts = (reading, text, settings, callback) ->
   console.log settings
 
   #make parts
   for i in [0..9]
-    if !book.parsed
-      savePart(text, book, i, settings.part_length)
+    unless reading.parsed
+      part = getNextPart(text, reading, i, settings.part_length)
+      part.save()
 
-  console.log 'saving book...'
-  book.save (err0) ->
-    if err0
-      console.log err0
+  console.log 'saving reading...'
+  reading.save (err) ->
+    if err
+      console.log err
     console.log 'saved'
-    callback book
+    callback reading
 
 
 # Select one part
-savePart = (text, book, i, min_length) ->
+getNextPart = (text, reading, i, min_length) ->
   console.log 'select parts from text'
 
   #remove used text
-  text = text.substr book.last_pos_parsed, text.length - 1
+  text = text.substr reading.last_pos_parsed, text.length - 1
 
+  #parsed
   if (text.length < 10)
     console.log "end of file"
-    book.parsed = true
+    reading.parsed = true
+
   else
     # create Part
     part = new Part()
-    console.log 'start from ' + book.last_pos_parsed + ' position'
-    part.start_pos = book.last_pos_parsed
+
+    # set start position
+    console.log 'start from ' + reading.last_pos_parsed + ' position'
+    part.start_pos = reading.last_pos_parsed
 
     #select paragraphs
     paragraph = text.split '\n'
     console.log 'all paragraphs: ' + paragraph.length
 
-    console.log 'min len ' + min_length
     #make one part from paragraphs
-    partText = ''
-    sPart = '' # without last paragraph
-    lastP = ''
-    num = 0
-    while partText.length < min_length and paragraph.length > num
-      sPart = partText
-      lastP = paragraph[num]
-      partText += paragraph[num] + '\n'
-      console.log partText.length
+    part_text = ''
+    prev_part = '' # without last paragraph
+    last_p = '' # last paragraph
+    num = 0 # paragraph number
+    while part_text.length < min_length and paragraph.length > num
+      prev_part = part_text
+      last_p = paragraph[num]
+      part_text += paragraph[num] + '\n'
+      console.log part_text.length
       num++
 
     console.log 'part generated'
 
-    cutting = false
-    #check if part is too long divide by dot
-    if partText.length > min_length * 1.3
+    # check if part is too long - divide by dot
+    if part_text.length > min_length * 1.3
       console.log 'too long'
-      cutting = true
       num = 0
-      partText = sPart
-      sentence = lastP.split('.')
-      console.log 'last part ' + lastP.length + ' contains ' + sentence.length + ' sentences'
-      while partText.length < min_length and sentence.length > num
-        partText += sentence[num] + '.'
-        console.log partText.length
+
+      part_text = prev_part
+      sentence = last_p.split('.')
+      console.log 'last part ' + last_p.length + ' contains ' + sentence.length + ' sentences'
+
+      while part_text.length < min_length and sentence.length > num
+        part_text += sentence[num] + '.'
+        console.log part_text.length
         num++
 
-      partText += '→'
+      part_text += '→'
 
 
-    console.log "length: " + partText.length
-    part.text = partText
-    part.count = getWordsCount(part.text.replace('→', ''))
-    plen = if cutting then partText.length - 1 else partText.length
-    book.last_pos_parsed += plen
-    part.end_pos = book.last_pos_parsed
+    console.log "length: " + part_text.length
+    part.text = part_text
+    part.count = getCount(part.text.replace('→', ''))
+    reading.last_pos_parsed += part.count.chars
+    part.end_pos = reading.last_pos_parsed
     part.num = i
 
-    part.book = book._id
-    part.save()
+    part.reading = reading._id
+    return part
 
 
 
@@ -241,11 +287,11 @@ savePart = (text, book, i, min_length) ->
 
 # Get all Books for viewing list and select one
 exports.books = (req, res) ->
-  Book.find().sort('-updated').exec (err, books) ->
+  Book.find().sort('-updated').populate('reading').exec (err, books) ->
     res.json {books: books, user: req.user}
 
 
-# Get Book for statistics and select exercise
+# Get Book for statistics
 exports.book = (req, res) ->
   LoadBook req.params.id, (book) ->
     res.json book: book
@@ -264,14 +310,6 @@ exports.bookWithText = (req, res) ->
   LoadBook req.params.id, (book) ->
     LoadText book, (text) ->
       book.text = text
-      #   cb book
-      # else
-      #   pieceSize = 100000 # symbols
-      #   console.log 'text length: ' + text.length
-      #   if (text.length > pieceSize)
-      #     console.log 'cutting'
-      #     text = text.substr 0, pieceSize
-      #   cb book, text
       res.json book: book
 
 
@@ -299,19 +337,28 @@ exports.deleteBook = (req, res) ->
     DeleteBookParts id
 
 
-# Post Book, save all info and generate first 10 Parts
+# Post Book, save all info
 exports.addBook = (req, res) ->
   console.log 'creating book...'
   book = new Book()
+
   b = req.body
   book.title = b.title
   book.author = b.author
 
-  SaveBook book, () ->
-    LoadSettings (settings) ->
-      AllocateParts book, b.text, settings, (book) ->
-        res.json book:book
+  book.count = getCount(b.text)
+  book.count.chars++
+  console.log JSON.stringify(book)
 
+  SaveBook book, () ->
+    # LoadSettings (settings) ->
+    #   #words and chars count
+    #   reading.count = getCount(text)
+    #   reading.count.chars++
+
+    #   CalculateParts book, b.text, settings, (book) ->
+    #     res.json book:book
+    res.json book:book
     SaveText book, b.text
 
 
@@ -391,6 +438,9 @@ saveFile = (file) ->
 
 
 
+
+
+
 # Put Book, save changed info and generate parts if need
 exports.saveBook = (req, res) ->
   LoadBook req.params.id, (book) ->
@@ -419,7 +469,8 @@ exports.saveBook = (req, res) ->
 
                 for i in [0..9]
                   if !book.parsed
-                    savePart(text, book, i + partsCount, settings.part_length)
+                    part = getNextPart(text, book, i + partsCount, settings.part_length)
+                    part.save()
 
                 SaveBook book, () ->
 
@@ -469,7 +520,7 @@ exports.resetBook = (req, res) ->
     book.read_count = {}
     book.read_count.words = 0
     book.read_count.chars = 0
-    book.read_count.chars_without_spaces = 0
+    book.read_count.symbols = 0
 
     book.complete = 0
     book.reading_time = 0
@@ -563,7 +614,7 @@ exports.saveSettings = (req, res) ->
     console.log req.body
     console.log 'copy fields'
 
-    props = ['font_size', 'line_height', 'width', 'part_length', 'words_font_size', 'words_count', 'words_delay', 'words_speed', 'words_length']
+    props = ['font_size', 'line_height', 'width', 'part_length', 'words_font_size', 'words_count', 'words_delay', 'words_speed', 'words_length', 'mem_length', 'mem_part']
     for prop in props
       do (prop) ->
         settings[prop] = req.body[prop]

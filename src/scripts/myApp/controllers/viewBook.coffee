@@ -49,8 +49,8 @@ angular.module("myApp").controller "ViewBookCtrl", ($scope, $http, $routeParams)
 
   updateData = (data) ->
     $scope.book = data.book
-    $scope.book.createdDate = $.format.date($scope.book.created, "hh:mm d MMMM yyyy")
-    $scope.book.updated = $.format.date($scope.book.updated, "hh:mm d MMMM yyyy")
+    $scope.book.created = $.format.date($scope.book.created_at, "hh:mm d MMMM yyyy")
+    $scope.book.updated = $.format.date($scope.book.updated_at, "hh:mm d MMMM yyyy")
     $scope.book.readTime = TimeToString($scope.book.reading_time)
 
     if $scope.book.reading_time > 0

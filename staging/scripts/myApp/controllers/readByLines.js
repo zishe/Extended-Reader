@@ -70,7 +70,7 @@ angular.module("myApp").controller("ReadByLinesCtrl", function($scope, $http, $r
       $scope.book.reading_time += Math.round($scope.reading_time / 1000);
       $scope.book.read_count.words += count.words;
       $scope.book.read_count.chars += count.chars;
-      $scope.book.read_count.chars_without_spaces += count.chars_without_spaces;
+      $scope.book.read_count.symbols += count.symbols;
       $scope.book.complete = Math.round($scope.book.read_count.chars * 100 / $scope.book.count.chars);
       if ($scope.book.last_word_pos == null) {
         $scope.book.last_word_pos = 0;
@@ -174,10 +174,10 @@ getWordsCount = function(text) {
   console.log("Define words and chars count");
   count = {};
   count.chars = text.length;
-  count.chars_without_spaces = text.replace(/\s+/g, "").length;
+  count.symbols = text.replace(/\s+/g, "").length;
   count.words = text.replace(/[\,\.\:\?\-\—\;\(\)\«\»\…]/g, "").replace(/\s+/g, " ").trim().split(" ").length;
   console.log("chars: " + count.chars);
-  console.log("chars wothout spaces: " + count.chars_without_spaces);
+  console.log("chars wothout spaces: " + count.symbols);
   console.log("words count: " + count.words);
   return count;
 };
