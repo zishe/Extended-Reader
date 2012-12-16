@@ -4,12 +4,14 @@
   "main": "./app.coffee",
   "private": true,
   "dependencies": {
-    "coffee-script": ">= 1.3.3",
-    "express": ">= 3.0.0",
+    "coffee-script": "*",
+    "express": "*",
     "mongoose": "*",
-    "mongoose-timestamps": "*",
+    "mongoose-time": "*",
     "jade": "*",
     "markdown": "*",
+    "node_xslt": "*",
+    "fibers": "*",
     "libxmljs": "*",
     "passport": "*",
     "passport-facebook": "*",
@@ -32,7 +34,7 @@
     "grunt": "*"
   },
   "engines": {
-    "node": "= 0.6.20"
+    "node": "*"
   },
   "subdomain": "speed-reading-apps"
 }

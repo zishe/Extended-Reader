@@ -14,21 +14,17 @@ div.container
         //- dt Current Page
         //- dd {{book.partNum}}
         //- dt Curr
-        //- dd {{book.parts[book.partNum].startPos}}
+        //- dd {{book.parts[book.partNum].start_pos}}
         dt Complete
         dd {{book.complete}} %
         dt Words
         dd {{book.count.words}}
         dt Chars without spaces
-        dd {{book.count.charsWithoutSpaces}}
+        dd {{book.count.symbols}}
         dt Chars
         dd {{book.count.chars}}
         dt Read Words
-        dd {{book.readCount.words}}
-        //- dt Read Chars
-        //- dd {{book.readCount.chars}}
-        //- dt Read Chars without spaces
-        //- dd {{book.readCount.charsWithoutSpaces}}
+        dd {{book.read_count.words}}
         dt Averange Speed
         dd {{book.readingSpeed}}
         dt Reading Time
@@ -36,9 +32,11 @@ div.container
         dt Last using
         dd {{book.updated}}
         dt Created
-        dd {{book.createdDate}}
+        dd {{book.created}}
 
     .span5.read-actions
+      .row.reading-act
+        a.btn.btn-primary.btn-large(href='/memorize/{{book._id}}') Memorization
       .row.reading-act
         a.btn.btn-primary.btn-large(href='/readBook/{{book._id}}') Paginal reading
       .row.reading-act
@@ -59,25 +57,3 @@ div.container
 
 
   .row.graph-block
-
-  //- .row.detailed
-  //-   table.table.table-condensed
-  //-     thead
-  //-     tr
-  //-       th Num
-  //-       th Words
-  //-       th Chars
-  //-       th Chars without spaces
-  //-       th Reding time, second
-  //-       th
-  //-       //- th
-  //-       //- th
-  //-     tbody
-  //-       tr(ng-repeat='part in parts | orderBy:num:true')
-  //-         td {{part.num}}
-  //-         td {{part.count.words}}
-  //-         td {{part.count.chars}}
-  //-         td {{part.count.charsWithoutSpaces}}
-  //-         td {{part.readingTime}}
-  //-         td {{part.text}}
-

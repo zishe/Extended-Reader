@@ -4,10 +4,16 @@
 angular.module("myApp").controller "IndexCtrl", ($scope, $http, $location) ->
   $scope.user = {}
 
+  # $scope.books = Book.query()
+  # console.log $scope.books
+  # formatBook()
+  # $("a[rel=tooltip]").tooltip()
+
   $http.get("/api/books").success (data) ->
     $scope.books = data.books
     $scope.user = data.user
     formatBook()
+    $("a[rel=tooltip]").tooltip()
 
   $scope.google_login = ->
     window.location = "/auth/google"
@@ -40,5 +46,5 @@ angular.module("myApp").controller "IndexCtrl", ($scope, $http, $location) ->
 
   formatBook = ->
     angular.forEach $scope.books, (book, i) ->
-      book.time = TimeToString(book.readingTime, true)
+      book.time = TimeToString(book.reading_time, true)
       book.title = book.title.substr(0, 25) + "…"  if book.title.length > 25

@@ -2,6 +2,15 @@
 
 angular.module("myApp.services", []).value "version", "0.1"
 
+# angular.module("dbServices", ["ngResource"]).factory "Book", ($resource) ->
+#   $resource "/api/books", {},
+#     query:
+#       method: "GET"
+#       # params: { id: "" }
+#       isArray: true
+
+
+
 # # "upload-app.services"
 # angular.module("myApp.services", []).directive("fileButton", ->
 #   link: (scope, element, attributes) ->

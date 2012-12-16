@@ -3,15 +3,17 @@ module.exports = (app, api) ->
   # JSON API
 
   app.get '/api/books', api.books
+
   app.get '/api/book/:id', api.book
   app.post '/api/book', api.addBook
-  app.post '/api/uploadfile', api.uploadFile
-
-  app.put '/api/book/:id', api.saveBookChanges
+  app.put '/api/book/:id', api.updateBook
   app.delete '/api/book/:id', api.deleteBook
+
+  app.post '/api/uploadfile', api.uploadFile
 
   app.get '/api/readBook/:id', api.readBook
   app.get '/api/readByLines/:id', api.readByLines
+  app.get '/api/memorize/:id', api.memorize
 
   app.put '/api/save_book/:id', api.saveBook
   app.put '/api/book_finished/:id', api.finishBook

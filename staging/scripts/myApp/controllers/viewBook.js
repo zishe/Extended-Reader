@@ -14,10 +14,10 @@ angular.module("myApp").controller("ViewBookCtrl", function($scope, $http, $rout
     decimal_data = [];
     while ($scope.parts.length > num) {
       part = $scope.parts[num];
-      if (part.readingTime > 0) {
+      if (part.reading_time > 0) {
         decimal_data.push({
           x: num,
-          y: Math.round(part.count.words / part.readingTime * 60)
+          y: Math.round(part.count.words / part.reading_time * 60)
         });
       }
       num++;
@@ -41,11 +41,11 @@ angular.module("myApp").controller("ViewBookCtrl", function($scope, $http, $rout
   });
   updateData = function(data) {
     $scope.book = data.book;
-    $scope.book.createdDate = $.format.date($scope.book.created, "hh:mm d MMMM yyyy");
-    $scope.book.updated = $.format.date($scope.book.updated, "hh:mm d MMMM yyyy");
-    $scope.book.readTime = TimeToString($scope.book.readingTime);
-    if ($scope.book.readingTime > 0) {
-      $scope.book.readingSpeed = Math.round($scope.book.readCount.words / ($scope.book.readingTime / 60)) + " words per minute";
+    $scope.book.created = $.format.date($scope.book.created_at, "hh:mm d MMMM yyyy");
+    $scope.book.updated = $.format.date($scope.book.updated_at, "hh:mm d MMMM yyyy");
+    $scope.book.readTime = TimeToString($scope.book.reading_time);
+    if ($scope.book.reading_time > 0) {
+      $scope.book.readingSpeed = Math.round($scope.book.read_count.words / ($scope.book.reading_time / 60)) + " words per minute";
     } else {
       $scope.book.readingSpeed = "undefined";
     }
@@ -62,8 +62,8 @@ angular.module("myApp").controller("ViewBookCtrl", function($scope, $http, $rout
     console.log(page_num);
     if (angular.isNumber(parseInt(page_num))) {
       part = $scope.parts[page_num];
-      console.log(part.readingTime);
-      part.readingTime = null;
+      console.log(part.reading_time);
+      part.reading_time = null;
       drawGraph();
       $http.put("/api/part/" + part._id, part).success(function(data) {
         return console.log("save null time");

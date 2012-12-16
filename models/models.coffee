@@ -1,122 +1,74 @@
-mongoose = require 'mongoose'
-mongoose_timestamps = require 'mongoose-timestamps'
+mongoose    = require 'mongoose'
+timestamps  = require 'mongoose-time'
 
-Schema = mongoose.Schema
-ObjectId = Schema.Types.ObjectId
+Schema      = mongoose.Schema
+ObjectId    = Schema.Types.ObjectId
 
 mongoose.set 'debug', true
 
+
 Count = {
-  words:
-    type: Number
-    default: 0
-, chars:
-    type: Number
-    default: 0
-, charsWithoutSpaces:
-    type: Number
-    default: 0
+  words:            { type: Number, default: 0 }
+  chars:            { type: Number, default: 0 }
+  symbols:          { type: Number, default: 0 }
 }
 
+
 PartSchema = new Schema(
-  book:
-    type: ObjectId
-    ref: 'Book'
 
-  startPos: Number
-  endPos: Number
-  count: Count
+  book:             { type: ObjectId, ref: 'Book' }
 
-  num: Number
-  text: String
-  readingTime: Number
-  finished: Date
+  start_pos:        Number
+  end_pos:          Number
+  count:            Count
+
+  num:              Number
+  text:             String
+  reading_time:     Number
+  finished:         Date
 )
+
 
 BookSchema = new Schema(
-  title:
-    type: String
-    required: true
 
-  author: String
-  text: String
+  title:            { type: String, required: true }
+  path:             String
+  author:           String
+  text:             String
+  count:            Count
 
-  count: Count
+  complete:         { type: Number, default: 0 }
+  reading_time:     { type: Number, default: 0 }
+  read_count:       Count
+  finished:         { type: Boolean, default: false }
 
-  lastPosParsed:
-    type: Number
-    default: 0
+  current_part_num: { type: Number, default: 0 }
+  regen_parts:      { type: Boolean, default: false }
+  parts:            [{ type: ObjectId, ref: "Part" }]
 
-  complete:
-    type: String
-    default: 0
-  readingTime:
-    type: Number
-    default: 0
+  last_pos_parsed:  { type: Number, default: 0 }
+  parsed:           { type: Boolean, default: false }
 
-  readCount: Count
+  last_word_pos:    { type: Number, default: 0 }
 
-  currPartNum:
-    type: Number
-    default: 0
+).plugin(timestamps())
 
-  lastWordPos:
-    type: Number
-    default: 0
-
-  RegenParts:
-    type: Boolean
-    default: false
-
-  parts: [
-    type: ObjectId
-    ref: "Part"
-  ]
-
-  finished:
-    type: Boolean
-    default: false
-  parsed:
-    type: Boolean
-    default: false
-
-  path: String
-
-  updated: Date
-  created: Date
-)
-
-BookSchema.pre "save", (next) ->
-  if @isNew
-    @created = @updated = new Date()
-  else
-    @updated = new Date()
-  next()
-
-# BookSchema.plugin mongoose_timestamps
 
 SettingsSchema = new Schema(
-  font_size:
-    type: Number
-    default: 22
-  line_height:
-    type: Number
-    default: 33
-  width:
-    type: Number
-    default: 820
-  part_length:
-    type: Number
-    default: 1000
-  words_font_size:
-    type: Number
-    default: 31
-  words_count:
-    type: Number
-    default: 3
-  show_delay:
-    type: Number
-    default: 300
+
+  font_size:        { type: Number, default: 22 }
+  line_height:      { type: Number, default: 33 }
+  width:            { type: Number, default: 820 }
+  part_length:      { type: Number, default: 1000 }
+
+  words_font_size:  { type: Number, default: 31 }
+  words_count:      { type: Number, default: 3 }
+  words_delay:      { type: Number, default: 300 }
+  words_speed:      { type: Number, default: 230 }
+  words_length:     { type: Number, default: 15 }
+
+  mem_length:       { type: Number, default: 1 }
+  mem_part:         { type: String, default: "sentence" }
 )
 
 

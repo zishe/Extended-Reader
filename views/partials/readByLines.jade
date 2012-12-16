@@ -8,14 +8,32 @@ div.container
       i.icon-minus-sign(ng-click='font_decrease();save_settings()')
       span.prop font size
       i.icon-plus-sign(ng-click='font_increase();save_settings()')
+      .opts-val {{settings.words_font_size}}
+
     .opts.well.well-small
       i.icon-minus-sign(ng-click='dalay_decrease();save_settings()')
-      span.prop dalay
+      span.prop delay
       i.icon-plus-sign(ng-click='dalay_increase();save_settings()')
+      .opts-val {{settings.words_delay}}
+
     .opts.well.well-small
       i.icon-minus-sign(ng-click='words_decrease();save_settings()')
       span.prop words
       i.icon-plus-sign(ng-click='words_increase();save_settings()')
+      .opts-val {{settings.words_count}}
+
+    .opts.well.well-small
+      i.icon-minus-sign(ng-click='length_decrease();save_settings()')
+      span.prop length
+      i.icon-plus-sign(ng-click='length_increase();save_settings()')
+      .opts-val {{settings.words_length}}
+
+    .opts.well.well-small
+      i.icon-minus-sign(ng-click='speed_decrease();save_settings()')
+      span.prop speed
+      i.icon-plus-sign(ng-click='speed_increase();save_settings()')
+      .opts-val {{settings.words_speed}}
+
     .parts.pull-left
       span {{num}} from
       span {{parts.length}}

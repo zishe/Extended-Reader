@@ -37,38 +37,6 @@ setCssProp = (name, val) ->
   $(".reading-area p").each ->
     $(this).css name, val
 
-TimeToString = (time, brief) ->
-  sec = Math.round(time % 60)
-  min = Math.round(((time - sec) / 60) % 60)
-  hour = Math.round(((time - (time % 3600)) / 3600))
-
-  text = ""
-  return "-"  if sec is 0 and min is 0 and hour is 0
-  text += hour + " hour "  if hour is 1
-  text += hour + " hours "  if hour > 1
-  text += min + " minute "  if min is 1
-  text += min + " minutes "  if min > 1
-  text += sec + " second"  if sec < 2
-  text += sec + " seconds"  if sec > 1
-  if brief
-    text = ""
-    text = hour + ":"  if hour > 0
-    if min > 0 and min < 10 and hour > 0 #12:[0]3:33
-      text += "0" + min + ":"
-    else if min is 0 and hour > 0 #12:[00]:35
-      text += "00:"
-    else if min is 0 and hour is 0
-      text = ""
-    else
-      text += min + ":"
-    if sec > 0 and sec < 10 and (hour > 0 or min > 0) #12:34:[0]2
-      text += "0" + sec
-    else if sec is 0 and (hour > 0 or min > 0) #12:34:[00]
-      text += "00"
-    else
-      text += sec
-  text
-
 "use strict"
 angular.module("myApp").controller "ReadBookCtrl", ($scope, $http, $routeParams) ->
   $scope.book = {}
@@ -77,10 +45,11 @@ angular.module("myApp").controller "ReadBookCtrl", ($scope, $http, $routeParams)
 
   $scope.prevTime = null
   $scope.nowTime = null
-  $scope.readingTime = 0
+  $scope.reading_time = 0
   $scope.allTime = 0
 
   $scope.readWords = 0
+  $scope.speed = 0
   $scope.playing = false
   $scope.showNum = false
   $scope.showOpts = false
@@ -105,29 +74,31 @@ angular.module("myApp").controller "ReadBookCtrl", ($scope, $http, $routeParams)
 
 
   $scope.next = ->
-    if timer_message_shown < 2
+    if timer_message_shown < 2 and not $scope.playing
       $(".alert").alert()
       $(".alert").removeClass "hidden"
-      $(".alert").delay(3000).hide 0
+      $(".alert").delay(3000).hide(500)
       timer_message_shown++
-    unless $scope.readingTime is 0
+
+    unless $scope.reading_time is 0
       console.log "save time"
-      $scope.part.readingTime = Math.round($scope.readingTime / 1000)
+      $scope.part.reading_time = Math.round($scope.reading_time / 1000)
       $http.put("/api/part/" + $scope.part._id, $scope.part).success (data) ->
         console.log "saved"
 
-      $scope.readingTime = 0
+      $scope.reading_time = 0
       $scope.prevTime = (new Date()).getTime()
 
-    $scope.book.readingTime += $scope.part.readingTime if $scope.part.readingTime?
+    $scope.book.reading_time += $scope.part.reading_time if $scope.part.reading_time?
 
-    $scope.book.readCount.words += $scope.part.count.words
-    $scope.book.readCount.chars += $scope.part.count.chars
-    $scope.book.readCount.charsWithoutSpaces += $scope.part.count.charsWithoutSpaces
-    $scope.book.complete = Math.round($scope.book.readCount.chars * 10000 / $scope.book.count.chars) / 100
+    $scope.book.read_count.words += $scope.part.count.words
+    $scope.book.read_count.chars += $scope.part.count.chars
+    $scope.book.read_count.symbols += $scope.part.count.symbols
+    $scope.book.complete = Math.round($scope.book.read_count.chars * 10000 / $scope.book.count.chars) / 100
 
-    $scope.book.lastWordPos = $scope.book.readCount.chars
-    $scope.book.currPartNum++
+    $scope.speed = Math.round($scope.part.count.words / $scope.part.reading_time *60)
+    $scope.book.last_word_pos = $scope.book.read_count.chars
+    $scope.book.current_part_num++
 
     $http.put("/api/save_book/" + $routeParams.id, $scope.book).success (data) ->
       console.log "book saved"
@@ -152,24 +123,24 @@ angular.module("myApp").controller "ReadBookCtrl", ($scope, $http, $routeParams)
 
 
   $scope.prev = ->
-    if $scope.book.currPartNum > 0
-      $scope.book.currPartNum--
-      $http.get("/api/part/" + $routeParams.id + "/" + $scope.book.currPartNum).success (data) ->
+    if $scope.book.current_part_num > 0
+      $scope.book.current_part_num--
+      $http.get("/api/part/" + $routeParams.id + "/" + $scope.book.current_part_num).success (data) ->
         console.log "get previous part"
         console.log data
         $scope.part = data.part
-        $scope.book.readingTime -= $scope.part.readingTime  if $scope.part.readingTime?
-        $scope.book.readCount.words -= $scope.part.count.words
-        $scope.book.readCount.chars -= $scope.part.count.chars
-        $scope.book.readCount.charsWithoutSpaces -= $scope.part.count.charsWithoutSpaces
-        $scope.book.complete = Math.round($scope.book.readCount.chars * 100 / $scope.book.count.chars)
+        $scope.book.reading_time -= $scope.part.reading_time  if $scope.part.reading_time?
+        $scope.book.read_count.words -= $scope.part.count.words
+        $scope.book.read_count.chars -= $scope.part.count.chars
+        $scope.book.read_count.symbols -= $scope.part.count.symbols
+        $scope.book.complete = Math.round($scope.book.read_count.chars * 10000 / $scope.book.count.chars) / 100
         $http.put("/api/save_book/" + $routeParams.id, $scope.book).success (data) ->
           console.log "book saved"
 
         $("#text").html "<p>" + $scope.part.text.replace(/\n/g, "</p><p>") + "</p>"
         setAll $scope
 
-    $scope.book.currPartNum is 0
+    $scope.book.current_part_num is 0
 
   $scope.play = ->
     unless $scope.playing
@@ -185,9 +156,9 @@ angular.module("myApp").controller "ReadBookCtrl", ($scope, $http, $routeParams)
 
   $scope.sec = ->
     $scope.nowTime = (new Date()).getTime()
-    $scope.readingTime += $scope.nowTime - $scope.prevTime
+    $scope.reading_time += $scope.nowTime - $scope.prevTime
     $scope.prevTime = $scope.nowTime
-    $("#time").text TimeToString($scope.readingTime / 1000)
+    $("#time").text TimeToString($scope.reading_time / 1000)
 
   $scope.font_increase = ->
     $scope.settings.font_size++
