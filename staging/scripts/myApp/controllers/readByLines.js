@@ -20,7 +20,14 @@ angular.module("myApp").controller("ReadByLinesCtrl", function($scope, $http, $r
   $http.get("/api/book_with_text/" + $routeParams.id).success(function(data) {
     $scope.book = data.book;
     $scope.text = data.book.text;
-    console.log("text length " + ($scope.book.last_word_pos > 0 ? $scope.text = $scope.book.text.substr($scope.book.last_word_pos, $scope.book.text.length - 1) : $scope.book.last_word_pos !== 0 ? $scope.book.last_word_pos = 0 : void 0));
+    console.log("text length " + data.book.text.length);
+    if ($scope.book.last_word_pos > 0) {
+      $scope.text = $scope.book.text.substr($scope.book.last_word_pos, $scope.book.text.length - 1);
+    } else {
+      if ($scope.book.last_word_pos !== 0) {
+        $scope.book.last_word_pos = 0;
+      }
+    }
     console.log("open book");
     $("#time").text();
     return $http.get("/api/settings").success(function(data) {

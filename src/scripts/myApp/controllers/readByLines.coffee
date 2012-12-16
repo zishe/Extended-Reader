@@ -18,7 +18,7 @@ angular.module("myApp").controller "ReadByLinesCtrl", ($scope, $http, $routePara
     $scope.book = data.book
     $scope.text = data.book.text
 
-    console.log "text length " +
+    console.log "text length " + data.book.text.length
 
     if $scope.book.last_word_pos > 0
       $scope.text = $scope.book.text.substr($scope.book.last_word_pos, $scope.book.text.length - 1)
