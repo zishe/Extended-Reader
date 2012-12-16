@@ -69,7 +69,7 @@ LoadText = (book, cb) ->
 # Save book text in file
 SaveText = (book, text, cb) ->
   console.log 'saving text...'
-  book.path = __dirname + '/../../tmp/files/' + book._id.toString()
+  book.path = __dirname + './tmp' + book._id.toString()
   console.log book.path
   fs.writeFile book.path, text.trim(), (err) ->
     console.log err if err
@@ -318,8 +318,8 @@ exports.addBook = (req, res) ->
 
   SaveBook book, () ->
     LoadSettings (settings) ->
-      # CalculateParts book, b.text, settings, (book) ->
-      res.json book:book
+      CalculateParts book, b.text, settings, (book) ->
+        res.json book:book
 
     SaveText book, b.text, () ->
 
