@@ -20,40 +20,44 @@ angular.module("myApp").controller("ReadByLinesCtrl", function($scope, $http, $r
   $http.get("/api/book_with_text/" + $routeParams.id).success(function(data) {
     $scope.book = data.book;
     $scope.text = data.book.text;
-    console.log("text length " + data.book.text.length);
-    if ($scope.book.last_word_pos > 0) {
-      $scope.text = $scope.book.text.substr($scope.book.last_word_pos, $scope.book.text.length - 1);
+    if ($scope.text !== null && $scope.text !== void 0) {
+      console.log("text length " + data.book.text.length);
+      if ($scope.book.last_word_pos > 0) {
+        $scope.text = $scope.book.text.substr($scope.book.last_word_pos, $scope.book.text.length - 1);
+      } else {
+        if ($scope.book.last_word_pos !== 0) {
+          $scope.book.last_word_pos = 0;
+        }
+      }
+      $scope.book.text = null;
+      console.log("open book");
+      $("#time").text();
+      return $http.get("/api/settings").success(function(data) {
+        var changed;
+        $scope.settings = data.settings;
+        console.log(data.settings);
+        setWordsFont($scope);
+        changed = false;
+        if ($scope.settings.words_font_size == null) {
+          $scope.settings.words_font_size = 20;
+          changed = true;
+        }
+        if ($scope.settings.words_count == null) {
+          $scope.settings.words_count = 3;
+          changed = true;
+        }
+        if ($scope.settings.words_delay < 100) {
+          $scope.settings.words_delay = 300;
+          changed = true;
+        }
+        if (changed) {
+          saveSettings($scope, $http);
+        }
+        return collect_parts($scope);
+      });
     } else {
-      if ($scope.book.last_word_pos !== 0) {
-        $scope.book.last_word_pos = 0;
-      }
+      return console.log("text not loaded");
     }
-    $scope.book.text = null;
-    console.log("open book");
-    $("#time").text();
-    return $http.get("/api/settings").success(function(data) {
-      var changed;
-      $scope.settings = data.settings;
-      console.log(data.settings);
-      setWordsFont($scope);
-      changed = false;
-      if ($scope.settings.words_font_size == null) {
-        $scope.settings.words_font_size = 20;
-        changed = true;
-      }
-      if ($scope.settings.words_count == null) {
-        $scope.settings.words_count = 3;
-        changed = true;
-      }
-      if ($scope.settings.words_delay < 100) {
-        $scope.settings.words_delay = 300;
-        changed = true;
-      }
-      if (changed) {
-        saveSettings($scope, $http);
-      }
-      return collect_parts($scope);
-    });
   });
   $scope.play = function() {
     if (!$scope.playing) {

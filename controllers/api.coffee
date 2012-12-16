@@ -53,6 +53,7 @@ DeleteBook = (id, cb) ->
 # Load Book text
 LoadText = (book, cb) ->
   console.log 'loading file...'
+  console.log 'dir: ' + __dirname
   fs.readFile book.path, (err, data) ->
     if err
       console.log err
