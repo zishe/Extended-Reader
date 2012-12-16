@@ -18,10 +18,12 @@ angular.module("myApp").controller "ReadByLinesCtrl", ($scope, $http, $routePara
     $scope.book = data.book
     $scope.text = data.book.text
 
+    console.log "text length " +
+
     if $scope.book.last_word_pos > 0
       $scope.text = $scope.book.text.substr($scope.book.last_word_pos, $scope.book.text.length - 1)
     else $scope.book.last_word_pos = 0  unless $scope.book.last_word_pos is 0
-    $scope.book.text = null
+    # $scope.book.text = null
 
     console.log "open book"
     $("#time").text()
