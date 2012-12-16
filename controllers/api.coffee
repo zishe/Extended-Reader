@@ -53,7 +53,6 @@ DeleteBook = (id, cb) ->
 # Load Book text
 LoadText = (book, cb) ->
   console.log 'loading file...'
-  console.log 'dir: ' + __dirname
   fs.readFile book.path, (err, data) ->
     if err
       console.log err
@@ -69,7 +68,7 @@ LoadText = (book, cb) ->
 # Save book text in file
 SaveText = (book, text, cb) ->
   console.log 'saving text...'
-  book.path = __dirname + './tmp' + book._id.toString()
+  book.path = __dirname + '/../upload/files/' + book._id.toString()
   console.log book.path
   fs.writeFile book.path, text.trim(), (err) ->
     console.log err if err
