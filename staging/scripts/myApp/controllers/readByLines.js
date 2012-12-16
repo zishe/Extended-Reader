@@ -28,6 +28,7 @@ angular.module("myApp").controller("ReadByLinesCtrl", function($scope, $http, $r
         $scope.book.last_word_pos = 0;
       }
     }
+    $scope.book.text = null;
     console.log("open book");
     $("#time").text();
     return $http.get("/api/settings").success(function(data) {

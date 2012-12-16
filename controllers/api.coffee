@@ -57,10 +57,11 @@ LoadText = (book, cb) ->
     if err
       console.log err
       # throw err
-    console.log 'file loaded'
     if data
+      console.log 'file loaded'
       cb data.toString()
     else
+      console.log 'file not loaded'
       cb null
 
 

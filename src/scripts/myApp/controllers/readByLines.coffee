@@ -18,32 +18,35 @@ angular.module("myApp").controller "ReadByLinesCtrl", ($scope, $http, $routePara
     $scope.book = data.book
     $scope.text = data.book.text
 
-    console.log "text length " + data.book.text.length
+    if $scope.text != null and $scope.text != undefined
+      console.log "text length " + data.book.text.length
 
-    if $scope.book.last_word_pos > 0
-      $scope.text = $scope.book.text.substr($scope.book.last_word_pos, $scope.book.text.length - 1)
-    else $scope.book.last_word_pos = 0  unless $scope.book.last_word_pos is 0
-    # $scope.book.text = null
+      if $scope.book.last_word_pos > 0
+        $scope.text = $scope.book.text.substr($scope.book.last_word_pos, $scope.book.text.length - 1)
+      else $scope.book.last_word_pos = 0  unless $scope.book.last_word_pos is 0
+      $scope.book.text = null
 
-    console.log "open book"
-    $("#time").text()
-    $http.get("/api/settings").success (data) ->
-      $scope.settings = data.settings
-      console.log data.settings
+      console.log "open book"
+      $("#time").text()
+      $http.get("/api/settings").success (data) ->
+        $scope.settings = data.settings
+        console.log data.settings
 
-      setWordsFont $scope
-      changed = false
-      unless $scope.settings.words_font_size?
-        $scope.settings.words_font_size = 20
-        changed = true
-      unless $scope.settings.words_count?
-        $scope.settings.words_count = 3
-        changed = true
-      if $scope.settings.words_delay < 100
-        $scope.settings.words_delay = 300
-        changed = true
-      saveSettings $scope, $http  if changed
-      collect_parts $scope
+        setWordsFont $scope
+        changed = false
+        unless $scope.settings.words_font_size?
+          $scope.settings.words_font_size = 20
+          changed = true
+        unless $scope.settings.words_count?
+          $scope.settings.words_count = 3
+          changed = true
+        if $scope.settings.words_delay < 100
+          $scope.settings.words_delay = 300
+          changed = true
+        saveSettings $scope, $http  if changed
+        collect_parts $scope
+    else
+      console.log "text not loaded"
 
   $scope.play = ->
     unless $scope.playing
