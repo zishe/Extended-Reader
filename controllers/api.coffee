@@ -68,7 +68,7 @@ LoadText = (book, cb) ->
 SaveText = (book, text, cb) ->
   console.log 'saving text...'
   book.path = __dirname + '/../upload/files/' + book._id.toString()
-  console.log(book.path);
+  console.log book.path
   fs.writeFile book.path, text.trim(), (err) ->
     console.log err if err
     console.log "done"
@@ -319,7 +319,7 @@ exports.addBook = (req, res) ->
       CalculateParts book, b.text, settings, (book) ->
         res.json book:book
 
-    SaveText book, b.text
+    SaveText book, b.text, () ->
 
 
 
@@ -555,7 +555,7 @@ exports.resetParts = (req, res) ->
       console.log err1 if err1
       console.log 'futher parts deleted'
 
-    SaveBook () ->
+    SaveBook book, () ->
       console.log 'set num ' + num
       res.json true
 
