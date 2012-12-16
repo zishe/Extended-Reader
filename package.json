@@ -34,7 +34,7 @@
     "grunt": "*"
   },
   "engines": {
-    "node": "*"
+    "node": "0.8.14"
   },
   "subdomain": "speed-reading-apps"
 }
