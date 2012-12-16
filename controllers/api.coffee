@@ -318,8 +318,8 @@ exports.addBook = (req, res) ->
 
   SaveBook book, () ->
     LoadSettings (settings) ->
-      CalculateParts book, b.text, settings, (book) ->
-        res.json book:book
+      # CalculateParts book, b.text, settings, (book) ->
+      res.json book:book
 
     SaveText book, b.text, () ->
 
