@@ -8,6 +8,10 @@ Part = models.Part
 Settings = models.Settings
 
 
+# class DropBoxApi
+#   constructor: (args) ->
+#     dropbox = new DropboxClient("mbtjip8tsc8ioyr", "gefdu4u17q5qom6")
+#     dropbox.getAccessToken(dropbox_email, dropbox_password, callback)
 
 
 # Overloaded mongo methods
@@ -251,7 +255,7 @@ getNextPart = (text, book, i, min_length) ->
 
 # Get all Books for viewing list and select one
 exports.books = (req, res) ->
-  Book.find().sort('-updated').populate('reading').exec (err, books) ->
+  Book.find().sort('-updated_at').populate('reading').exec (err, books) ->
     res.json {books: books, user: req.user}
 
 
@@ -337,8 +341,8 @@ exports.addBook = (req, res) ->
 
 
 Fiber = require('fibers')
-libxmljs = require("libxmljs")
-xslt = require('node_xslt')
+# libxmljs = require("libxmljs")
+# xslt = require('node_xslt')
 
 
 sleep = (ms) ->
@@ -370,18 +374,18 @@ saveFile = (file) ->
   console.log file.name
   newPath = __dirname + "/upload/" + file.name
   console.log newPath
-  if /.fb2$/.test(file.name)
-    console.log("fb2 file")
+#   if /.fb2$/.test(file.name)
+#     console.log("fb2 file")
 
-    fs.readFile file.path, 'utf8', (err, data) ->
-      if err
-        console.log err
-      # console.log data
-      xmlDoc = libxmljs.parseXml(data)
-      # console.log xmlDoc.toString()
-      gchild = xmlDoc.get('//description')
-      console.log gchild.text()
-      # console.log xmlDoc.root().text()
+#     fs.readFile file.path, 'utf8', (err, data) ->
+#       if err
+#         console.log err
+#       # console.log data
+#       xmlDoc = libxmljs.parseXml(data)
+#       # console.log xmlDoc.toString()
+#       gchild = xmlDoc.get('//description')
+#       console.log gchild.text()
+#       # console.log xmlDoc.root().text()
 
 
       # stylesheet = fs.readFileSync('/home/alder/Node/Speed-reading-apps/src/scripts/libs/FB2_2_txt.xsl', 'utf8')
@@ -422,25 +426,25 @@ exports.saveBook = (req, res) ->
         console.log 'current number is ' + book.current_part_num
 
         if (parts.length < book.current_part_num + 5) and not book.parsed
-            LoadSettings (settings) ->
+          LoadSettings (settings) ->
 
-              console.log 'generate new parts'
-              LoadText book, (text) ->
-                partsCount = parts.length
+            console.log 'generate new parts'
+            LoadText book, (text) ->
+              partsCount = parts.length
 
-                for i in [0..9]
-                  if !book.parsed
-                    part = getNextPart(text, book, i + partsCount, settings.part_length)
-                    part.save()
+              for i in [0..9]
+                if !book.parsed
+                  part = getNextPart(text, book, i + partsCount, settings.part_length)
+                  part.save()
 
-                SaveBook book, () ->
+              SaveBook book, () ->
 
-                  console.log 'now getting current part'
-                  Part.findOne {book: book._id, num: book.current_part_num}, (err4, part) ->
-                    console.log err4 if err4
+                console.log 'now getting current part'
+                Part.findOne {book: book._id, num: book.current_part_num}, (err4, part) ->
+                  console.log err4 if err4
 
-                    console.log 'return next part'
-                    res.json part: part
+                  console.log 'return next part'
+                  res.json part: part
         else
           Part.findOne {book: book._id, num: book.current_part_num}, (err4, part) ->
             console.log err4 if err4

@@ -13,6 +13,11 @@ api_routes = require './routes/api-routes'
 auth passport
 
 
+    # // "node_xslt": "*",
+    # // "fibers": "*",
+    # // "libxmljs": "*",
+
+
 db = null
 app = express()
 
@@ -48,8 +53,8 @@ app.configure "development", ->
     showStack: true
   )
   # db = mongoose.connect 'mongodb://user:user@ds037007.mongolab.com:37007/speed-reading'
-  db = mongoose.connect 'mongodb://alder:alder@linus.mongohq.com:10078/reader'
-  # db = mongoose.connect 'mongodb://localhost/speed-reading'
+  # db = mongoose.connect 'mongodb://alder:alder@linus.mongohq.com:10078/reader'
+  db = mongoose.connect 'mongodb://localhost/speed-reading'
 
 # Routes
 app.get '/', routes.index
@@ -59,7 +64,7 @@ api_routes app, api
 auth_routes app, passport
 
 # redirect all others to the index (HTML5 history)
-app.get '*',  (req, res) ->
+app.get '*', (req, res) ->
   res.render "index"
 
 http.createServer(app).listen app.get('port'), ->

@@ -1,5 +1,20 @@
 module.exports = (app, api) ->
 
+  app.param (name, fn) ->
+    if fn instanceof RegExp
+      (req, res, next, val) ->
+        captures = undefined
+        if captures = fn.exec(String(val))
+          req.params[name] = captures
+          next()
+        else
+          next "route"
+
+  app.param 'id', /^\w+$/
+  app.param 'book_id', /^\w+$/
+  app.param 'num', /^\d+$/
+  app.param 'plen', /^\d+$/
+
   # JSON API
 
   app.get '/api/books', api.books
@@ -12,8 +27,8 @@ module.exports = (app, api) ->
   app.post '/api/uploadfile', api.uploadFile
 
   app.get '/api/readBook/:id', api.readBook
-  app.get '/api/readByLines/:id', api.readByLines
-  app.get '/api/memorize/:id', api.memorize
+  # app.get '/api/readByLines/:id', api.readByLines
+  # app.get '/api/memorize/:id', api.memorize
 
   app.put '/api/save_book/:id', api.saveBook
   app.put '/api/book_finished/:id', api.finishBook
