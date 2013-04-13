@@ -1,6 +1,6 @@
 {
   "name": "Speed-Reading-Apps",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "./app.coffee",
   "private": true,
   "dependencies": {
@@ -29,16 +29,15 @@
     "zombie": "*",
     "request": "*",
     "supervisor": "*",
-    "grunt-hustler": "*",
-    "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.4.2",
+    "grunt": "*",
+    "grunt-contrib-jshint": "*",
     "grunt-contrib-nodeunit": "*",
-    "grunt-contrib-coffee": "~0.6.6",
-    "grunt-contrib-watch": "~0.3.1",
-    "grunt-contrib-copy": "~0.4.1",
-    "grunt-contrib-clean": "~0.4.0",
-    "grunt-coffeelint": "0.0.6",
-    "grunt-contrib-less": "~0.5.0"
+    "grunt-contrib-coffee": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-contrib-copy": "*",
+    "grunt-contrib-clean": "*",
+    "grunt-coffeelint": "*",
+    "grunt-contrib-less": "*"
   },
   "engines": {
     "node": "0.8.x",

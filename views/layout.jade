@@ -9,47 +9,46 @@ html(ng-app="myApp")
     title Extended Reader
     meta(name='description', content='')
     meta(name='author', content='')
-    // Mobile Specific
+    //- Mobile Specific
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
 
-    // CSS
+    //- CSS
     link(rel='stylesheet', href='/styles/styles.css')
     //- link(rel='stylesheet', href='/styles/angular-ui.css')
 
-    // JS
+    //- JS
     script(src='/scripts/libs/jquery.js')
     script(src='/scripts/libs/bootstrap.min.js')
     script(src='/scripts/libs/mousetrap.js')
     script(src='/scripts/libs/jquery.date.js')
     script(src='/scripts/libs/raphael-min.js')
     script(src='/scripts/libs/morris.min.js')
-    // script(src='/scripts/libs/fileuploader.js')
+    //- script(src='/scripts/libs/fileuploader.js')
 
-    script(src='/scripts/preload.js')
+    //- script(src='/scripts/preload.js')
     script(src='/scripts/angular/angular.js')
     script(src='/scripts/angular/angular-sanitize.js')
     script(src='/scripts/angular/angular-resource.js')
-    // script(src='/scripts/angular-ui/angular-ui.min.js')
+    //- script(src='/scripts/angular-ui/angular-ui.min.js')
 
-    script(src='/scripts/application.js')
+    script(src='/app.js')
+    //- script(src='/scripts/application.js')
+    //- script(src='/scripts/myApp/app.js')
 
+    //- script(src='/scripts/myApp/controllers/index.js')
+    //- script(src='/scripts/myApp/controllers/addBook.js')
+    //- script(src='/scripts/myApp/controllers/FileUpload.js')
+    //- script(src='/scripts/myApp/controllers/editBook.js')
+    //- script(src='/scripts/myApp/controllers/viewBook.js')
+    //- script(src='/scripts/myApp/controllers/readBook.js')
+    //- script(src='/scripts/myApp/controllers/readByLines.js')
+    //- script(src='/scripts/myApp/controllers/schulte.js')
+    //- script(src='/scripts/myApp/controllers/greenDot.js')
 
-    script(src='/scripts/myApp/app.js')
-
-    script(src='/scripts/myApp/controllers/index.js')
-    script(src='/scripts/myApp/controllers/addBook.js')
-    script(src='/scripts/myApp/controllers/FileUpload.js')
-    script(src='/scripts/myApp/controllers/editBook.js')
-    script(src='/scripts/myApp/controllers/viewBook.js')
-    script(src='/scripts/myApp/controllers/readBook.js')
-    script(src='/scripts/myApp/controllers/readByLines.js')
-    script(src='/scripts/myApp/controllers/schulte.js')
-    script(src='/scripts/myApp/controllers/greenDot.js')
-
-    script(src='/scripts/myApp/directives.js')
-    script(src='/scripts/myApp/filters.js')
-    script(src='/scripts/myApp/services.js')
-    script(src='/scripts/myApp/helpers.js')
+    //- script(src='/scripts/myApp/directives.js')
+    //- script(src='/scripts/myApp/filters.js')
+    //- script(src='/scripts/myApp/services.js')
+    //- script(src='/scripts/myApp/helpers.js')
 
   body(data-spy="scroll")
     block body
